@@ -26,7 +26,7 @@ function parseMessage( msg ){
         //const upperCaseReponse = encodeURIComponent( msg.message.text.toUpperCase() );
 
 		    if (msg.message.text="update" || msg.message.text="UPDATE" || msg.message.text="Update") {
-          upperCaseReponse = "Caxxo mi scrivi!"
+          upperCaseReponse = "DajeDAJEEEEE"
         } else {
           upperCaseReponse = "---"
         }
