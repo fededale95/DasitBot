@@ -25,9 +25,9 @@ function parseMessage( msg ){
 
         //const upperCaseReponse = encodeURIComponent( msg.message.text.toUpperCase() );
 
-		    if (msg.message.text="update" || msg.message.text="UPDATE" || msg.message.text="Update") {
-          //upperCaseReponse = '{ "keyboard": [["uno :+1:"],["uno \ud83d\udc4d", "due"],["uno", "due","tre"],["uno", "due","tre","quattro"]]}';
-          upperCaseReponse = "true";
+		    if (msg.message.text=="update" || msg.message.text=="UPDATE" || msg.message.text=="Update") {
+          upperCaseReponse = '{ "keyboard": [["uno :+1:"],["uno \ud83d\udc4d", "due"],["uno", "due","tre"],["uno", "due","tre","quattro"]]}';
+          //upperCaseReponse = "true";
         } else {
           upperCaseReponse = "false";
         }
