@@ -26,9 +26,9 @@ function parseMessage( msg ){
         //const upperCaseReponse = encodeURIComponent( msg.message.text.toUpperCase() );
 
 		    if (msg.message.text="update" || msg.message.text="UPDATE" || msg.message.text="Update") {
-          upperCaseReponse = "DajeDAJEEEEE"
+          upperCaseReponse = "DajeDAJEEEEE";
         } else {
-          upperCaseReponse = "---"
+          upperCaseReponse = "---";
         }
 
         // Vedi metodo https://core.telegram.org/bots/api#sendmessage
