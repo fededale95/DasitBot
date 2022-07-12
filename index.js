@@ -25,18 +25,40 @@ function parseMessage( msg ){
 
         //const upperCaseReponse = encodeURIComponent( msg.message.text.toUpperCase() );
 
-		    if (msg.message.text=="update" || msg.message.text=="UPDATE" || msg.message.text=="Update") {
+
+        superagent.get(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${msg.message.chat.id}&text=${
+              reply_markup: {
+                  inline_keyboard: [[
+                      {
+                          text: 'Development',
+                          callback_data: 'development'
+                      }, {
+                          text: 'Lifestyle',
+                          callback_data: 'lifestyle'
+                      }, {
+                          text: 'Other',
+                          callback_data: 'other'
+                      }
+                  ]]
+              }
+          }`)
+            .then( response => {
+            });
+
+
+
+		    /*if (msg.message.text=="update" || msg.message.text=="UPDATE" || msg.message.text=="Update") {
           //upperCaseReponse = '{ "keyboard": [["uno :+1:"],["uno \ud83d\udc4d", "due"],["uno", "due","tre"],["uno", "due","tre","quattro"]]}';
-          upperCaseReponse = "true";
+          upperCaseReponse = "true"
         } else {
           upperCaseReponse = "false";
-        }
+        }*/
 
         // Vedi metodo https://core.telegram.org/bots/api#sendmessage
 
-        superagent.get(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${msg.message.chat.id}&text=${upperCaseReponse}`)
+        /*superagent.get(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${msg.message.chat.id}&text=${upperCaseReponse}`)
             .then( response => {
-            });
+            });*/
 
     } catch( e ){
         console.error( e );
