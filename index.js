@@ -31,7 +31,16 @@ function parseMessage( msg ){
 
 		    if (msg.message.text=="/dmsweb") {
           //upperCaseReponse = '{ "keyboard": [["uno :+1:"],["uno \ud83d\udc4d", "due"],["uno", "due","tre"],["uno", "due","tre","quattro"]]}';
-          upperCaseReponse = "true"
+
+          const fs = require('fs');
+
+            try {
+              const data = fs.readFileSync('/home/ubuntu/lastDMSWeb.txt', 'utf8');
+                  upperCaseReponse = data;
+            } catch (err) {
+              console.error(err);
+            }
+
         } else {
           upperCaseReponse = "Comando non presente";
         }
