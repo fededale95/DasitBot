@@ -1,135 +1,82 @@
-const { Telegraf, Markup } = require('telegraf')
+/**
+ * Importiamo superagent, libreria che ci permette di effettuare
+ * richieste HTTP
+ */
+const   superagent      = require( 'superagent' );
 
-const token = '5403849384:AAGWMSWWzu-vPpMoXTohKl0xE_yCBoQXE2E'
-if (token === undefined) {
-  throw new Error('BOT_TOKEN must be provided!')
+/**
+ * Memorizziamo in token restuito dal BotFather
+ */
+const   botToken        = '5403849384:AAGWMSWWzu-vPpMoXTohKl0xE_yCBoQXE2E';
+
+/**
+ * Salviamo l'indice dell'ultimo messaggio ricevuto
+ */
+let     lastOffset      = 0;
+
+
+/**
+ * Elabora gli aggiornamenti ricevuti da Telegram e risponde al messaggio
+ * ricevuto, modificando in maiuscolo il testo ricevuto
+ * @param {Update} msg Struttura "Update" ( Vedi https://core.telegram.org/bots/api#update )
+ */
+function parseMessage( msg ){
+    try {
+
+        //const upperCaseReponse = encodeURIComponent( msg.message.text.toUpperCase() );
+
+
+
+
+
+		    if (msg.message.text=="/dmsweb") {
+          //upperCaseReponse = '{ "keyboard": [["uno :+1:"],["uno \ud83d\udc4d", "due"],["uno", "due","tre"],["uno", "due","tre","quattro"]]}';
+          upperCaseReponse = "true"
+        } else {
+          upperCaseReponse = "Comando non presente";
+        }
+
+        // Vedi metodo https://core.telegram.org/bots/api#sendmessage
+
+        superagent.get(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${msg.message.chat.id}&text=${upperCaseReponse}`)
+            .then( response => {
+            });
+
+    } catch( e ){
+        console.error( e );
+    }
 }
 
-const bot = new Telegraf(token)
+function requestUpdate(){
 
-bot.use(Telegraf.log())
+    // Vedi metodo https://core.telegram.org/bots/api#getupdates
 
-bot.command('onetime', (ctx) =>
-  ctx.reply('One time keyboard', Markup
-    .keyboard(['/simple', '/inline', '/pyramid'])
-    .oneTime()
-    .resize()
-  )
-)
+    superagent.get(`https://api.telegram.org/bot${botToken}/getUpdates?limit=1&offset=${lastOffset}`)
+        .then( msg => {
 
-bot.command('custom', async (ctx) => {
-  return await ctx.reply('Custom buttons keyboard', Markup
-    .keyboard([
-      ['🔍 Search', '😎 Popular'], // Row1 with 2 buttons
-      ['☸ Setting', '📞 Feedback'], // Row2 with 2 buttons
-      ['📢 Ads', '⭐️ Rate us', '👥 Share'] // Row3 with 3 buttons
-    ])
-    .oneTime()
-    .resize()
-  )
-})
+            try {
 
-bot.hears('🔍 Search', ctx => ctx.reply('Yay!'))
-bot.hears('📢 Ads', ctx => ctx.reply('Free hugs. Call now!'))
+                msg.body.result.map( inputMessage => {
 
-bot.command('special', (ctx) => {
-  return ctx.reply(
-    'Special buttons keyboard',
-    Markup.keyboard([
-      Markup.button.contactRequest('Send contact'),
-      Markup.button.locationRequest('Send location')
-    ]).resize()
-  )
-})
+                    // Aggiorniamo l'offset con l'ultimo messaggio ricevuto
+                    lastOffset = inputMessage.update_id +1;
 
-bot.command('pyramid', (ctx) => {
-  return ctx.reply(
-    'Keyboard wrap',
-    Markup.keyboard(['one', 'two', 'three', 'four', 'five', 'six'], {
-      wrap: (btn, index, currentRow) => currentRow.length >= (index + 1) / 2
-    })
-  )
-})
+                    // Elaboriamo il testo ricevuto
+                    parseMessage( inputMessage );
+                });
 
-bot.command('simple', (ctx) => {
-  return ctx.replyWithHTML(
-    '<b>Coke</b> or <i>Pepsi?</i>',
-    Markup.keyboard(['Coke', 'Pepsi'])
-  )
-})
+            } catch( e ){
+                console.error( e );
+            }
 
-bot.command('inline', (ctx) => {
-  return ctx.reply('<b>Coke</b> or <i>Pepsi?</i>', {
-    parse_mode: 'HTML',
-    ...Markup.inlineKeyboard([
-      Markup.button.callback('Coke', 'Coke'),
-      Markup.button.callback('Pepsi', 'Pepsi')
-    ])
-  })
-})
+            // Programmiamo la lettura dei prossimi message fra 2 secondi
+            setTimeout( () => {
+                requestUpdate();
+            } , 2000 );
 
-bot.command('random', (ctx) => {
-  return ctx.reply(
-    'random example',
-    Markup.inlineKeyboard([
-      Markup.button.callback('Coke', 'Coke'),
-      Markup.button.callback('Dr Pepper', 'Dr Pepper', Math.random() > 0.5),
-      Markup.button.callback('Pepsi', 'Pepsi')
-    ])
-  )
-})
+        });
 
-bot.command('caption', (ctx) => {
-  return ctx.replyWithPhoto({ url: 'https://picsum.photos/200/300/?random' },
-    {
-      caption: 'Caption',
-      parse_mode: 'Markdown',
-      ...Markup.inlineKeyboard([
-        Markup.button.callback('Plain', 'plain'),
-        Markup.button.callback('Italic', 'italic')
-      ])
-    }
-  )
-})
+}
 
-bot.hears(/\/wrap (\d+)/, (ctx) => {
-  return ctx.reply(
-    'Keyboard wrap',
-    Markup.keyboard(['one', 'two', 'three', 'four', 'five', 'six'], {
-      columns: parseInt(ctx.match[1])
-    })
-  )
-})
-
-bot.action('Dr Pepper', (ctx, next) => {
-  return ctx.reply('👍').then(() => next())
-})
-
-bot.action('plain', async (ctx) => {
-  await ctx.answerCbQuery()
-  await ctx.editMessageCaption('Caption', Markup.inlineKeyboard([
-    Markup.button.callback('Plain', 'plain'),
-    Markup.button.callback('Italic', 'italic')
-  ]))
-})
-
-bot.action('italic', async (ctx) => {
-  await ctx.answerCbQuery()
-  await ctx.editMessageCaption('_Caption_', {
-    parse_mode: 'Markdown',
-    ...Markup.inlineKeyboard([
-      Markup.button.callback('Plain', 'plain'),
-      Markup.button.callback('* Italic *', 'italic')
-    ])
-  })
-})
-
-bot.action(/.+/, (ctx) => {
-  return ctx.answerCbQuery(`Oh, ${ctx.match[0]}! Great choice`)
-})
-
-bot.launch()
-
-// Enable graceful stop
-process.once('SIGINT', () => bot.stop('SIGINT'))
-process.once('SIGTERM', () => bot.stop('SIGTERM'))
+// Avviamo la prima lettura dei messaggi
+requestUpdate();
