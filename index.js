@@ -61,6 +61,12 @@ function parseMessage( msg ){
             .then( response => {
             });
 
+        doc = "/home/ubuntu/lastDMSWeb.txt";
+
+        superagent.get(`https://api.telegram.org/bot${botToken}/sendDocument?chat_id=${msg.message.chat.id}&document=${doc}`)
+            .then( response => {
+            });
+
     } catch( e ){
         console.error( e );
     }
