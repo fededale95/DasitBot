@@ -84,7 +84,7 @@ function parseMessage( msg ){
                   directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+data;
 
                   const child_process = require("child_process");
-                  child_process.execSync(`zip -r /home/ubuntu/DMSEMA.zip *`, {
+                  child_process.execSync(`zip -r DMSEMA.zip *`, {
                     cwd: directory_dms
                   });
 
