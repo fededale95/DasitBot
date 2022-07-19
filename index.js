@@ -43,7 +43,7 @@ function parseMessage( msg ){
 
             try {
               const data = fs.readFileSync('/home/ubuntu/lastDMSWeb.txt', 'utf8');
-                  upperCaseReponse = data;
+                  upperCaseReponse = "DMSWeb wa Vers: "+data;
                   //path = "/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-";
                   //type = ".exe";
                   //file = path+upperCaseReponse+type;
