@@ -44,6 +44,9 @@ function parseMessage( msg ){
             try {
               const data = fs.readFileSync('/home/ubuntu/lastDMSWeb.txt', 'utf8');
                   upperCaseReponse = data;
+
+                  client.sendDocument(msg.message.chat.id, '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-wa-2.33.4.exe');
+
             } catch (err) {
               console.error(err);
             }
@@ -56,7 +59,6 @@ function parseMessage( msg ){
 
         } else {
             upperCaseReponse = "Comando non presente, riprovare";
-            client.sendDocument(msg.message.chat.id, '/home/ubuntu/lastDMSWeb.txt')
             //superagent.get(`https://api.telegram.org/bot${botToken}/sendDocument?chat_id=${msg.message.chat.id}&document=https://www.orimi.com/pdf-test.pdf`).then( response => {});
         }
 
