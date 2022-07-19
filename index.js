@@ -81,7 +81,7 @@ function parseMessage( msg ){
                   data = data2;
                   replyText = "DMS CS EMA vers: "+data;
                   zipme(data);
-                  //client.sendDocument(msg.message.chat.id, file);
+                  client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
 
             } catch (err) {
               console.error(err);
