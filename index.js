@@ -43,9 +43,9 @@ function parseMessage( msg ){
 
             try {
                   data = fs.readFileSync('/home/ubuntu/lastDMSWeb.txt', 'utf8');
-                  upperCaseReponse = "DMSWeb WebApp vers: "+data;
-                  //data2 = data.substring(0, str.length - 1); //tolgo il carattere di fine riga
-                  //upperCaseReponse = data2;
+                  //upperCaseReponse = "DMSWeb WebApp vers: "+data;
+                  data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
+                  upperCaseReponse = data2;
                   //file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+data+'.exe';
                   //client.sendDocument(msg.message.chat.id, file);
 
