@@ -90,7 +90,7 @@ function parseMessage( msg ){
             directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
 
             zipme(directory_dms);
-            replyText = "DMS CS EMA vers: "+data2+" \nDownload ultima versione: /downloadcs";
+            replyText = "DMS CS EMA vers: "+data2+" \nAttendi 10 secondi, sto preparando il tuo download...";
             sleep(10).then(() => {
                 client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
             })
