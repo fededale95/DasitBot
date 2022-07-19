@@ -43,11 +43,11 @@ function parseMessage( msg ){
 
             try {
                   data = fs.readFileSync('/home/ubuntu/lastDMSWeb.txt', 'utf8');
-                  //upperCaseReponse = "DMSWeb WebApp vers: "+data;
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
-                  upperCaseReponse = data2;
-                  //file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+data+'.exe';
-                  //client.sendDocument(msg.message.chat.id, file);
+                  data = data2;
+                  replyText = "DMSWeb WebApp vers: "+data;
+                  file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+data+'.exe';
+                  client.sendDocument(msg.message.chat.id, file);
 
             } catch (err) {
               console.error(err);
@@ -57,16 +57,16 @@ function parseMessage( msg ){
 
         } else if(msg.message.text=="/start"){
 
-            upperCaseReponse = "Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.";
+            replyText = "Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.";
 
         } else {
-            upperCaseReponse = "Comando non presente, riprovare";
+            replyText = "Comando non presente, riprovare";
             //superagent.get(`https://api.telegram.org/bot${botToken}/sendDocument?chat_id=${msg.message.chat.id}&document=https://www.orimi.com/pdf-test.pdf`).then( response => {});
         }
 
         // Vedi metodo https://core.telegram.org/bots/api#sendmessage
 
-        superagent.get(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${msg.message.chat.id}&text=${upperCaseReponse}`)
+        superagent.get(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${msg.message.chat.id}&text=${replyText}`)
             .then( response => {
             });
 
