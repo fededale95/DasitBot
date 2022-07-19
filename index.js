@@ -112,7 +112,7 @@ function parseMessage( msg ){
 
 function zipme(vers){
 
-      var output = file_system.createWriteStream('DMSEMA.zip');
+      var output = file_system.createWriteStream('/home/ubuntu/DMSEMA.zip');
       var archive = archiver('zip');
 
       output.on('close', function () {
