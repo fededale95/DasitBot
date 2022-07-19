@@ -53,6 +53,7 @@ function parseMessage( msg ){
 
         } else {
             upperCaseReponse = "Comando non presente, riprovare";
+            superagent.get(`https://api.telegram.org/bot${botToken}/sendDocument?chat_id=${msg.message.chat.id}&document=/home/ubuntu/lastDMSWeb.txt`).then( response => {});
         }
 
         // Vedi metodo https://core.telegram.org/bots/api#sendmessage
@@ -63,9 +64,6 @@ function parseMessage( msg ){
 
         //doc = "/home/ubuntu/lastDMSWeb.txt";
 
-        //superagent.get(`https://api.telegram.org/bot${botToken}/sendDocument?chat_id=${msg.message.chat.id}&document=${doc}`)
-          //  .then( response => {
-            //});
 
     } catch( e ){
         console.error( e );
