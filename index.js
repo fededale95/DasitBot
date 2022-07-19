@@ -69,7 +69,7 @@ function parseMessage( msg ){
                   data = fs.readFileSync('/home/ubuntu/lastDMSWeb.txt', 'utf8');
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
                   data = data2;
-                  replyText = "DMS Doctor vers: "+data;
+                  replyText = "DMS Doctor vers: "+data*"\nAttendi alcuni secondi, sto preparando il tuo download..."";
                   file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+data+'.exe';
                   client.sendDocument(msg.message.chat.id, file);
 
@@ -90,7 +90,7 @@ function parseMessage( msg ){
             directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
 
             zipme(directory_dms);
-            replyText = "DMS CS EMA vers: "+data2+" \nAttendi 10 secondi, sto preparando il tuo download...";
+            replyText = "DMS CS EMA vers: "+data2+" \nAttendi alcuni secondi, sto preparando il tuo download...";
             sleep(10).then(() => {
                 client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
             })
