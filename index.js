@@ -45,9 +45,9 @@ function parseMessage( msg ){
               const data = fs.readFileSync('/home/ubuntu/lastDMSWeb.txt', 'utf8');
                   upperCaseReponse = "DMSWeb wa Vers: "+data;
                   //path = "/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-";
-
-                  //file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+data+".exe";
-                  client.sendDocument(msg.message.chat.id, '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-2.33.4.exe');
+                  //file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-2.33.4.exe';
+                  file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+data+'.exe';
+                  client.sendDocument(msg.message.chat.id, file);
 
             } catch (err) {
               console.error(err);
