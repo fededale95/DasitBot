@@ -87,7 +87,7 @@ function parseMessage( msg ){
 
             zipme(directory_dms);
 
-            replyText = "DMS CS EMA vers: "+data2;
+            replyText = "DMS CS EMA versz: "+data2;
             client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
 
         } else if(msg.message.text=="/cristian"){
