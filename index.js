@@ -80,7 +80,7 @@ function parseMessage( msg ){
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
                   data = data2;
                   replyText = "DMS CS EMA vers: "+data;
-                  //zipme(data);
+                  zipme(data);
                   client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
 
             } catch (err) {
@@ -115,10 +115,10 @@ function zipme(vers){
       var output = file_system.createWriteStream('/home/ubuntu/DMSEMA.zip');
       var archive = archiver('zip');
 
-      output.on('close', function () {
-        console.log(archive.pointer() + ' total bytes');
-        console.log('archiver has been finalized and the output file descriptor has closed.');
-      });
+      //output.on('close', function () {
+        //console.log(archive.pointer() + ' total bytes');
+        //console.log('archiver has been finalized and the output file descriptor has closed.');
+      //});
 
       archive.on('error', function(err){
         throw err;
