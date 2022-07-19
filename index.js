@@ -87,9 +87,10 @@ function parseMessage( msg ){
 
             zipme(directory_dms);
 
-            replyText = "DMS CS EMA vers: "+data2;
-            client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
+            replyText = "DMS CS EMA vers: "+data2+" Download ultima versione: /downloadcs";
 
+        } else if(msg.message.text=="/downloadcs"){
+            client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
         } else if(msg.message.text=="/cristian"){
             replyText = "NEXUS, Sono Cristian!";
             client.sendPhoto(msg.message.chat.id, '/mnt/nas/zzzz_Lorenzo/segreto.jpg');
