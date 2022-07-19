@@ -20,6 +20,10 @@ var client = new TelegramBotClient('5403849384:AAGWMSWWzu-vPpMoXTohKl0xE_yCBoQXE
 var file_system = require('fs');
 var archiver = require('archiver');
 
+const sleep = (s) => {
+  return new Promise(resolve => setTimeout(resolve, (s*1000)))
+}
+
 //var TelegramBotClient = require('telegram-bot-client');
 //var client = new TelegramBotClient(botToken);
 
@@ -86,10 +90,10 @@ function parseMessage( msg ){
             directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
 
             zipme(directory_dms);
-            client.delay(15000);
             replyText = "DMS CS EMA vers: "+data2+" \nDownload ultima versione: /downloadcs";
-
-            client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
+            sleep(10).then(() => {
+                client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
+            })
 
         } else if(msg.message.text=="/downloadcs"){
             replyText = "Attendi qualche istante...";
