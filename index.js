@@ -74,7 +74,7 @@ function parseMessage( msg ){
         } else if(msg.message.text=="/dmsema"){
             replyText = "Under construction!";
         } else if(msg.message.text=="/cristian"){
-            client.sendPhoto(msg.message.chat.id, '/mnt/nas/zzzz_Lorenzo/segreto.jpg')
+            client.sendPhoto(msg.message.chat.id, '/mnt/nas/zzzz_Lorenzo/segreto.jpg');
         } else if(msg.message.text=="/start"){
             replyText = "Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.";
         } else {
