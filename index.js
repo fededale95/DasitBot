@@ -88,7 +88,7 @@ function parseMessage( msg ){
             zipme(directory_dms);
 
             replyText = "DMS CS EMA vers: "+data2+" \nDownload ultima versione: /downloadcs";
-            //clieny.delay(15000);
+            client.delay(15000);
             client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
 
         } else if(msg.message.text=="/downloadcs"){
