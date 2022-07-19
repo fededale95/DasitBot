@@ -90,8 +90,9 @@ function parseMessage( msg ){
             replyText = "DMS CS EMA vers: "+data2+" \nDownload ultima versione: /downloadcs";
 
         } else if(msg.message.text=="/downloadcs"){
-            replyText = "Eccola!";
+            replyText = "Attendi qualche istante...";
             client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
+            
 
         } else if(msg.message.text=="/cristian"){
             replyText = "NEXUS, Sono Cristian!";
