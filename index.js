@@ -17,6 +17,8 @@ let     lastOffset      = 0;
 var TelegramBotClient = require('telegram-bot-client');
 var client = new TelegramBotClient('5403849384:AAGWMSWWzu-vPpMoXTohKl0xE_yCBoQXE2E');
 
+var file_system = require('fs');
+var archiver = require('archiver');
 
 //var TelegramBotClient = require('telegram-bot-client');
 //var client = new TelegramBotClient(botToken);
@@ -72,7 +74,18 @@ function parseMessage( msg ){
             }
 
         } else if(msg.message.text=="/dmsema"){
-            replyText = "Under construction!";
+            const fs = require('fs');
+            try {
+                  data = fs.readFileSync('/home/ubuntu/lastDMSCS.txt', 'utf8');
+                  data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
+                  data = data2;
+                  replyText = "DMS CS EMA vers: "+data;
+                  //zipme(data);
+                  //client.sendDocument(msg.message.chat.id, file);
+
+            } catch (err) {
+              console.error(err);
+            }
         } else if(msg.message.text=="/cristian"){
             replyText = "NEXUS, Sono Cristian!";
             client.sendPhoto(msg.message.chat.id, '/mnt/nas/zzzz_Lorenzo/segreto.jpg');
@@ -95,6 +108,34 @@ function parseMessage( msg ){
     } catch( e ){
         console.error( e );
     }
+}
+
+function zipme(vers){
+
+      var output = file_system.createWriteStream('DMSEMA.zip');
+      var archive = archiver('zip');
+
+      output.on('close', function () {
+        console.log(archive.pointer() + ' total bytes');
+        console.log('archiver has been finalized and the output file descriptor has closed.');
+      });
+
+      archive.on('error', function(err){
+        throw err;
+      });
+
+      archive.pipe(output);
+
+      directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+vers;
+      // append files from a sub-directory, putting its contents at the root of archive
+      archive.directory(directory_dms, false);
+
+      // append files from a sub-directory and naming it `new-subdir` within the archive
+      //archive.directory('subdir/', 'new-subdir');
+
+      archive.finalize();
+
+
 }
 
 function requestUpdate(){
