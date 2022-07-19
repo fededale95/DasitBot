@@ -80,7 +80,7 @@ function parseMessage( msg ){
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
                   data = data2;
                   replyText = "DMS CS EMA vers: "+data;
-                  zipme(data);
+                  //zipme(data);
                   client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
 
             } catch (err) {
