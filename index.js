@@ -120,9 +120,9 @@ function zipme(vers){
         //console.log('archiver has been finalized and the output file descriptor has closed.');
       //});
 
-      archive.on('error', function(err){
-        throw err;
-      });
+      //archive.on('error', function(err){
+        //throw err;
+      //});
 
       archive.pipe(output);
 
