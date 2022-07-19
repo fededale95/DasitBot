@@ -46,8 +46,8 @@ function parseMessage( msg ){
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
                   data = data2;
                   replyText = "DMSWeb WebApp vers: "+data;
-                  file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-wa-'+data+'.exe';
-                  client.sendDocument(msg.message.chat.id, file);
+                  //file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-wa-'+data+'.exe';
+                  //client.sendDocument(msg.message.chat.id, file);
 
             } catch (err) {
               console.error(err);
@@ -55,10 +55,28 @@ function parseMessage( msg ){
 
             //client.sendDocument(msg.message.chat.id, "/home/ubuntu/lastDMSWeb.txt");
 
+        } else if(msg.message.text=="/dmsdoctor"){
+
+            const fs = require('fs');
+
+            try {
+                  data = fs.readFileSync('/home/ubuntu/lastDMSWeb.txt', 'utf8');
+                  data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
+                  data = data2;
+                  replyText = "DMS Doctor vers: "+data;
+                  file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+data+'.exe';
+                  client.sendDocument(msg.message.chat.id, file);
+
+            } catch (err) {
+              console.error(err);
+            }
+
+        } else if(msg.message.text=="/dmsema"){
+            replyText = "Under construction!";
+        } else if(msg.message.text=="/cristian"){
+            client.sendPhoto(msg.message.chat.id, '/mnt/nas/zzzz_Lorenzo/segreto.jpg')
         } else if(msg.message.text=="/start"){
-
             replyText = "Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.";
-
         } else {
             replyText = "Comando non presente, riprovare";
             //superagent.get(`https://api.telegram.org/bot${botToken}/sendDocument?chat_id=${msg.message.chat.id}&document=https://www.orimi.com/pdf-test.pdf`).then( response => {});
