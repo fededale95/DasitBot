@@ -15,6 +15,10 @@ const   botToken        = '5403849384:AAGWMSWWzu-vPpMoXTohKl0xE_yCBoQXE2E';
 let     lastOffset      = 0;
 
 
+var TelegramBotClient = require('telegram-bot-client');
+var client = new TelegramBotClient(botToken);
+
+
 /**
  * Elabora gli aggiornamenti ricevuti da Telegram e risponde al messaggio
  * ricevuto, modificando in maiuscolo il testo ricevuto
@@ -41,7 +45,7 @@ function parseMessage( msg ){
               console.error(err);
             }
 
-            sendDocument(msg.message.chat.id, "/home/ubuntu/lastDMSWeb.txt");
+            client.sendDocument(msg.message.chat.id, "/home/ubuntu/lastDMSWeb.txt");
 
         } else if(msg.message.text=="/start"){
 
