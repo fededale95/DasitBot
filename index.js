@@ -14,6 +14,9 @@ const   botToken        = '5403849384:AAGWMSWWzu-vPpMoXTohKl0xE_yCBoQXE2E';
  */
 let     lastOffset      = 0;
 
+var TelegramBotClient = require('telegram-bot-client');
+var client = new TelegramBotClient('5403849384:AAGWMSWWzu-vPpMoXTohKl0xE_yCBoQXE2E');
+
 
 //var TelegramBotClient = require('telegram-bot-client');
 //var client = new TelegramBotClient(botToken);
@@ -53,7 +56,8 @@ function parseMessage( msg ){
 
         } else {
             upperCaseReponse = "Comando non presente, riprovare";
-            superagent.get(`https://api.telegram.org/bot${botToken}/sendDocument?chat_id=${msg.message.chat.id}&document=https://www.orimi.com/pdf-test.pdf`).then( response => {});
+            client.sendDocument(msg.message.chat.id, '/home/ubuntu/lastDMSWeb.txt')
+            //superagent.get(`https://api.telegram.org/bot${botToken}/sendDocument?chat_id=${msg.message.chat.id}&document=https://www.orimi.com/pdf-test.pdf`).then( response => {});
         }
 
         // Vedi metodo https://core.telegram.org/bots/api#sendmessage
