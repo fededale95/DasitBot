@@ -82,7 +82,6 @@ function parseMessage( msg ){
 
                   replyText = "DMS CS EMA vers: "+data;
                   zipme(data);
-                  client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
 
             } catch (err) {
               console.error(err);
@@ -112,14 +111,13 @@ function parseMessage( msg ){
 }
 
 function zipme(vers){
-
       var output = file_system.createWriteStream('/home/ubuntu/DMSEMA.zip');
       var archive = archiver('zip');
 
-      //output.on('close', function () {
-        //console.log(archive.pointer() + ' total bytes');
-        //console.log('archiver has been finalized and the output file descriptor has closed.');
-      //});
+      output.on('close', function () {
+        console.log(archive.pointer() + ' total bytes');
+        console.log('archiver has been finalized and the output file descriptor has closed.');
+      });
 
       archive.on('error', function(err){
         throw err;
@@ -128,15 +126,9 @@ function zipme(vers){
       archive.pipe(output);
 
       directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+vers;
-      // append files from a sub-directory, putting its contents at the root of archive
       archive.directory(directory_dms, false);
-
-      // append files from a sub-directory and naming it `new-subdir` within the archive
-      //archive.directory('subdir/', 'new-subdir');
-
       archive.finalize();
-
-
+      client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
 }
 
 function requestUpdate(){
