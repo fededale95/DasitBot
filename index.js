@@ -44,10 +44,10 @@ function parseMessage( msg ){
             try {
               const data = fs.readFileSync('/home/ubuntu/lastDMSWeb.txt', 'utf8');
                   upperCaseReponse = data;
-                  path = "/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-";
-                  type = ".exe";
-                  file = path+upperCaseReponse+type;
-                  client.sendDocument(msg.message.chat.id, file);
+                  //path = "/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-";
+                  //type = ".exe";
+                  //file = path+upperCaseReponse+type;
+                  //client.sendDocument(msg.message.chat.id, file);
 
             } catch (err) {
               console.error(err);
