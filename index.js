@@ -46,7 +46,7 @@ function parseMessage( msg ){
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
                   data = data2;
                   replyText = "DMSWeb WebApp vers: "+data;
-                  file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+data+'.exe';
+                  file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-wa-'+data+'.exe';
                   client.sendDocument(msg.message.chat.id, file);
 
             } catch (err) {
