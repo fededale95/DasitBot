@@ -83,7 +83,7 @@ function parseMessage( msg ){
 
                   directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+data;
 
-                  //zipme(directory_dms);
+                  zipme(directory_dms);
 
                   replyText = "DMS CS EMA vers: "+data;
                   client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
