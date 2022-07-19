@@ -124,7 +124,7 @@ function zipme(vers){
         //throw err;
       //});
 
-      archive.pipe(output);
+      //archive.pipe(output);
 
       directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+vers;
       // append files from a sub-directory, putting its contents at the root of archive
