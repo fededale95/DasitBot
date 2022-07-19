@@ -41,6 +41,8 @@ function parseMessage( msg ){
               console.error(err);
             }
 
+            sendDocument(msg.message.chat.id, "/home/ubuntu/lastDMSWeb.txt");
+
         } else if(msg.message.text=="/start"){
 
             upperCaseReponse = "Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.";
