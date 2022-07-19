@@ -83,10 +83,7 @@ function parseMessage( msg ){
 
                   directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+data;
 
-                  const child_process = require("child_process");
-                  child_process.execSync(`zip -r DMSEMA.zip *`, {
-                    cwd: directory_dms
-                  });
+                  zipme(directory_dms);
 
                   replyText = "DMS CS EMA vers: "+data;
                   client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
@@ -118,7 +115,7 @@ function parseMessage( msg ){
     }
 }
 
-function zipme(vers){
+function zipme(dir_dms){
       var output = file_system.createWriteStream('/home/ubuntu/DMSEMA.zip');
       var archive = archiver('zip');
 
@@ -133,8 +130,7 @@ function zipme(vers){
 
       archive.pipe(output);
 
-      directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+vers;
-      archive.directory(directory_dms, false);
+      archive.directory(dir_dms, false);
       archive.finalize();
 }
 
