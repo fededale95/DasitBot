@@ -132,6 +132,7 @@ function zipme(dir_dms){
 
       archive.directory(dir_dms, false);
       archive.finalize();
+      return
 }
 
 function requestUpdate(){
