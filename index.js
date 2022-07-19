@@ -79,9 +79,9 @@ function parseMessage( msg ){
                   data = fs.readFileSync('/home/ubuntu/lastDMSCS.txt', 'utf8');
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
                   data = data2;
-                  zipme(data);
-                  replyText = "DMS CS EMA vers: "+data;
 
+                  replyText = "DMS CS EMA vers: "+data;
+                  zipme(data);
                   client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
 
             } catch (err) {
