@@ -33,7 +33,7 @@ function parseMessage( msg ){
 
 
 
-		    if (msg.message.text=="/dmsweb") {
+		    if (msg.message.text=="/pippo") {
           //upperCaseReponse = '{ "keyboard": [["uno :+1:"],["uno \ud83d\udc4d", "due"],["uno", "due","tre"],["uno", "due","tre","quattro"]]}';
 
             const fs = require('fs');
