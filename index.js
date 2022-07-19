@@ -75,22 +75,21 @@ function parseMessage( msg ){
 
         } else if(msg.message.text=="/dmsema"){
             const fs = require('fs');
+            data2 = "";
             try {
                   data = fs.readFileSync('/home/ubuntu/lastDMSCS.txt', 'utf8');
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
-                  data = data2;
-                  //zipme(data);
-
-                  directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+data;
-
-                  zipme(directory_dms);
-
-                  replyText = "DMS CS EMA vers: "+data;
-                  client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
-
             } catch (err) {
               console.error(err);
             }
+
+            directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
+
+            zipme(directory_dms);
+
+            replyText = "DMS CS EMA vers: "+data2;
+            client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
+
         } else if(msg.message.text=="/cristian"){
             replyText = "NEXUS, Sono Cristian!";
             client.sendPhoto(msg.message.chat.id, '/mnt/nas/zzzz_Lorenzo/segreto.jpg');
@@ -132,7 +131,6 @@ function zipme(dir_dms){
 
       archive.directory(dir_dms, false);
       archive.finalize();
-      return
 }
 
 function requestUpdate(){
