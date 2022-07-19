@@ -69,7 +69,7 @@ function parseMessage( msg ){
                   data = fs.readFileSync('/home/ubuntu/lastDMSWeb.txt', 'utf8');
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
                   data = data2;
-                  replyText = "DMS Doctor vers: "+data*"\nAttendi alcuni secondi, sto preparando il tuo download..."";
+                  replyText = "DMS Doctor vers: "+data+"\nAttendi alcuni secondi, sto preparando il tuo download...";
                   file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+data+'.exe';
                   client.sendDocument(msg.message.chat.id, file);
 
