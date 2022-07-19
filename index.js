@@ -43,11 +43,13 @@ function parseMessage( msg ){
 
             try {
                   data = fs.readFileSync('/home/ubuntu/lastDMSWeb.txt', 'utf8');
-                  upperCaseReponse = "DMSWeb wa Vers: "+data;
-                  //path = "/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-";
+                  upperCaseReponse = "DMSWeb WebApp vers: "+data;
+                  path = "/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-";
+                  path.concat(data);
+                  path.concat(".exe");
                   //file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+data+'.exe';
                   //file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+data+'.exe';
-                  client.sendDocument(msg.message.chat.id, file);
+                  client.sendDocument(msg.message.chat.id, path);
 
             } catch (err) {
               console.error(err);
