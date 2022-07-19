@@ -79,9 +79,17 @@ function parseMessage( msg ){
                   data = fs.readFileSync('/home/ubuntu/lastDMSCS.txt', 'utf8');
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
                   data = data2;
+                  //zipme(data);
+
+                  directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+data;
+
+                  const child_process = require("child_process");
+                  child_process.execSync(`zip -r /home/ubuntu/DMSEMA.zip *`, {
+                    cwd: directory_dms
+                  });
 
                   replyText = "DMS CS EMA vers: "+data;
-                  zipme(data);
+                  client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
 
             } catch (err) {
               console.error(err);
@@ -128,7 +136,6 @@ function zipme(vers){
       directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+vers;
       archive.directory(directory_dms, false);
       archive.finalize();
-      client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
 }
 
 function requestUpdate(){
