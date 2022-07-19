@@ -15,8 +15,8 @@ const   botToken        = '5403849384:AAGWMSWWzu-vPpMoXTohKl0xE_yCBoQXE2E';
 let     lastOffset      = 0;
 
 
-var TelegramBotClient = require('telegram-bot-client');
-var client = new TelegramBotClient(botToken);
+//var TelegramBotClient = require('telegram-bot-client');
+//var client = new TelegramBotClient(botToken);
 
 
 /**
@@ -45,7 +45,7 @@ function parseMessage( msg ){
               console.error(err);
             }
 
-            client.sendDocument(msg.message.chat.id, "/home/ubuntu/lastDMSWeb.txt");
+            //client.sendDocument(msg.message.chat.id, "/home/ubuntu/lastDMSWeb.txt");
 
         } else if(msg.message.text=="/start"){
 
