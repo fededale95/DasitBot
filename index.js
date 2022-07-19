@@ -86,9 +86,9 @@ function parseMessage( msg ){
             directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
 
             zipme(directory_dms);
-
-            replyText = "DMS CS EMA vers: "+data2+" \nDownload ultima versione: /downloadcs";
             client.delay(15000);
+            replyText = "DMS CS EMA vers: "+data2+" \nDownload ultima versione: /downloadcs";
+
             client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
 
         } else if(msg.message.text=="/downloadcs"){
