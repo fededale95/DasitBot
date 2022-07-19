@@ -1,6 +1,7 @@
 /**
  * Librerie e variabili
  */
+
  //superagent
 const   superagent      = require( 'superagent' );
 const   botToken        = '5403849384:AAGWMSWWzu-vPpMoXTohKl0xE_yCBoQXE2E';
@@ -82,7 +83,7 @@ function parseMessage( msg ){
 function sendMes(msg_id, replyText){
       client.sendMessage(msg_id, replyText);
       /*superagent.get(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${msg_id}&text=${replyText}`)
-        .then( response => {});*/
+        .then( response => {});*/ //primo metodo
 }
 
 //funzione che zippa una cartella (da parametrizzare in e out)
