@@ -79,8 +79,9 @@ function parseMessage( msg ){
                   data = fs.readFileSync('/home/ubuntu/lastDMSCS.txt', 'utf8');
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
                   data = data2;
-                  replyText = "DMS CS EMA vers: "+data;
                   zipme(data);
+                  replyText = "DMS CS EMA vers: "+data;
+
                   client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
 
             } catch (err) {
@@ -120,11 +121,11 @@ function zipme(vers){
         //console.log('archiver has been finalized and the output file descriptor has closed.');
       //});
 
-      //archive.on('error', function(err){
-        //throw err;
-      //});
+      archive.on('error', function(err){
+        throw err;
+      });
 
-      //archive.pipe(output);
+      archive.pipe(output);
 
       directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+vers;
       // append files from a sub-directory, putting its contents at the root of archive
