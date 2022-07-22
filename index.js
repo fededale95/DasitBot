@@ -76,7 +76,7 @@ function parseMessage( msg ){
             output_zip = '/home/dms/DMSEMA.zip';
             zipme(directory_dms, output_zip);
             sendMes(msg.message.chat.id,"DMS CS EMA vers: "+data2+" \nAttendi alcuni secondi, sto preparando il tuo download...");
-            sleep(10).then(() => {
+            sleep(20).then(() => {
                 client.sendDocument(msg.message.chat.id, output_zip);
             })
         } else if(msg.message.text=="/cristian"){
