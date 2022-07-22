@@ -29,7 +29,7 @@ function parseMessage( msg ){
 		    if (msg.message.text=="/dmsweb") {
             const fs = require('fs');
             try {
-                  data = fs.readFileSync('/home/ubuntu/lastDMSWeb.txt', 'utf8');
+                  data = fs.readFileSync('/home/dms/lastDMSWeb.txt', 'utf8');
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
                   data = data2;
                   sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+data);
@@ -41,11 +41,11 @@ function parseMessage( msg ){
         } else if(msg.message.text=="/dmsdoctor"){
             const fs = require('fs');
             try {
-                  data = fs.readFileSync('/home/ubuntu/lastDMSWeb.txt', 'utf8');
+                  data = fs.readFileSync('/home/dms/lastDMSWeb.txt', 'utf8');
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
                   data = data2;
                   sendMes(msg.message.chat.id,"DMS Doctor vers: "+data+"\nAttendi alcuni secondi, sto preparando il tuo download...");
-                  file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+data+'.exe';
+                  file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+data+'.exe';
                   client.sendDocument(msg.message.chat.id, file);
             } catch (err) {
               console.error(err);
@@ -54,21 +54,21 @@ function parseMessage( msg ){
             const fs = require('fs');
             data2 = "";
             try {
-                  data = fs.readFileSync('/home/ubuntu/lastDMSCS.txt', 'utf8');
+                  data = fs.readFileSync('/home/dms/lastDMSCS.txt', 'utf8');
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
             } catch (err) {
               console.error(err);
             }
-            directory_dms = '/mnt/nastest/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
-            output_zip = '/home/ubuntu/DMSEMA.zip';
+            directory_dms = '/mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
+            output_zip = '/home/dms/DMSEMA.zip';
             zipme(directory_dms, output_zip);
             sendMes(msg.message.chat.id,"DMS CS EMA vers: "+data2+" \nAttendi alcuni secondi, sto preparando il tuo download...");
             sleep(10).then(() => {
-                client.sendDocument(msg.message.chat.id, '/home/ubuntu/DMSEMA.zip');
+                client.sendDocument(msg.message.chat.id, output_zip);
             })
         } else if(msg.message.text=="/cristian"){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
-            client.sendPhoto(msg.message.chat.id, '/mnt/nas/zzzz_Lorenzo/segreto.jpg');
+            client.sendPhoto(msg.message.chat.id, '/mnt/nasPub/zzzz_Lorenzo/segreto.jpg');
         } else if(msg.message.text=="/start"){
             sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.");
         } else {
