@@ -39,10 +39,10 @@ function parseMessage( msg ){
                   file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-wa-'+data+'.exe';
                   fileName = 'dmsweb-wa-'+data+'.exe';
                   output_zip = '/home/dms/DMSWeb'+data+'.zip';
-                  zipFile(file, fileName, output_zip);
-                  sleep(10).then(() => {
+                  zipFile(file, fileName, output_zip, msg.message.chat.id);
+                  /*sleep(10).then(() => {
                       splitMyFile(output_zip, 52428800);
-                  })
+                  })*/
 
 
                   //client.sendDocument(msg.message.chat.id, file);
@@ -103,20 +103,15 @@ function sendMes(msg_id, replyText){
 }
 
 //funzione ch ezippa un file
-function zipFile(file_to_zip, fileName, output_name){
+function zipFile(file_to_zip, fileName, output_name, msg_id){
       var output = file_system.createWriteStream(output_name);
       var archive = archiver('zip');
-      /*output.on('close', function () {
-        console.log(archive.pointer() + ' total bytes');
-        console.log('archiver has been finalized and the output file descriptor has closed.');
-      });
-
-      archive.on('error', function(err){
-        throw err;
-      });*/
       archive.pipe(output);
       archive.file(file_to_zip, { name:  fileName});
       archive.finalize();
+      output.on('close', function () {
+          sendMes(msg_id,"Finish!");
+      });
 }
 
 //funzione che zippa una cartella (da parametrizzare in e out)
