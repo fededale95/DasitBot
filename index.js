@@ -36,7 +36,7 @@ function parseMessage( msg ){
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
                   data = data2;
                   sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+data);
-                  file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-wa-'+data+'.exe';
+                  file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-wa-'+data+'.exe';
                   fileName = 'dmsweb-wa-'+data+'.exe';
                   output_zip = '/home/dms/DMSWeb'+data+'.zip';
                   zipFile(file, fileName, output_zip);
