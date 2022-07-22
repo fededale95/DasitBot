@@ -20,6 +20,9 @@ const sleep = (s) => {
   return new Promise(resolve => setTimeout(resolve, (s*1000)))
 }
 
+//split file
+const splitFile = require('split-file');
+
 /**
  * Elabora gli aggiornamenti ricevuti da Telegram e risponde al messaggio
  * ricevuto
@@ -33,8 +36,13 @@ function parseMessage( msg ){
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
                   data = data2;
                   sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+data);
-                  //file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-wa-'+data+'.exe'; //purtroppo il file è troppo grande
+                  file = '/mnt/nastest/Nexus/DMSWEBSperimentali/dmsweb-wa-'+data+'.exe';
+                  fileName = 'dmsweb-wa-'+data+'.exe';
+                  output_zip = '/home/dms/DMSWeb'+data+'.zip';
+                  zipFile(file, fileName, output_zip);
                   //client.sendDocument(msg.message.chat.id, file);
+                  sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+data);
+
             } catch (err) {
               console.error(err);
             }
@@ -89,6 +97,24 @@ function sendMes(msg_id, replyText){
         .then( response => {});*/ //primo metodo
 }
 
+//funzione ch ezippa un file
+function zipFile(file_to_zip, fileName, output_name){
+      var output = file_system.createWriteStream(output_name);
+      var archive = archiver('zip');
+      /*output.on('close', function () {
+        console.log(archive.pointer() + ' total bytes');
+        console.log('archiver has been finalized and the output file descriptor has closed.');
+      });
+
+      archive.on('error', function(err){
+        throw err;
+      });*/
+      archive.pipe(output);
+      archive.directory(dir_to_zip, false);
+      archive.file(file_to_zip, { name:  ${fileName}});
+      archive.finalize();
+}
+
 //funzione che zippa una cartella (da parametrizzare in e out)
 function zipme(dir_to_zip, output_name){
       var output = file_system.createWriteStream(output_name);
@@ -127,7 +153,7 @@ function requestUpdate(){
         });
 }
 
-  function readExcel(msg_id) {
+function readExcel(msg_id) {
 
         const readXlsxFile = require('read-excel-file/node')
 
@@ -136,7 +162,17 @@ function requestUpdate(){
             sendMes(msg_id,"dio insipido");
             sendMes(msg_id,rows[3][1]);
         })
-  }
+}
+
+function splitFile(source, maxSize) {
+      splitFile.splitFileBySize( source , maxSize)
+      .then((names) => {
+      console.log(names);
+      })
+      .catch((err) => {
+      console.log('Error: ', err);
+      });
+}
 
 // Avviamo la prima lettura dei messaggi
 requestUpdate();
