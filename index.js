@@ -69,9 +69,12 @@ function parseMessage( msg ){
         } else if(msg.message.text=="/cristian"){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
             client.sendPhoto(msg.message.chat.id, '/mnt/nasPub/1600_Federico_project/segreto.jpg');
+        } else if(msg.message.text=="/excel"){
+            readExcel(msg.message.text);
+            sendMes(msg.message.chat.id,"OK!");
         } else if(msg.message.text=="/start"){
             sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.");
-        } else {
+        }else{
             sendMes(msg.message.chat.id,"Comando non presente, riprovare");
         }
     } catch( e ){
@@ -123,6 +126,18 @@ function requestUpdate(){
             } , 2000 );
         });
 }
+
+  function readExcel(msg_id) {
+        //leggi da file excel
+        const xlsxFile = require('read-excel-file/node');
+        xlsxFile('/home/dms/km_nota_spesa.xls').then((rows) => {
+            for (i in rows){
+              for (j in rows[i]){
+                sendMes(msg_id,rows[i][j]);
+              }
+            }
+        })
+  }
 
 // Avviamo la prima lettura dei messaggi
 requestUpdate();
