@@ -35,12 +35,15 @@ function parseMessage( msg ){
                   data = fs.readFileSync('/home/dms/lastDMSWeb.txt', 'utf8');
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
                   data = data2;
-                  sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+data);
+                  sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+data+"\nAttendi alcuni secondi, sto preparando il tuo download...");
                   file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-wa-'+data+'.exe';
                   fileName = 'dmsweb-wa-'+data+'.exe';
                   output_zip = '/home/dms/DMSWeb'+data+'.zip';
                   zipFile(file, fileName, output_zip);
-                  splitMyFile(output_zip, 52428800);
+                  sleep(10).then(() => {
+                      splitMyFile(output_zip, 52428800);
+                  })
+
 
                   //client.sendDocument(msg.message.chat.id, file);
                   //sendMes(msg.message.chat.id, "OK!");
@@ -166,7 +169,7 @@ function readExcel(msg_id) {
 }
 
 function splitMyFile(source, maxSize) {
-      splitFile.splitFile( source , 3)
+      splitFile.splitFileBySize( source , 52428800)
       .then((names) => {
           console.log(names);
       })
