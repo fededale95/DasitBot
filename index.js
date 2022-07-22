@@ -117,7 +117,7 @@ function zipFile(file_to_zip, fileName, output_name, msg_id){
                 });
 
             }
-            for(i=0;i=<3;i++){
+            for(i=0;i<3;i++){
                 client.sendDocument(msg_id, output_name+'.00'+(i+1));
             }
 
