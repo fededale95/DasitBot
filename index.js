@@ -16,9 +16,9 @@ var file_system = require('fs');
 var archiver = require('archiver');
 
 //funzione sleep con callback
-const sleep = (s) => {
+/*const sleep = (s) => {
   return new Promise(resolve => setTimeout(resolve, (s*1000)))
-}
+}*/
 
 //split file
 const splitFile = require('split-file');
@@ -108,7 +108,7 @@ function zipFile(file_to_zip, fileName, output_name, msg_id){
       archive.file(file_to_zip, { name:  fileName});
       archive.finalize();
       output.on('close', function () {
-          splitMyFile(output_zip, 52428800);
+          splitMyFile(output_name, 52428800);
       });
 }
 
@@ -159,7 +159,13 @@ function readExcel(msg_id) {
 function splitMyFile(source, maxSize) {
       splitFile.splitFileBySize( source , 52428800)
       .then((names) => {
-          console.log(names);
+          for(i in names){
+              file_system.rename(source+'sf-part'+(i+1) , source+'.00'+(i+1), function(err) {
+                  if ( err ) console.log('ERROR: ' + err);
+              });
+              //console.log(names);
+          }
+
       })
       .catch((err) => {
           console.log('Error: ', err);
