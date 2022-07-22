@@ -74,11 +74,9 @@ function parseMessage( msg ){
             }
             directory_dms = '/mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
             output_zip = '/home/dms/DMSEMA.zip';
-            zipme(directory_dms, output_zip);
             sendMes(msg.message.chat.id,"DMS CS EMA vers: "+data2+" \nAttendi alcuni secondi, sto preparando il tuo download...");
-            sleep(30).then(() => {
-                client.sendDocument(msg.message.chat.id, output_zip);
-            })
+            zipDir(directory_dms, output_zip, msg.message.chat.id);
+
         } else if(msg.message.text=="/cristian"){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
             client.sendPhoto(msg.message.chat.id, '/mnt/nasPub/1600_Federico_project/segreto.jpg');
@@ -110,25 +108,20 @@ function zipFile(file_to_zip, fileName, output_name, msg_id){
       archive.file(file_to_zip, { name:  fileName});
       archive.finalize();
       output.on('close', function () {
-          sendMes(msg_id,"Finish!");
+          splitMyFile(output_zip, 52428800);
       });
 }
 
 //funzione che zippa una cartella (da parametrizzare in e out)
-function zipme(dir_to_zip, output_name){
+function zipDir(dir_to_zip, output_name, msg_id){
       var output = file_system.createWriteStream(output_name);
       var archive = archiver('zip');
-      /*output.on('close', function () {
-        console.log(archive.pointer() + ' total bytes');
-        console.log('archiver has been finalized and the output file descriptor has closed.');
-      });
-
-      archive.on('error', function(err){
-        throw err;
-      });*/
       archive.pipe(output);
       archive.directory(dir_to_zip, false);
       archive.finalize();
+      output.on('close', function () {
+          client.sendDocument(msg_id, output_name);
+      });
 }
 
 //start del programma, attende un messaggio nuovo
