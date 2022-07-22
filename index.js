@@ -130,7 +130,7 @@ function requestUpdate(){
   function readExcel(msg_id) {
         //leggi da file excel
         const xlsxFile = require('read-excel-file/node');
-        xlsxFile('/home/dms/km_nota_spesa.xls').then((rows) => {
+        xlsxFile('/home/dms/km_nota_spesa.xlsx').then((rows) => {
             for (i in rows){
               for (j in rows[i]){
                 sendMes(msg_id,rows[i][j]);
