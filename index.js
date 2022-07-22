@@ -108,7 +108,7 @@ function zipFile(file_to_zip, fileName, output_name, msg_id){
       archive.file(file_to_zip, { name:  fileName});
       archive.finalize();
       output.on('close', function () {
-          splitMyFile(output_name, 52428800, msg_id);
+          splitMyFile(output_name, 50000000, msg_id);
 
           sleep(5).then(() => {  //capire se c'è un evento che triggera al finire dello split
             for(i=0;i<3;i++){ //capire grandezza file e salvare num in const al posto che mettere 3
