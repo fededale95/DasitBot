@@ -164,7 +164,7 @@ function readExcel(msg_id) {
         })
 }
 
-function splitFile(source, maxSize) {
+function splitMyFile(source, maxSize) {
       splitFile.splitFileBySize( source , maxSize)
       .then((names) => {
       console.log(names);
