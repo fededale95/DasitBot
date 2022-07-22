@@ -40,8 +40,10 @@ function parseMessage( msg ){
                   fileName = 'dmsweb-wa-'+data+'.exe';
                   output_zip = '/home/dms/DMSWeb'+data+'.zip';
                   zipFile(file, fileName, output_zip);
+                  splitMyFile(output_zip, 52428800);
+
                   //client.sendDocument(msg.message.chat.id, file);
-                  sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+data);
+                  sendMes(msg.message.chat.id, "OK!");
 
             } catch (err) {
               console.error(err);
@@ -166,10 +168,10 @@ function readExcel(msg_id) {
 function splitMyFile(source, maxSize) {
       splitFile.splitFileBySize( source , maxSize)
       .then((names) => {
-      console.log(names);
+          console.log(names);
       })
       .catch((err) => {
-      console.log('Error: ', err);
+          console.log('Error: ', err);
       });
 }
 
