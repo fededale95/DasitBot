@@ -111,7 +111,7 @@ function zipFile(file_to_zip, fileName, output_name){
       });*/
       archive.pipe(output);
       archive.directory(dir_to_zip, false);
-      archive.file(file_to_zip, { name:  ${fileName}});
+      archive.file(file_to_zip, { name:  fileName});
       archive.finalize();
 }
 
