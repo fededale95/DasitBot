@@ -110,12 +110,14 @@ function zipFile(file_to_zip, fileName, output_name, msg_id){
       output.on('close', function () {
           splitMyFile(output_name, 52428800, msg_id);
 
-          sleep(5).then(() => {
-            for(i=0;i<3;i++){
+          sleep(5).then(() => {  //capire se c'è un evento che triggera al finire dello split
+            for(i=0;i<3;i++){ //capire grandezza file e salvare num in const al posto che mettere 3
                 file_system.rename(output_name+'.sf-part'+(i+1) , output_name+'.00'+(i+1), function(err) {
                     if ( err ) console.log('ERROR: ' + err);
                 });
+                client.sendDocument(msg_id, output_name+'.00'+(i+1));
             }
+
 
           })
       });
