@@ -128,14 +128,13 @@ function requestUpdate(){
 }
 
   function readExcel(msg_id) {
-        //leggi da file excel
-        const xlsxFile = require('read-excel-file/node');
-        xlsxFile('/home/dms/km_nota_spesa.xlsx').then((rows) => {
-            for (i in rows){
-              for (j in rows[i]){
-                sendMes(msg_id,rows[i][j]);
-              }
-            }
+
+        const readXlsxFile = require('read-excel-file/node')
+
+        // File path.
+        readXlsxFile('/home/dms/km_nota_spesa.xlsx').then((rows) => {
+            sendMes(msg_id,"dio insipido");
+            sendMes(msg_id,rows[3][1]);
         })
   }
 
