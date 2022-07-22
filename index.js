@@ -43,7 +43,7 @@ function parseMessage( msg ){
                   splitMyFile(output_zip, 52428800);
 
                   //client.sendDocument(msg.message.chat.id, file);
-                  sendMes(msg.message.chat.id, "OK!");
+                  //sendMes(msg.message.chat.id, "OK!");
 
             } catch (err) {
               console.error(err);
