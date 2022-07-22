@@ -111,9 +111,12 @@ function zipFile(file_to_zip, fileName, output_name, msg_id){
           splitMyFile(output_name, 52428800, msg_id);
 
           sleep(5).then(() => {
-              file_system.rename(output_name+'.sf-part'+1 , output_name+'.00'+1, function(err) {
-                  if ( err ) console.log('ERROR: ' + err);
-              });
+            for(i=0;i<3;i++){
+                file_system.rename(output_name+'.sf-part'+(i+1) , output_name+'.00'+(i+1), function(err) {
+                    if ( err ) console.log('ERROR: ' + err);
+                });
+            }
+
           })
       });
 }
