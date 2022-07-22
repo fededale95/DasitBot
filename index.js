@@ -70,8 +70,8 @@ function parseMessage( msg ){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
             client.sendPhoto(msg.message.chat.id, '/mnt/nasPub/1600_Federico_project/segreto.jpg');
         } else if(msg.message.text=="/excel"){
-            readExcel(msg.message.text);
             sendMes(msg.message.chat.id,"OK!");
+            readExcel(msg.message.text);
         } else if(msg.message.text=="/start"){
             sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.");
         }else{
