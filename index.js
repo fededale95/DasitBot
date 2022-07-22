@@ -16,9 +16,9 @@ var file_system = require('fs');
 var archiver = require('archiver');
 
 //funzione sleep con callback
-/*const sleep = (s) => {
+const sleep = (s) => {
   return new Promise(resolve => setTimeout(resolve, (s*1000)))
-}*/
+}
 
 //split file
 const splitFile = require('split-file');
