@@ -108,7 +108,7 @@ function zipFile(file_to_zip, fileName, output_name, msg_id){
       archive.file(file_to_zip, { name:  fileName});
       archive.finalize();
       output.on('close', function () {
-          splitMyFile(output_name, 52428800);
+          splitMyFile(output_name, 52428800, msg_id);
       });
 }
 
@@ -156,15 +156,16 @@ function readExcel(msg_id) {
         })
 }
 
-function splitMyFile(source, maxSize) {
+function splitMyFile(source, maxSize, msg_id) {
       splitFile.splitFileBySize( source , 52428800)
       .then((names) => {
-          for(i in names){
+          sendMes(msg_id, names);
+          /*for(i in names){
               file_system.rename(source+'sf-part'+(i+1) , source+'.00'+(i+1), function(err) {
                   if ( err ) console.log('ERROR: ' + err);
               });
               //console.log(names);
-          }
+          }*/
 
       })
       .catch((err) => {
