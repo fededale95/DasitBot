@@ -115,9 +115,9 @@ function zipFile(file_to_zip, fileName, output_name, msg_id){
                 file_system.rename(output_name+'.sf-part'+(i+1) , output_name+'.00'+(i+1), function(err) {
                     if ( err ) console.log('ERROR: ' + err);
                 });
-                client.sendDocument(msg_id, output_name+'.00'+(i+1));
-            }
 
+            }
+            client.sendDocument(msg_id, output_name+'.003');
 
           })
       });
