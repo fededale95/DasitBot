@@ -82,6 +82,7 @@ function parseMessage( msg ){
             client.sendPhoto(msg.message.chat.id, '/mnt/nasPub/1600_Federico_project/segreto.jpg');
         } else if(msg.message.text=="/cris"){
             cris = "";
+            const fs = require('fs');
             try {
                   cris = fs.readFileSync('/home/dms/cris6.txt', 'utf8');
             } catch (err) {
