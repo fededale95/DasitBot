@@ -88,7 +88,7 @@ function parseMessage( msg ){
             } catch (err) {
               console.error(err);
             }
-            sendMes(msg.message.chat.id, cris);
+            sendMes(msg.message.chat.id, "NEXUS, Sono Cristian testuale!\n\n"+cris);
         } else if(msg.message.text=="/excel"){
             sendMes(msg.message.chat.id,"OK!");
             readExcel(msg.message.text);
