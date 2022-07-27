@@ -81,7 +81,6 @@ function parseMessage( msg ){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
             client.sendPhoto(msg.message.chat.id, '/mnt/nasPub/1600_Federico_project/segreto.jpg');
         } else if(msg.message.text=="/cris"){
-            sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
             cris = "";
             try {
                   cris = fs.readFileSync('/home/dms/cris6.txt', 'utf8');
