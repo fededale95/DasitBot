@@ -70,7 +70,7 @@ function parseMessage( msg ){
             myArray.sort();
             for(i in myArray){
                for(j=0; j<10; j++){
-                  if ( myArray[i].startsWith(j) ) {
+                  if ( myArray[i].startsWith(""+j) ) {
                      myArray.splice(i, 1);
                   }
                }
