@@ -67,15 +67,16 @@ function parseMessage( msg ){
             const fs = require('fs');
             data2 = "";
             try {
-                  data = fs.readFileSync('/home/dms/lastDMSCS.txt', 'utf8');
-                  data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
+                  data2 = fs.readFileSync('/home/dms/lastVersCS.txt', 'utf8');
+                  //data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
+
             } catch (err) {
               console.error(err);
             }
             directory_dms = '/mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
             output_zip = '/home/dms/DMSEMA.zip';
             sendMes(msg.message.chat.id,"DMS CS EMA vers: "+data2+" \nAttendi alcuni secondi, sto preparando il tuo download...");
-            zipDir(directory_dms, output_zip, msg.message.chat.id);
+            //zipDir(directory_dms, output_zip, msg.message.chat.id);
 
         } else if(msg.message.text=="/cristian"){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
