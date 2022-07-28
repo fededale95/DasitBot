@@ -66,7 +66,7 @@ function parseMessage( msg ){
         } else if(msg.message.text=="/dmsdoctor"){
             const fs = require('fs');
             try {
-                  data = fs.readFileSync('/home/dms/lastDMSWeb.txt', 'utf8');
+                  data = fs.readFileSync('/home/dms/lastVersWEB.txt', 'utf8');
                   data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
                   data = data2;
                   sendMes(msg.message.chat.id,"DMS Doctor vers: "+data+"\nAttendi alcuni secondi, sto preparando il tuo download...");
