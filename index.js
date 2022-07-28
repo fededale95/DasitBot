@@ -75,7 +75,7 @@ function parseMessage( msg ){
                      myArray[i]="CANC";
                   }
             }
-            for(i in myArray){
+            for(i=0 ; i<myArray.length; i++){
                if(myArray[i]=="CANC"){
                   myArray.splice(i, 1);
                }
