@@ -67,11 +67,12 @@ function parseMessage( msg ){
               console.error(err);
             }
             const myArray = data2.split("\n");
+            myArray.splice(0, 1);
             myArray.sort();
             for(i in myArray){
                for(j=0; j<10; j++){
                   if ( !myArray[i].startsWith(j) ) {
-                     myArray.splice(i, 1);
+                     //myArray.splice(i, 1);
                   }
                }
             }
