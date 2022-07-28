@@ -67,7 +67,7 @@ function parseMessage( msg ){
               console.error(err);
             }
             const myArray = data2.split("\n");
-            myArray.splice(0, 2);
+            myArray.splice(0, 3);
             myArray.sort();
             for(i in myArray){
                for(j=0; j<10; j++){
