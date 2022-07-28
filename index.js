@@ -77,7 +77,7 @@ function parseMessage( msg ){
                }
             }
             //sendMes(msg.message.chat.id,"DMS CS EMA vers: "+myArray+" \nAttendi alcuni secondi, sto preparando il tuo download...");
-            sendMes(msg.message.chat.id,myArray);
+            sendMes(msg.message.chat.id, ""+myArray);
             directory_dms = '/mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
             output_zip = '/home/dms/DMSEMA.zip';
             //zipDir(directory_dms, output_zip, msg.message.chat.id);
