@@ -63,7 +63,7 @@ function parseMessage( msg ){
         } else if(msg.message.text=="/dmsdoctor"){
             const fs = require('fs');
             try {
-                  data = fs.readFileSync('/home/dms/lastVersWEB.txt', 'utf8');
+                  data = fs.readFileSync('/home/dms/lastVersDOC.txt', 'utf8');
                   var myArray = data.split("\n");
                   var toCanc = [];
                   myArray.sort();
