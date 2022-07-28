@@ -66,19 +66,18 @@ function parseMessage( msg ){
             } catch (err) {
               console.error(err);
             }
-            const myArray = data2.split("\n");
+            var myArray = data2.split("\n");
+            var toCanc = [];
             myArray.sort();
             for(i in myArray){
                   if ( myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") ) {
 
                   } else {
-                     myArray[i]="CANC";
+                     toCanc.push(i);
                   }
             }
-            for(i=0 ; i<myArray.length; i++){
-               if(myArray[i]=="CANC"){
-                  myArray.splice(i, 1);
-               }
+            for(i in toCanc){
+               myArray.splice(toCanc[i], 1);
             }
             //sendMes(msg.message.chat.id,"DMS CS EMA vers: "+myArray+" \nAttendi alcuni secondi, sto preparando il tuo download...");
             sendMes(msg.message.chat.id, ""+myArray);
