@@ -55,7 +55,7 @@ function parseMessage( msg ){
                   file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-wa-'+last+'.exe';
                   fileName = 'dmsweb-wa-'+last+'.exe';
                   output_zip = '/home/dms/DMSWeb'+last+'.zip';
-                  //zipFile(file, fileName, output_zip, msg.message.chat.id);
+                  zipFile(file, fileName, output_zip, msg.message.chat.id);
 
             } catch (err) {
               console.error(err);
