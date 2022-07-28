@@ -68,7 +68,7 @@ function parseMessage( msg ){
             }
             const myArray = data2.split("\n");
             myArray.splice(0, 3);
-            myArray.sort();
+            //myArray.sort();
             for(i in myArray){
                for(j=0; j<10; j++){
                   if ( !myArray[i].startsWith(j) ) {
