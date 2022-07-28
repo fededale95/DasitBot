@@ -64,25 +64,7 @@ function parseMessage( msg ){
             const fs = require('fs');
             try {
                   data = fs.readFileSync('/home/dms/lastVersDOC.txt', 'utf8');
-                  /*var myArray = data.split("\n");
-                  var toCanc = [];
-                  myArray.sort();
-                  for(i in myArray){
-                        if ( myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") ) {
-
-                        } else {
-                           toCanc.push(i);
-                        }
-                  }
-                  for(i in toCanc){
-                     myArray.splice(toCanc[i], 1);
-                     for(i in toCanc){
-                        toCanc[i]=toCanc[i]-1;
-                     }
-                  }
-                  last=myArray[myArray.length-1];*/
                   last=lastVersion(data);
-
                   sendMes(msg.message.chat.id,"DMS Doctor vers: "+last+"\nAttendi alcuni secondi, sto preparando il tuo download...");
                   file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+last+'.exe';
                   client.sendDocument(msg.message.chat.id, file);
@@ -91,36 +73,16 @@ function parseMessage( msg ){
             }
         } else if(msg.message.text=="/dmsema"){
             const fs = require('fs');
-            data2 = "";
             try {
-                  data2 = fs.readFileSync('/home/dms/lastVersCS.txt', 'utf8');
-                  //data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
-
+                  data = fs.readFileSync('/home/dms/lastVersCS.txt', 'utf8');
+                  last=lastVersion(data);
+                  sendMes(msg.message.chat.id,"DMS CS EMA vers: "+last+" \nAttendi alcuni secondi, sto preparando il tuo download...");
+                  directory_dms = '/mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA/'+last;
+                  output_zip = '/home/dms/DMSEMA.zip';
+                  zipDir(directory_dms, output_zip, msg.message.chat.id);
             } catch (err) {
               console.error(err);
             }
-            var myArray = data2.split("\n");
-            var toCanc = [];
-            myArray.sort();
-            for(i in myArray){
-                  if ( myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") ) {
-
-                  } else {
-                     toCanc.push(i);
-                  }
-            }
-            for(i in toCanc){
-               myArray.splice(toCanc[i], 1);
-               for(i in toCanc){
-                  toCanc[i]=toCanc[i]-1;
-               }
-            }
-            last=myArray[myArray.length-1];
-            sendMes(msg.message.chat.id,"DMS CS EMA vers: "+last+" \nAttendi alcuni secondi, sto preparando il tuo download...");
-            directory_dms = '/mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA/'+last;
-            output_zip = '/home/dms/DMSEMA.zip';
-            zipDir(directory_dms, output_zip, msg.message.chat.id);
-
         } else if(msg.message.text=="/cristian"){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
             client.sendPhoto(msg.message.chat.id, '/mnt/nasPub/1600_Federico_project/segreto.jpg');
