@@ -67,8 +67,8 @@ function parseMessage( msg ){
               console.error(err);
             }
             const myArray = data2.split("\n");
-            sendMes(msg.message.chat.id,"DMS CS EMA vers: "+myArray[2]+" \nAttendi alcuni secondi, sto preparando il tuo download...");
-
+            myArray.sort();
+            sendMes(msg.message.chat.id,"DMS CS EMA vers: "+myArray+" \nAttendi alcuni secondi, sto preparando il tuo download...");
             directory_dms = '/mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
             output_zip = '/home/dms/DMSEMA.zip';
             //zipDir(directory_dms, output_zip, msg.message.chat.id);
