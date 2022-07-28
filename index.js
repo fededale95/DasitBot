@@ -76,11 +76,14 @@ function parseMessage( msg ){
                      toCanc.push(i);
                   }
             }
-            //for(i in toCanc){
-               //myArray.splice(toCanc[i], 1);
-            //}
+            for(i in toCanc){
+               myArray.splice(toCanc[i], 1);
+               for(i in toCanc){
+                  toCanc[i]=toCanc[i]-1;
+               }
+            }
             //sendMes(msg.message.chat.id,"DMS CS EMA vers: "+myArray+" \nAttendi alcuni secondi, sto preparando il tuo download...");
-            sendMes(msg.message.chat.id, ""+toCanc);
+            sendMes(msg.message.chat.id, ""+myArray);
             directory_dms = '/mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
             output_zip = '/home/dms/DMSEMA.zip';
             //zipDir(directory_dms, output_zip, msg.message.chat.id);
