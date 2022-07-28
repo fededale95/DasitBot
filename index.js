@@ -159,17 +159,6 @@ function requestUpdate(){
         });
 }
 
-function readExcel(msg_id) {
-
-        const readXlsxFile = require('read-excel-file/node')
-
-        // File path.
-        readXlsxFile('/home/dms/km_nota_spesa.xlsx').then((rows) => {
-            sendMes(msg_id,"dio insipido");
-            sendMes(msg_id,rows[3][1]);
-        })
-}
-
 function splitMyFile(source, maxSize, msg_id) {
       splitFile.splitFileBySize( source , maxSize)
       .then((names) => {
