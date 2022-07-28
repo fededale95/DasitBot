@@ -35,22 +35,7 @@ function parseMessage( msg ){
                   data = fs.readFileSync('/home/dms/lastVersWEB.txt', 'utf8');
                   var myArray = data.split("\n");
                   var toCanc = [];
-                  myArray.sort();
-                  for(i in myArray){
-                        if ( myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") ) {
-
-                        } else {
-                           toCanc.push(i);
-                        }
-                  }
-                  for(i in toCanc){
-                     myArray.splice(toCanc[i], 1);
-                     for(i in toCanc){
-                        toCanc[i]=toCanc[i]-1;
-                     }
-                  }
-                  last=myArray[myArray.length-1];
-
+                  last=lastVersion(data);
                   sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+last+"\nAttendi alcuni secondi, sto preparando il tuo download...");
                   file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-wa-'+last+'.exe';
                   fileName = 'dmsweb-wa-'+last+'.exe';
@@ -86,9 +71,6 @@ function parseMessage( msg ){
         } else if(msg.message.text=="/cristian"){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
             client.sendPhoto(msg.message.chat.id, '/mnt/nasPub/1600_Federico_project/segreto.jpg');
-        } else if(msg.message.text=="/excel"){
-            sendMes(msg.message.chat.id,"OK!");
-            readExcel(msg.message.text);
         } else if(msg.message.text=="/start"){
             sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.");
         }else{
