@@ -69,7 +69,9 @@ function parseMessage( msg ){
             const myArray = data2.split("\n");
             myArray.sort();
             for(i in myArray){
-                  if ( !myArray[i].startsWith(0) || !myArray[i].startsWith(1) || !myArray[i].startsWith(2) || !myArray[i].startsWith(3) || !myArray[i].startsWith(4) || !myArray[i].startsWith(5) || !myArray[i].startsWith(6) || !myArray[i].startsWith(7) || !myArray[i].startsWith(8) || !myArray[i].startsWith(9) ) {
+                  if ( myArray[i].startsWith(0) || myArray[i].startsWith(1) || myArray[i].startsWith(2) || myArray[i].startsWith(3) || myArray[i].startsWith(4) || myArray[i].startsWith(5) || myArray[i].startsWith(6) || myArray[i].startsWith(7) || myArray[i].startsWith(8) || myArray[i].startsWith(9) ) {
+                     
+                  } else {
                      myArray.splice(i, 1);
                   }
             }
