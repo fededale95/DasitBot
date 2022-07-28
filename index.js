@@ -64,7 +64,7 @@ function parseMessage( msg ){
             const fs = require('fs');
             try {
                   data = fs.readFileSync('/home/dms/lastVersDOC.txt', 'utf8');
-                  var myArray = data.split("\n");
+                  /*var myArray = data.split("\n");
                   var toCanc = [];
                   myArray.sort();
                   for(i in myArray){
@@ -80,7 +80,8 @@ function parseMessage( msg ){
                         toCanc[i]=toCanc[i]-1;
                      }
                   }
-                  last=myArray[myArray.length-1];
+                  last=myArray[myArray.length-1];*/
+                  last=lastVersion(data);
 
                   sendMes(msg.message.chat.id,"DMS Doctor vers: "+last+"\nAttendi alcuni secondi, sto preparando il tuo download...");
                   file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+last+'.exe';
@@ -208,6 +209,27 @@ function splitMyFile(source, maxSize, msg_id) {
       .catch((err) => {
           console.log('Error: ', err);
       });
+}
+
+function lastVersion(data){
+      var myArray = data.split("\n");
+      var toCanc = [];
+      myArray.sort();
+      for(i in myArray){
+            if ( myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") ) {
+
+            } else {
+               toCanc.push(i);
+            }
+      }
+      for(i in toCanc){
+         myArray.splice(toCanc[i], 1);
+         for(i in toCanc){
+            toCanc[i]=toCanc[i]-1;
+         }
+      }
+      last=myArray[myArray.length-1];
+      return last;
 }
 
 // Avviamo la prima lettura dei messaggi
