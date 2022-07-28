@@ -32,14 +32,33 @@ function parseMessage( msg ){
 		    if (msg.message.text=="/dmsweb") {
             const fs = require('fs');
             try {
-                  data = fs.readFileSync('/home/dms/lastDMSWeb.txt', 'utf8');
-                  data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
-                  data = data2;
-                  sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+data+"\nAttendi alcuni secondi, sto preparando il tuo download...");
-                  file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-wa-'+data+'.exe';
-                  fileName = 'dmsweb-wa-'+data+'.exe';
-                  output_zip = '/home/dms/DMSWeb'+data+'.zip';
-                  zipFile(file, fileName, output_zip, msg.message.chat.id);
+                  data = fs.readFileSync('/home/dms/lastVersWEB.txt', 'utf8');
+                  //data2 = data.substring(0, data.length - 1); //tolgo il carattere di fine riga
+                  //data = data2;
+
+                  var myArray = data.split("\n");
+                  var toCanc = [];
+                  myArray.sort();
+                  for(i in myArray){
+                        if ( myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") ) {
+
+                        } else {
+                           toCanc.push(i);
+                        }
+                  }
+                  for(i in toCanc){
+                     myArray.splice(toCanc[i], 1);
+                     for(i in toCanc){
+                        toCanc[i]=toCanc[i]-1;
+                     }
+                  }
+                  last=myArray[myArray.length-1];
+
+                  sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+last+"\nAttendi alcuni secondi, sto preparando il tuo download...");
+                  file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-wa-'+last+'.exe';
+                  fileName = 'dmsweb-wa-'+last+'.exe';
+                  output_zip = '/home/dms/DMSWeb'+last+'.zip';
+                  //zipFile(file, fileName, output_zip, msg.message.chat.id);
 
             } catch (err) {
               console.error(err);
