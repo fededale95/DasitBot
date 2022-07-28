@@ -86,7 +86,7 @@ function parseMessage( msg ){
             sendMes(msg.message.chat.id,"DMS CS EMA vers: "+myArray[myArray.length-1]+" \nAttendi alcuni secondi, sto preparando il tuo download...");
             directory_dms = '/mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
             output_zip = '/home/dms/DMSEMA.zip';
-            //zipDir(directory_dms, output_zip, msg.message.chat.id);
+            zipDir(directory_dms, output_zip, msg.message.chat.id);
 
         } else if(msg.message.text=="/cristian"){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
