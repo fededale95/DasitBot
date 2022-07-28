@@ -68,6 +68,13 @@ function parseMessage( msg ){
             }
             const myArray = data2.split("\n");
             myArray.sort();
+            for(i in myArray){
+               for(j=0; j<10; j++){
+                  if ( myArray[i].startsWith(j) ) {
+                     myArray.splice(i, 1);
+                  }
+               }
+            }
             sendMes(msg.message.chat.id,"DMS CS EMA vers: "+myArray+" \nAttendi alcuni secondi, sto preparando il tuo download...");
             directory_dms = '/mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
             output_zip = '/home/dms/DMSEMA.zip';
