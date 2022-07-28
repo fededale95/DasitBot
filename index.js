@@ -40,13 +40,6 @@ function parseMessage( msg ){
                   fileName = 'dmsweb-wa-'+data+'.exe';
                   output_zip = '/home/dms/DMSWeb'+data+'.zip';
                   zipFile(file, fileName, output_zip, msg.message.chat.id);
-                  /*sleep(10).then(() => {
-                      splitMyFile(output_zip, 52428800);
-                  })*/
-
-
-                  //client.sendDocument(msg.message.chat.id, file);
-                  //sendMes(msg.message.chat.id, "OK!");
 
             } catch (err) {
               console.error(err);
@@ -73,9 +66,11 @@ function parseMessage( msg ){
             } catch (err) {
               console.error(err);
             }
+            const myArray = data2.split("\n");
+            sendMes(msg.message.chat.id,"DMS CS EMA vers: "+myArray[2]+" \nAttendi alcuni secondi, sto preparando il tuo download...");
+
             directory_dms = '/mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
             output_zip = '/home/dms/DMSEMA.zip';
-            sendMes(msg.message.chat.id,"DMS CS EMA vers: "+data2+" \nAttendi alcuni secondi, sto preparando il tuo download...");
             //zipDir(directory_dms, output_zip, msg.message.chat.id);
 
         } else if(msg.message.text=="/cristian"){
