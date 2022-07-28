@@ -85,7 +85,7 @@ function parseMessage( msg ){
             last=myArray[myArray.length-1];
             last2 = last.substring(0, last.length - 1);
             //sendMes(msg.message.chat.id,"DMS CS EMA vers: "+myArray[myArray.length-1]+" \nAttendi alcuni secondi, sto preparando il tuo download...");
-            sendMes(msg.message.chat.id, ""+last);
+            sendMes(msg.message.chat.id, ""+last2);
             directory_dms = '/mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
             output_zip = '/home/dms/DMSEMA.zip';
             //zipDir(directory_dms, output_zip, msg.message.chat.id);
