@@ -82,12 +82,12 @@ function parseMessage( msg ){
                   toCanc[i]=toCanc[i]-1;
                }
             }
-
+            myArray[myArray.length-1]=data.substring(0, data.length - 1);
             //sendMes(msg.message.chat.id,"DMS CS EMA vers: "+myArray[myArray.length-1]+" \nAttendi alcuni secondi, sto preparando il tuo download...");
             sendMes(msg.message.chat.id, ""+myArray[myArray.length-1]);
             directory_dms = '/mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA/'+data2;
             output_zip = '/home/dms/DMSEMA.zip';
-            zipDir(directory_dms, output_zip, msg.message.chat.id);
+            //zipDir(directory_dms, output_zip, msg.message.chat.id);
 
         } else if(msg.message.text=="/cristian"){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
