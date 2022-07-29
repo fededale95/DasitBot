@@ -23,6 +23,11 @@ const sleep = (s) => {
 //split file
 const splitFile = require('split-file');
 
+//last version
+var lastWeb;
+var lastCS;
+var lastDoc;
+
 /**
  * Elabora gli aggiornamenti ricevuti da Telegram e risponde al messaggio
  * ricevuto
@@ -129,6 +134,21 @@ function zipDir(dir_to_zip, output_name, msg_id){
 
 //start del programma, attende un messaggio nuovo
 function requestUpdate(){
+      //controllo versioni sw e notifico novità
+      const fs = require('fs');
+      try {
+            data = fs.readFileSync('/home/dms/lastVersWEB.txt', 'utf8');
+            var myArray = data.split("\n");
+            var toCanc = [];
+            last=lastVersion(data);
+            if(last!=lastWeb){
+               lastWeb=last;
+               sendMes(msg.message.chat.id, "E' disponibile una nuova versione di DMSWeb WebApp!\n vers: "+last+"\nClicca /dmsweb per scaricarla!");
+            }
+      } catch (err) {
+        console.error(err);
+      }
+      //controllo se ci sono messaggi dall'utente
       superagent.get(`https://api.telegram.org/bot${botToken}/getUpdates?limit=1&offset=${lastOffset}`)
         .then( msg => {
             try {
@@ -177,6 +197,17 @@ function lastVersion(data){
       last=myArray[myArray.length-1];
       return last;
 }
-
+function inizialize(){
+      const fs = require('fs');
+      try {
+            data = fs.readFileSync('/home/dms/lastVersWEB.txt', 'utf8');
+            var myArray = data.split("\n");
+            var toCanc = [];
+            lastWeb=lastVersion(data);
+      } catch (err) {
+        console.error(err);
+      }
+}
 // Avviamo la prima lettura dei messaggi
+inizialize();
 requestUpdate();
