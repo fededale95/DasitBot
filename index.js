@@ -173,7 +173,7 @@ function requestUpdate(){
 
                        var stream = fs.createWriteStream('/home/dms/usersId.txt', {flags:'a'});
                        console.log(new Date().toISOString());
-                       usersId.forEach( function (item,index) {
+                       usersId.forEach( function (index) {
                           stream.write(index + "\n");
                        });
                        console.log(new Date().toISOString());
