@@ -81,6 +81,8 @@ function parseMessage( msg ){
             sendMes(msg.message.chat.id,"Portale VPN - ASSISTENZA \n(ricordati di attivare GlobalProtect)\n\n http://10.1.6.14/AssistenzaRemota/");
         } else if(msg.message.text=="/start"){
             sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.");
+        } else if(msg.message.text=="/users"){
+            sendMes(msg.message.chat.id,"Utenti: "+usersId);
         } else{
             sendMes(msg.message.chat.id,"Comando non presente, riprovare");
         }
@@ -170,25 +172,9 @@ function requestUpdate(){
                     }
                     if(!found){
                        usersId.push(inputMessage.message.chat.id);
-
                        var stream = fs.createWriteStream('/home/dms/usersId.txt', {flags:'a'});
-                       //console.log(new Date().toISOString());
                        stream.write(usersId[usersId.length-1] + "\n");
-                       //console.log(new Date().toISOString());
                        stream.end();
-
-
-                       /*const fs3 = require('fs');
-                       const opzioni = {
-                          mode: 0o600,
-                       }
-                       for(i in usersId){ //metti file in append
-                          fs3.writeFile('/home/dms/usersId.txt', ""+usersId[i],  opzioni, (errore) => {
-                            if ( errore ) {
-                              throw errore;
-                           }
-                         })
-                      }*/
                     }
                     // Elaboriamo il testo ricevuto
                     parseMessage( inputMessage );
