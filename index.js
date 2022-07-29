@@ -25,6 +25,12 @@ const splitFile = require('split-file');
 
 //last version
 var usersId = [];
+const fsU = require('fs');
+try {
+      usersId = fsU.readFileSync('/home/dms/usersId.txt', 'utf8');
+} catch (err) {
+  console.error(err);
+}
 var lastWeb;
 var lastCS;
 var lastDoc;
@@ -123,7 +129,7 @@ function zipFile(file_to_zip, fileName, output_name, msg_id){
       });
 }
 
-//funzione che zippa una cartella (da parametrizzare in e out)
+//funzione che zippa una cartella
 function zipDir(dir_to_zip, output_name, msg_id){
       var output = file_system.createWriteStream(output_name);
       var archive = archiver('zip');
