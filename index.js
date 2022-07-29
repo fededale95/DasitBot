@@ -24,14 +24,14 @@ const sleep = (s) => {
 const splitFile = require('split-file');
 
 //last version
-var usersId;
+var usersId=[];
 var userz;
 const fsU = require('fs');
 try {
       usersz = fsU.readFileSync('/home/dms/usersId.txt', 'utf8');
       usersId = usersz.split("\n");
 } catch (err) {
-  console.error(err);
+
 }
 
 var lastWeb;
