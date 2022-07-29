@@ -41,7 +41,7 @@ function parseMessage( msg ){
                   var myArray = data.split("\n");
                   var toCanc = [];
                   last=lastVersion(data);
-                  sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+last+"\nAttendi alcuni secondi, sto preparando il tuo download...");
+                  sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+last+"\nAttendi alcuni secondi, sto preparando il tuo download..."+"\nlastWeb: "+lastWeb);
                   file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-wa-'+last+'.exe';
                   fileName = 'dmsweb-wa-'+last+'.exe';
                   output_zip = '/home/dms/DMSWeb'+last+'.zip';
