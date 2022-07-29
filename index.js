@@ -39,6 +39,8 @@ var lastWeb;
 var lastCS;
 var lastDoc;
 
+var nameSplit;
+
 /**
  * Elabora gli aggiornamenti ricevuti da Telegram e risponde al messaggio
  * ricevuto
@@ -117,7 +119,8 @@ function zipFile(file_to_zip, fileName, output_name, msg_id){
           splitMyFile(output_name, 50000000, msg_id);
 
           sleep(5).then(() => {  //capire se c'è un evento che triggera al finire dello split
-            for(i=0;i<3;i++){ //capire grandezza file e salvare num in const al posto che mettere 3
+            sendMes(msg_id,"names: "+nameSplit);
+            for(i=0;i<3;i++){ //capire grandezza file e salvare num in var al posto che mettere 3
                 file_system.rename(output_name+'.sf-part'+(i+1) , output_name+'.00'+(i+1), function(err) {
                     if ( err ) console.log('ERROR: ' + err);
                 });
@@ -213,6 +216,7 @@ function requestUpdate(){
 function splitMyFile(source, maxSize, msg_id) {
       splitFile.splitFileBySize( source , maxSize)
       .then((names) => {
+         nameSplit=names;
       })
       .catch((err) => {
           console.log('Error: ', err);
