@@ -24,6 +24,7 @@ const sleep = (s) => {
 const splitFile = require('split-file');
 
 //last version
+var usersId = [];
 var lastWeb;
 var lastCS;
 var lastDoc;
@@ -143,7 +144,9 @@ function requestUpdate(){
             last=lastVersion(data);
             if(last!=lastWeb){
                lastWeb=last;
-               sendMes(msg.message.chat.id, "E' disponibile una nuova versione di DMSWeb WebApp!\n vers: "+last+"\nClicca /dmsweb per scaricarla!");
+               for(i in usersId){
+                  sendMes(usersId[i], "E' disponibile una nuova versione di DMSWeb WebApp!\n vers: "+last+"\nClicca /dmsweb per scaricarla!");
+               }
             }
       } catch (err) {
         console.error(err);
@@ -155,6 +158,16 @@ function requestUpdate(){
                 msg.body.result.map( inputMessage => {
                     // Aggiorniamo l'offset con l'ultimo messaggio ricevuto
                     lastOffset = inputMessage.update_id +1;
+                    //salvo chi ha parlato con me
+                    var found = false;
+                    for(i in usersId){
+                       if(inputMessage.message.chat.id==usersId[i]){
+                          found = true;
+                       }
+                    }
+                    if(!found){
+                       usersId.push(inputMessage.message.chat.id);
+                    }
                     // Elaboriamo il testo ricevuto
                     parseMessage( inputMessage );
                 });
