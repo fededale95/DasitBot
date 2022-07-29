@@ -175,7 +175,7 @@ function requestUpdate(){
                           mode: 0o600,
                        }
                        for(i in usersId){
-                          fs3.writeFile('/home/dms/usersId.txt', usersId[i],  opzioni, (errore) => {
+                          fs3.writeFile('/home/dms/usersId.txt', ""+usersId[i],  opzioni, (errore) => {
                             if ( errore ) {
                               throw errore;
                            }
