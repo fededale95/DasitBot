@@ -24,7 +24,7 @@ const sleep = (s) => {
 const splitFile = require('split-file');
 
 //last version
-var usersId = [];
+var usersId;
 var userz;
 const fsU = require('fs');
 try {
@@ -48,8 +48,6 @@ function parseMessage( msg ){
             const fs = require('fs');
             try {
                   data = fs.readFileSync('/home/dms/lastVersWEB.txt', 'utf8');
-                  var myArray = data.split("\n");
-                  var toCanc = [];
                   last=lastVersion(data);
                   sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+last+"\nAttendi alcuni secondi, sto preparando il tuo download..."+"\nlastWeb: "+lastWeb);
                   file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-wa-'+last+'.exe';
