@@ -222,5 +222,5 @@ function inizialize(){
       }
 }
 // Avviamo la prima lettura dei messaggi
-inizialize();
+//inizialize();
 requestUpdate();
