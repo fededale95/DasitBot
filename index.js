@@ -222,7 +222,7 @@ function splitMyFile(source, maxSize, msg_id) {
              });
 
          }
-         for(i=0;i<3;i++){
+         for(i=0;i<names.length;i++){
              client.sendDocument(msg_id, source+'.00'+(i+1));
          }
       })
