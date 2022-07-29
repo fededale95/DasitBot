@@ -50,7 +50,7 @@ function parseMessage( msg ){
             try {
                   data = fs.readFileSync('/home/dms/lastVersWEB.txt', 'utf8');
                   last=lastVersion(data);
-                  sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+last+"\nAttendi alcuni secondi, sto preparando il tuo download..."+"\nlastWeb: "+lastWeb);
+                  sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+last+"\nAttendi alcuni secondi, sto preparando il tuo download...");
                   file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-wa-'+last+'.exe';
                   fileName = 'dmsweb-wa-'+last+'.exe';
                   output_zip = '/home/dms/DMSWeb'+last+'.zip';
