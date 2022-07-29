@@ -30,6 +30,7 @@ const fsU = require('fs');
 try {
       usersz = fsU.readFileSync('/home/dms/usersId.txt', 'utf8');
       usersId = usersz.split("\n");
+      usersId.pop();
 } catch (err) {
 
 }
