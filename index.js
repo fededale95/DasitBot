@@ -170,6 +170,17 @@ function requestUpdate(){
                     }
                     if(!found){
                        usersId.push(inputMessage.message.chat.id);
+                       const fs3 = require('fs');
+                       const opzioni = {
+                          mode: 0o600,
+                       }
+                       for(i in usersId){
+                          fs3.writeFile('/home/dms/usersId.txt', usersId[i],  opzioni, (errore) => {
+                            if ( errore ) {
+                              throw errore;
+                           }
+                         })
+                       }
                     }
                     // Elaboriamo il testo ricevuto
                     parseMessage( inputMessage );
