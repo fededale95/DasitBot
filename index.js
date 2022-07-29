@@ -147,10 +147,9 @@ function zipDir(dir_to_zip, output_name, msg_id){
 function requestUpdate(){
       //controllo versioni sw e notifico novità
       const fs = require('fs');
+      const fs2 = require('fs');
       try {
             data = fs.readFileSync('/home/dms/lastVersWEB.txt', 'utf8');
-            var myArray = data.split("\n");
-            var toCanc = [];
             last=lastVersion(data);
             if(lastWeb==null){
                lastWeb=last;
@@ -161,6 +160,20 @@ function requestUpdate(){
                }
                lastWeb=last;
             }
+
+            data2 = fs2.readFileSync('/home/dms/lastVersCS.txt', 'utf8');
+            last2=lastVersion(data2);
+            if(lastCS==null){
+               lastCS=last2;
+            }
+            if(last2!=lastCS){
+               for(i in usersId){
+                  sendMes(usersId[i], "E' disponibile una nuova versione di DMS CS EMA!\n vers: "+last2+"\nClicca /dmsema per scaricarla!");
+               }
+               lastCS=last2;
+            }
+
+
       } catch (err) {
         console.error(err);
       }
