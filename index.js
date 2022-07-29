@@ -215,14 +215,13 @@ function requestUpdate(){
 function splitMyFile(source, maxSize, msg_id) {
       splitFile.splitFileBySize( source , maxSize)
       .then((names) => {
-         sendMes(msg_id,"names: "+names);
          for(i=0;i<3;i++){ //capire grandezza file e salvare num in var al posto che mettere 3
              file_system.rename(source+'.sf-part'+(i+1) , source+'.00'+(i+1), function(err) {
                  if ( err ) console.log('ERROR: ' + err);
              });
 
          }
-         for(i=0;i<3;i++){
+         for(i=0;i<names.lenght;i++){
              client.sendDocument(msg_id, source+'.00'+(i+1));
          }
       })
