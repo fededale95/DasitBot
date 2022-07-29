@@ -23,7 +23,7 @@ const sleep = (s) => {
 //split file
 const splitFile = require('split-file');
 
-//last version
+//utenti x notifiche
 var usersId=[];
 var userz;
 const fsU = require('fs');
@@ -34,10 +34,9 @@ try {
 } catch (err) {
 
 }
-
+//last version
 var lastWeb;
 var lastCS;
-var lastDoc;
 
 /**
  * Elabora gli aggiornamenti ricevuti da Telegram e risponde al messaggio
@@ -45,43 +44,28 @@ var lastDoc;
  */
 function parseMessage( msg ){
     try {
-		    if (msg.message.text=="/dmsweb") {
-            const fs = require('fs');
-            try {
-                  data = fs.readFileSync('/home/dms/lastVersWEB.txt', 'utf8');
-                  last=lastVersion(data);
-                  sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+last+"\nAttendi alcuni secondi, sto preparando il tuo download...");
-                  file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-wa-'+last+'.exe';
-                  fileName = 'dmsweb-wa-'+last+'.exe';
-                  output_zip = '/home/dms/DMSWeb'+last+'.zip';
-                  zipFile(file, fileName, output_zip, msg.message.chat.id);
-
-            } catch (err) {
-              console.error(err);
-            }
+		  if (msg.message.text=="/dmsweb") {
+            sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+lastWeb+"\nAttendi alcuni secondi, sto preparando il tuo download...");
+            file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-wa-'+lastWeb+'.exe';
+            fileName = 'dmsweb-wa-'+lastWeb+'.exe';
+            output_zip = '/home/dms/DMSWeb'+lastWeb+'.zip';
+            zipFile(file, fileName, output_zip, msg.message.chat.id);
         } else if(msg.message.text=="/dmsdoctor"){
             const fs = require('fs');
             try {
-                  data = fs.readFileSync('/home/dms/lastVersDOC.txt', 'utf8');
-                  last=lastVersion(data);
-                  sendMes(msg.message.chat.id,"DMS Doctor vers: "+last+"\nAttendi alcuni secondi, sto preparando il tuo download...");
-                  file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+last+'.exe';
-                  client.sendDocument(msg.message.chat.id, file);
+               data = fs.readFileSync('/home/dms/lastVersDOC.txt', 'utf8');
+               last=lastVersion(data);
+               sendMes(msg.message.chat.id,"DMS Doctor vers: "+last+"\nAttendi alcuni secondi, sto preparando il tuo download...");
+               file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+last+'.exe';
+               client.sendDocument(msg.message.chat.id, file);
             } catch (err) {
               console.error(err);
             }
         } else if(msg.message.text=="/dmsema"){
-            const fs = require('fs');
-            try {
-                  data = fs.readFileSync('/home/dms/lastVersCS.txt', 'utf8');
-                  last=lastVersion(data);
-                  sendMes(msg.message.chat.id,"DMS CS EMA vers: "+last+" \nAttendi alcuni secondi, sto preparando il tuo download...");
-                  directory_dms = '/mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA/'+last;
-                  output_zip = '/home/dms/DMSEMA.zip';
-                  zipDir(directory_dms, output_zip, msg.message.chat.id);
-            } catch (err) {
-              console.error(err);
-            }
+            sendMes(msg.message.chat.id,"DMS CS EMA vers: "+lastCS+" \nAttendi alcuni secondi, sto preparando il tuo download...");
+            directory_dms = '/mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA/'+lastCS;
+            output_zip = '/home/dms/DMSEMA.zip';
+            zipDir(directory_dms, output_zip, msg.message.chat.id);
         } else if(msg.message.text=="/cristian"){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
             client.sendPhoto(msg.message.chat.id, '/mnt/nasPub/1600_Federico_project/segreto.jpg');
@@ -102,8 +86,6 @@ function parseMessage( msg ){
 //funzione sendMessaggio personalizzata
 function sendMes(msg_id, replyText){
       client.sendMessage(msg_id, replyText);
-      /*superagent.get(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${msg_id}&text=${replyText}`)
-        .then( response => {});*/ //primo metodo
 }
 
 //funzione ch ezippa un file
@@ -115,21 +97,6 @@ function zipFile(file_to_zip, fileName, output_name, msg_id){
       archive.finalize();
       output.on('close', function () {
           splitMyFile(output_name, 50000000, msg_id);
-
-          /*sleep(5).then(() => {  //capire se c'è un evento che triggera al finire dello split
-            sendMes(msg_id,"names: "+nameSplit);
-            for(i=0;i<3;i++){ //capire grandezza file e salvare num in var al posto che mettere 3
-                file_system.rename(output_name+'.sf-part'+(i+1) , output_name+'.00'+(i+1), function(err) {
-                    if ( err ) console.log('ERROR: ' + err);
-                });
-
-            }
-            for(i=0;i<3;i++){
-                client.sendDocument(msg_id, output_name+'.00'+(i+1));
-            }
-
-         }
-      )*/
       });
 }
 
@@ -162,7 +129,6 @@ function requestUpdate(){
                }
                lastWeb=last;
             }
-
             data2 = fs2.readFileSync('/home/dms/lastVersCS.txt', 'utf8');
             last2=lastVersion(data2);
             if(lastCS==null){
@@ -174,8 +140,6 @@ function requestUpdate(){
                }
                lastCS=last2;
             }
-
-
       } catch (err) {
         console.error(err);
       }
@@ -219,7 +183,6 @@ function splitMyFile(source, maxSize, msg_id) {
              file_system.rename(source+'.sf-part'+(i+1) , source+'.00'+(i+1), function(err) {
                  if ( err ) console.log('ERROR: ' + err);
              });
-
          }
          for(i=0;i<names.length;i++){
              client.sendDocument(msg_id, source+'.00'+(i+1));
@@ -235,9 +198,7 @@ function lastVersion(data){
       var toCanc = [];
       myArray.sort();
       for(i in myArray){
-            if ( myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") ) {
-
-            } else {
+            if ( !(myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") )) {
                toCanc.push(i);
             }
       }
@@ -252,5 +213,4 @@ function lastVersion(data){
 }
 
 // Avviamo la prima lettura dei messaggi
-//inizialize();
 requestUpdate();
