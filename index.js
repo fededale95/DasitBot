@@ -172,11 +172,9 @@ function requestUpdate(){
                        usersId.push(inputMessage.message.chat.id);
 
                        var stream = fs.createWriteStream('/home/dms/usersId.txt', {flags:'a'});
-                       console.log(new Date().toISOString());
-                       usersId.forEach( function (index) {
-                          stream.write(index + "\n");
-                       });
-                       console.log(new Date().toISOString());
+                       //console.log(new Date().toISOString());
+                       stream.write(usersId[usersId.length-1] + "\n");
+                       //console.log(new Date().toISOString());
                        stream.end();
 
 
