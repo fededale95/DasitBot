@@ -29,7 +29,7 @@ var userz;
 const fsU = require('fs');
 try {
       usersz = fsU.readFileSync('/home/dms/usersId.txt', 'utf8');
-      usersId = userz.split("\n");
+      usersId = usersz.split("\n");
 } catch (err) {
   console.error(err);
 }
@@ -225,17 +225,7 @@ function lastVersion(data){
       last=myArray[myArray.length-1];
       return last;
 }
-function inizialize(){
-      const fs = require('fs');
-      try {
-            data = fs.readFileSync('/home/dms/lastVersWEB.txt', 'utf8');
-            var myArray = data.split("\n");
-            var toCanc = [];
-            lastWeb=lastVersion(data);
-      } catch (err) {
-        console.error(err);
-      }
-}
+
 // Avviamo la prima lettura dei messaggi
 //inizialize();
 requestUpdate();
