@@ -170,17 +170,27 @@ function requestUpdate(){
                     }
                     if(!found){
                        usersId.push(inputMessage.message.chat.id);
-                       const fs3 = require('fs');
+
+                       var stream = fs.createWriteStream('/home/dms/usersId.txt', {flags:'a'});
+                       console.log(new Date().toISOString());
+                       usersId.forEach( function (item,index) {
+                          stream.write(index + "\n");
+                       });
+                       console.log(new Date().toISOString());
+                       stream.end();
+
+
+                       /*const fs3 = require('fs');
                        const opzioni = {
                           mode: 0o600,
                        }
-                       for(i in usersId){
+                       for(i in usersId){ //metti file in append
                           fs3.writeFile('/home/dms/usersId.txt', ""+usersId[i],  opzioni, (errore) => {
                             if ( errore ) {
                               throw errore;
                            }
                          })
-                       }
+                      }*/
                     }
                     // Elaboriamo il testo ricevuto
                     parseMessage( inputMessage );
