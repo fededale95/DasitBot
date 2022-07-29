@@ -142,11 +142,14 @@ function requestUpdate(){
             var myArray = data.split("\n");
             var toCanc = [];
             last=lastVersion(data);
-            if(last!=lastWeb){
+            if(lastWeb==null){
                lastWeb=last;
+            }
+            if(last!=lastWeb){
                for(i in usersId){
                   sendMes(usersId[i], "E' disponibile una nuova versione di DMSWeb WebApp!\n vers: "+last+"\nClicca /dmsweb per scaricarla!");
                }
+               lastWeb=last;
             }
       } catch (err) {
         console.error(err);
