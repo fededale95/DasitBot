@@ -29,9 +29,11 @@ var userz;
 const fsU = require('fs');
 try {
       usersz = fsU.readFileSync('/home/dms/usersId.txt', 'utf8');
+      usersId = userz.split("\n");
 } catch (err) {
   console.error(err);
 }
+
 var lastWeb;
 var lastCS;
 var lastDoc;
@@ -89,7 +91,7 @@ function parseMessage( msg ){
         } else if(msg.message.text=="/start"){
             sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.");
         } else if(msg.message.text=="/users"){
-            sendMes(msg.message.chat.id,"Utenti: "+usersz);
+            sendMes(msg.message.chat.id,"Utenti: "+usersId);
         } else{
             sendMes(msg.message.chat.id,"Comando non presente, riprovare");
         }
