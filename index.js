@@ -217,13 +217,13 @@ function splitMyFile(source, maxSize, msg_id) {
       .then((names) => {
          sendMes(msg_id,"names: "+names);
          for(i=0;i<3;i++){ //capire grandezza file e salvare num in var al posto che mettere 3
-             file_system.rename(output_name+'.sf-part'+(i+1) , output_name+'.00'+(i+1), function(err) {
+             file_system.rename(source+'.sf-part'+(i+1) , source+'.00'+(i+1), function(err) {
                  if ( err ) console.log('ERROR: ' + err);
              });
 
          }
          for(i=0;i<3;i++){
-             client.sendDocument(msg_id, output_name+'.00'+(i+1));
+             client.sendDocument(msg_id, source+'.00'+(i+1));
          }
       })
       .catch((err) => {
