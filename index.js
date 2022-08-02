@@ -409,8 +409,9 @@ function uploadDMSFolder(){
          }
          if(updated){
             data2 = "NEW CONF: \nDMSWebFolder = "+DMSWebFolder+"\nDMSDocFolder = "+DMSDocFolder+"\nDMSCSFolder = "+DMSCSFolder;
+            myLog(data2);
          }
-         myLog(data2);
+
       } catch (err) {
          myLog("Errore File dasitbot.conf, controllare!");
       }
