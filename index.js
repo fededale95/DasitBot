@@ -271,7 +271,7 @@ function extractLast(items,cs) {
     return ris;
 }
 
-function myBubbleSort(items){
+function myBubbleSort(items,cs){
       //ordino per macroversioni N.x.x
       for (var i = 0; i < items.length; i++) {
             for (var j = 0; j < (items.length - i - 1); j++) {
