@@ -221,6 +221,7 @@ function lastVersion(data){
       stream.write("lunghezza toCanc:"+toCanc.length);
 
       for (i=toCanc.lenght-1;i>=0;i--){
+         stream.write("Cancello: "+toCanc[i]);
          myArray.splice(toCanc[i], 1);
       }
 
