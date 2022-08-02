@@ -214,8 +214,9 @@ function lastVersion(data){
       }
       for(i in toCanc){
          myArray.splice(toCanc[i], 1);
-         for(i in toCanc){
-            toCanc[i]=toCanc[i]-1;
+         j=i+1;
+         for(j in toCanc){
+            toCanc[j]=toCanc[j-1];
          }
       }
 
