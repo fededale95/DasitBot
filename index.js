@@ -207,31 +207,15 @@ function lastVersion(data){
       var myArray = data.split("\n");
       var toCanc = [];
       myArray.sort();
-
-      var stream = file_system.createWriteStream('/home/dms/debugLast.txt', {flags:'a'});
-      stream.write("myArray start:"+myArray);
-
       for(i in myArray){
             if ( !(myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") )) {
                toCanc.push(i);
             }
       }
-
-      stream.write("toCanc pieno:"+toCanc);
-      stream.write("lunghezza toCanc:"+toCanc.length);
-
       for (var i = toCanc.length - 1; i >= 0; i--){
-         stream.write("Cancello: "+toCanc[i]);
          myArray.splice(toCanc[i], 1);
       }
-
-
-
-      stream.write("myArray dopo cancellazione:"+myArray);
-      stream.end();
-
-      last=myArray[myArray.length-1];
-      return last;
+      return myArray[myArray.length-1];
 }
 
 // Avviamo la prima lettura dei messaggi
