@@ -261,11 +261,15 @@ function myBubbleSort(items){
               }
          }
       }
+
       var fsOrd = require('fs');
       var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
       streamOrd.write("ITEMS: \n\n");
       for(i in items){
-         streamOrd.write(items[i]+"\n");         
+         streamOrd.write(items[i]+"\n");
+      }
+      if(items[0][0]>items[1][0]){
+         streamOrd.write("FUNZIONA: "+items[][]+"\n");
       }
       streamOrd.end();
       //elimino tutte le macroversioni precedenti all'ultima
