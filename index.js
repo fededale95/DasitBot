@@ -83,8 +83,6 @@ function parseMessage( msg ){
             sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.");
         } else if(msg.message.text=="/users"){
             sendMes(msg.message.chat.id,"Utenti: "+usersId);
-        } else if(msg.message.text=="/newconf"){
-            uploadDMSFolder(msg.message.chat.id);
         } else{
             sendMes(msg.message.chat.id,"Comando non presente, riprovare");
         }
@@ -124,6 +122,8 @@ function zipDir(dir_to_zip, output_name, msg_id){
 
 //start del programma, attende un messaggio nuovo
 function requestUpdate(){
+      //check file di conf per dms directory
+      uploadDMSFolder();
       //controllo versioni sw e notifico novità
       const fs = require('fs');
       const fs2 = require('fs');
@@ -330,7 +330,7 @@ function myBubbleSort(items){
 
 function logNewVersion(newVersion, data, web){
       const fs3 = require('fs');
-      var stream1 = fs3.createWriteStream(homeFolder+'logNewVersion.txt', {flags:'a'});
+      var stream1 = fs3.createWriteStream(homeFolder+'log.txt', {flags:'a'});
       stream1.write("\n\n ------------start------------- \n\n");
       if(web){
          stream1.write("Nuova versione Web: "+newVersion);
@@ -341,6 +341,14 @@ function logNewVersion(newVersion, data, web){
          stream1.write("Vecchia Versione CS: "+lastCS);
          stream1.write("\nCartella DMSEMA (output ls -la): "+data);
       }
+      stream1.write("\n\n -------------end-------------- \n\n");
+      stream1.end();
+}
+function myLog(txt){
+      const fs3 = require('fs');
+      var stream1 = fs3.createWriteStream(homeFolder+'log.txt', {flags:'a'});
+      stream1.write("\n\n ------------start------------- \n\n");
+      stream1.write(txt);
       stream1.write("\n\n -------------end-------------- \n\n");
       stream1.end();
 }
@@ -373,7 +381,7 @@ function uploadConfig(){
       }
 }
 
-function uploadDMSFolder(msg_id){
+function uploadDMSFolder(){
       try {
          const fs = require('fs');
          data = fs.readFileSync('/etc/dasitbot.conf', 'utf8');
@@ -382,18 +390,23 @@ function uploadDMSFolder(msg_id){
             temp = param[i].split("'");
             val = temp[1];
             if(param[i].startsWith("DMSWebFolder")){
-                  DMSWebFolder=val;
+                  if(DMSWebFolder!=val){
+                     DMSWebFolder=val;
+                  }
             } else if(param[i].startsWith("DMSDocFolder")){
-                  DMSDocFolder=val;
+                  if(DMSDocFolder!=val){
+                     DMSDocFolder=val;
+                  }
             } else if(param[i].startsWith("DMSCSFolder")){
-                  DMSCSFolder=val;
+                  if(DMSCSFolder!=val){
+                     DMSCSFolder=val;
+                  }
             }
          }
-         data2 = "DMSWebFolder = "+DMSWebFolder+"\nDMSDocFolder = "+DMSDocFolder+"\nDMSCSFolder = "+DMSCSFolder;
-         sendMes(msg_id, "Configurazione aggiornata correttamente!\n\nNuova Conf:\n\n"+data2);
-
+         data2 = "NEW CONF: \nDMSWebFolder = "+DMSWebFolder+"\nDMSDocFolder = "+DMSDocFolder+"\nDMSCSFolder = "+DMSCSFolder;
+         myLog(data2);
       } catch (err) {
-         sendMes(msg_id, "Erorre nelle configurazione del Bot, non verrano apportate modifiche. \nAttenzione, assicurarsi che il file /etc/dasitbot.conf non sia stato eliminato!");
+         myLog("Errore File dasitbot.conf, controllare!");
       }
 }
 
