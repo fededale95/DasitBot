@@ -117,6 +117,7 @@ function requestUpdate(){
       //controllo versioni sw e notifico novità
       const fs = require('fs');
       const fs2 = require('fs');
+      const fs3 = require('fs');
       try {
             data = fs.readFileSync('/home/dms/lastVersWEB.txt', 'utf8');
             last=lastVersion(data);
@@ -135,6 +136,15 @@ function requestUpdate(){
                lastCS=last2;
             }
             if(last2!=lastCS){
+               if(last2==null){
+                  var stream1 = fs3.createWriteStream('/home/dms/logUndefinedError.txt', {flags:'a'});
+                  stream1.write("\n\n ------------start------------- \n\n");
+                  stream1.write("last (ultimo calcolato): "+last2);
+                  stream1.write("lastCS (var glob): "+lastCS);
+                  stream1.write("\nCartella DMSEMA (output ls -la): "+data2);
+                  stream1.write("\n\n -------------end-------------- \n\n");
+                  stream1.end();
+               }
                for(i in usersId){
                   sendMes(usersId[i], "E' disponibile una nuova versione di DMS CS EMA!\n vers: "+last2+"\nClicca /dmsema per scaricarla!");
                }
@@ -208,6 +218,12 @@ function lastVersion(data){
             toCanc[i]=toCanc[i]-1;
          }
       }
+
+      var stream = file_system.createWriteStream('/home/dms/debugLast.txt', {flags:'a'});
+      stream.write("toCanc:"+toCanc);
+      stream.write("myArray:"+myArray);
+      stream.end();
+
       last=myArray[myArray.length-1];
       return last;
 }
