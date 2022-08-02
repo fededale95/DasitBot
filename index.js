@@ -220,7 +220,7 @@ function lastVersion(data){
       stream.write("toCanc pieno:"+toCanc);
       stream.write("lunghezza toCanc:"+toCanc.length);
 
-      for (i=toCanc.lenght-1;i>=0;i--){
+      for (var i = toCanc.length - 1; i >= 0; i--){
          stream.write("Cancello: "+toCanc[i]);
          myArray.splice(toCanc[i], 1);
       }
