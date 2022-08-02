@@ -144,15 +144,7 @@ function requestUpdate(){
             last2=lastVersion(data2,0);
 
             if(lastCS==null){
-               var fsOrd = require('fs');
-               var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'a'});
-               streamOrd.write("lastCS: "+lastCS+"\n");
-               streamOrd.write("last2: "+last2+"\n");
-
                lastCS=last2;
-
-               streamOrd.write("lastCSNEW: "+lastCS+"\n");
-               stream1.end();
             }
             if(last2!=lastCS){
                logNewVersion(last2, data2, false);
