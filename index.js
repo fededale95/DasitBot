@@ -240,7 +240,7 @@ function lastVersionCS(data){
 }
 
 function mySort(items) {
-    var myArray = [];
+    var myArray;
     for(i in items){
         var tempString = items[i].split(".");
         myArray.push(tempString);
