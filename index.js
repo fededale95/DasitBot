@@ -274,7 +274,7 @@ function myBubbleSort(items){
 
       //elimino tutte le macroversioni precedenti all'ultima
       for (var i = items.length - 2; i >= 0; i--){
-         if(parseInt(items[i][0]) < parseInt(items[items.length-1])){
+         if(parseInt(items[i][0]) < parseInt(items[items.length-1][0])){
             items.splice(i, 1);
          }
       }
@@ -304,7 +304,7 @@ function myBubbleSort(items){
 
       //elimino le versioni precedenti all'ultima
       for (var i = items.length - 2; i >= 0; i--){
-         if(parseInt(items[i][1]) < parseInt(items[items.length-1])) {
+         if(parseInt(items[i][1]) < parseInt(items[items.length-1][1])) {
             items.splice(i, 1);
          }
       }
