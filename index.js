@@ -225,7 +225,6 @@ function lastVersionCS(data){
       }
 
       var toCanc = [];
-      myArray.sort();
       for(i in myArray){
             if ( myArray[i].endsWith(".zip") || !(myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") )) {
                toCanc.push(i);
@@ -234,7 +233,68 @@ function lastVersionCS(data){
       for (var i = toCanc.length - 1; i >= 0; i--){
          myArray.splice(toCanc[i], 1);
       }
+
+      mySort(myArray);
+
       return myArray[myArray.length-1];
+}
+
+function mySort(items) {
+    var myArray = [];
+    for(i in items){
+        var tempString = items[i].split(".");
+        myArray.push(tempString[0]);
+    }
+    myBubbleSort(myArray);
+}
+
+function myBubbleSort(items){
+      //ordino per macroversioni N.x.x
+      for (var i = 0; i < items.length; i++) {
+            for (var j = 0; j < (items.length - i - 1); j++) {
+              if(items[j][0] > items[j+1][0]) {
+                 var tmp = items[j];
+                 items[j] = items[j+1];
+                 items[j+1] = tmp;
+              }
+         }
+      }
+
+      //elimino tutte le macroversioni precedenti all'ultima
+      for (var i = items.length - 2; i >= 0; i--){
+         if(items[i][0]<items[items.length-1]){
+            items.splice(i, 1);
+         }
+      }
+
+      //ora ordino per versione x.N.x
+      for (var i = 0; i < items.length; i++) {
+            for (var j = 0; j < (items.length - i - 1); j++) {
+              if(items[j][1] > items[j+1][1]) {
+                 var tmp = items[j];
+                 items[j] = items[j+1];
+                 items[j+1] = tmp;
+              }
+         }
+      }
+
+      //elimino le versioni precedenti all'ultima
+      for (var i = items.length - 2; i >= 0; i--){
+         if(items[i][1]<items[items.length-1]){
+            items.splice(i, 1);
+         }
+      }
+
+      //ora ordino per release x.x.N
+      for (var i = 0; i < items.length; i++) {
+            for (var j = 0; j < (items.length - i - 1); j++) {
+              if(items[j][2] > items[j+1][2]) {
+                 var tmp = items[j];
+                 items[j] = items[j+1];
+                 items[j+1] = tmp;
+              }
+         }
+      }
 }
 
 function lastVersion(data){
