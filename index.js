@@ -10,16 +10,6 @@ var DMSDocFolder;
 var DMSCSFolder;
 var EasterEggPath;
 
-var fsConf = require('fs');
-var streamConf = fsConf.createWriteStream(homeFolder+'verifyConf.txt', {flags:'w'});
-streamConf.write("botTokenConfFile = "+botTokenConfFile+"\n");
-streamConf.write("homeFolder = "+homeFolder+"\n");
-streamConf.write("DMSWebFolder = "+DMSWebFolder+"\n");
-streamConf.write("DMSDocFolder = "+DMSDocFolder+"\n");
-streamConf.write("DMSCSFolder = "+DMSCSFolder+"\n");
-streamConf.write("EasterEggPath = "+EasterEggPath+"\n");
-streamConf.end();
-
 //superagent
 const   superagent      = require( 'superagent' );
 const   botToken        = botTokenConfFile;
