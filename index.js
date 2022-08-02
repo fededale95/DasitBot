@@ -151,6 +151,7 @@ function requestUpdate(){
                lastWeb=last;
             }
             data2 = fs2.readFileSync(homeFolder+'versCS.txt', 'utf8');
+            data2.shift();
             last2=lastVersionCS(data2);
             if(lastCS==null){
                lastCS=last2;
