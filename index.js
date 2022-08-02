@@ -249,6 +249,15 @@ function lastVersion(data,type){  //type: 0=CS,  1=Web,  2=Doc
          }
       }
 
+      if(type==0){
+            var fsOrd = require('fs');
+            var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
+            streamOrd.write("myARRAY: \n\n");
+            for(i in myArray){
+               streamOrd.write(myArray[i]+"\n");
+            }
+      }
+
       var toCanc = [];
       for(i in myArray){
             if ( myArray[i].endsWith(".zip") || !(myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") )) {
@@ -263,13 +272,7 @@ function lastVersion(data,type){  //type: 0=CS,  1=Web,  2=Doc
       }
 
       if(type==0){
-         var fsOrd = require('fs');
-         var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
-         streamOrd.write("myARRAY: \n\n");
-         for(i in myArray){
-            streamOrd.write(myArray[i]+"\n");
-         }
-         streamOrd.write("toCanc: \n\n");
+         streamOrd.write("\n\ntoCanc: \n\n");
          for(i in toCanc){
             streamOrd.write(toCanc[i]+"\n");
          }
