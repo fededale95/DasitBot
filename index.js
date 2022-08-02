@@ -2,7 +2,6 @@
  * Librerie e variabili
  */
 //upload config from /etc/dasitbot.conf
-var useConf = true; //true = utilizza i config file, flase altrimenti
 uploadConfig();
 var botTokenConfFile;
 var homeFolder;
@@ -12,7 +11,7 @@ var DMSCSFolder;
 var EasterEggPath;
 
 var fsConf = require('fs');
-var streamConf = fsConf.createWriteStream('/home/dms/verifyConf.txt', {flags:'a'});
+var streamConf = fsConf.createWriteStream(homeFolder+'verifyConf.txt', {flags:'a'});
 streamConf.write("--------Start--------\n");
 streamConf.write("botTokenConfFile = "+botTokenConfFile+"\n");
 streamConf.write("homeFolder = "+homeFolder+"\n");
@@ -25,12 +24,12 @@ streamConf.end();
 
 //superagent
 const   superagent      = require( 'superagent' );
-const   botToken        = '5403849384:AAGWMSWWzu-vPpMoXTohKl0xE_yCBoQXE2E';
+const   botToken        = botTokenConfFile;
 let     lastOffset      = 0;
 
 //telegrambot
 var TelegramBotClient = require('telegram-bot-client');
-var client = new TelegramBotClient('5403849384:AAGWMSWWzu-vPpMoXTohKl0xE_yCBoQXE2E');
+var client = new TelegramBotClient(botTokenConfFile);
 
 //zip cartelle
 var file_system = require('fs');
@@ -49,7 +48,7 @@ var usersId=[];
 var userz;
 const fsU = require('fs');
 try {
-      usersz = fsU.readFileSync('/home/dms/usersId.txt', 'utf8');
+      usersz = fsU.readFileSync(homeFolder+'usersId.txt', 'utf8');
       usersId = usersz.split("\n");
       usersId.pop();
 } catch (err) {
@@ -67,29 +66,29 @@ function parseMessage( msg ){
     try {
 		  if (msg.message.text=="/dmsweb") {
             sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+lastWeb+"\nAttendi alcuni secondi, sto preparando il tuo download...");
-            file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-wa-'+lastWeb+'.exe';
+            file = DMSWebFolder+'dmsweb-wa-'+lastWeb+'.exe';
             fileName = 'dmsweb-wa-'+lastWeb+'.exe';
-            output_zip = '/home/dms/DMSWeb'+lastWeb+'.zip';
+            output_zip = homeFolder+'DMSWeb'+lastWeb+'.zip';
             zipFile(file, fileName, output_zip, msg.message.chat.id);
         } else if(msg.message.text=="/dmsdoctor"){
             const fs = require('fs');
             try {
-               data = fs.readFileSync('/home/dms/lastVersDOC.txt', 'utf8');
+               data = fs.readFileSync(homeFolder+'lastVersDOC.txt', 'utf8');
                last=lastVersion(data);
                sendMes(msg.message.chat.id,"DMS Doctor vers: "+last+"\nAttendi alcuni secondi, sto preparando il tuo download...");
-               file = '/mnt/nasCons/Nexus/DMSWEBSperimentali/dmsweb-doctor-'+last+'.exe';
+               file = DMSDocFolder+'dmsweb-doctor-'+last+'.exe';
                client.sendDocument(msg.message.chat.id, file);
             } catch (err) {
               console.error(err);
             }
         } else if(msg.message.text=="/dmsema"){
             sendMes(msg.message.chat.id,"DMS CS EMA vers: "+lastCS+" \nAttendi alcuni secondi, sto preparando il tuo download...");
-            directory_dms = '/mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA/'+lastCS;
-            output_zip = '/home/dms/DMSEMA.zip';
+            directory_dms = DMSCSFolder+lastCS;
+            output_zip = homeFolder+'DMSEMA.zip';
             zipDir(directory_dms, output_zip, msg.message.chat.id);
         } else if(msg.message.text=="/cristian"){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
-            client.sendPhoto(msg.message.chat.id, '/mnt/nasPub/1600_Federico_project/segreto.jpg');
+            client.sendPhoto(msg.message.chat.id, EasterEggPath);
         } else if(msg.message.text=="/vpn"){
             sendMes(msg.message.chat.id,"Portale VPN - ASSISTENZA \n(ricordati di attivare GlobalProtect)\n\n http://10.1.6.14/AssistenzaRemota/");
         } else if(msg.message.text=="/start"){
@@ -139,7 +138,7 @@ function requestUpdate(){
       const fs = require('fs');
       const fs2 = require('fs');
       try {
-            data = fs.readFileSync('/home/dms/lastVersWEB.txt', 'utf8');
+            data = fs.readFileSync(homeFolder+'lastVersWEB.txt', 'utf8');
             last=lastVersion(data);
             if(lastWeb==null){
                lastWeb=last;
@@ -151,7 +150,7 @@ function requestUpdate(){
                }
                lastWeb=last;
             }
-            data2 = fs2.readFileSync('/home/dms/lastVersCS.txt', 'utf8');
+            data2 = fs2.readFileSync(homeFolder+'lastVersCS.txt', 'utf8');
             last2=lastVersion(data2);
             if(lastCS==null){
                lastCS=last2;
@@ -182,7 +181,7 @@ function requestUpdate(){
                     }
                     if(!found){
                        usersId.push(inputMessage.message.chat.id);
-                       var stream = fs.createWriteStream('/home/dms/usersId.txt', {flags:'a'});
+                       var stream = fs.createWriteStream(homeFolder+'usersId.txt', {flags:'a'});
                        stream.write(usersId[usersId.length-1] + "\n");
                        stream.end();
                     }
@@ -233,7 +232,7 @@ function lastVersion(data){
 
 function logNewVersion(newVersion, data, web){
       const fs3 = require('fs');
-      var stream1 = fs3.createWriteStream('/home/dms/logNewVersion.txt', {flags:'a'});
+      var stream1 = fs3.createWriteStream(homeFolder+'logNewVersion.txt', {flags:'a'});
       stream1.write("\n\n ------------start------------- \n\n");
       if(web){
          stream1.write("Nuova versione Web: "+newVersion);
@@ -271,7 +270,7 @@ function uploadConfig(){
             }
          }
       } catch (err) {
-         useConf=false;
+         exit(0);
       }
 }
 // Avviamo la funzione che gira ogni 2 secondi e gestisce la ricezione dei messaggi e il controllo di versione
