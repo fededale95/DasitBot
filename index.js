@@ -158,7 +158,7 @@ function requestUpdate(){
             if(last2!=lastCS){
                logNewVersion(last2, data2, false);
                for(i in usersId){
-                  sendMes(usersId[i], "E' disponibile una nuova versione di DMS CS EMA!\n vers: "+last2+"\nClicca /dmsema per scaricarla!");
+                  //sendMes(usersId[i], "E' disponibile una nuova versione di DMS CS EMA!\n vers: "+last2+"\nClicca /dmsema per scaricarla!");
                }
                lastCS=last2;
             }
