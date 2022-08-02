@@ -158,7 +158,7 @@ function requestUpdate(){
             if(last2!=lastCS){
                logNewVersion(last2, data2, false);
                for(i in usersId){
-                  //sendMes(usersId[i], "E' disponibile una nuova versione di DMS CS EMA!\n vers: "+last2+"\nClicca /dmsema per scaricarla!");
+                  sendMes(usersId[i], "E' disponibile una nuova versione di DMS CS EMA!\n vers: "+last2+"\nClicca /dmsema per scaricarla!");
                }
                lastCS=last2;
             }
@@ -247,14 +247,8 @@ function extractLast(items) {
         myArray.push(tempString);
     }
     myBubbleSort(myArray);
-    var fsOrd = require('fs');
-    var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
-    streamOrd.write("ITEMS: \n\n");
-    for(i in myArray){
-      streamOrd.write("AOOO "+myArray[myArray.length-1]+"\n");
-    }
-    streamOrd.end();
-    return myArray[myArray.length-1];
+    ris = myArray[myArray.length-1][0]+"."+myArray[myArray.length-1][1]+"."+myArray[myArray.length-1][2];
+    return ris;
 }
 
 function myBubbleSort(items){
