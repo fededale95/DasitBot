@@ -222,7 +222,7 @@ function lastVersion(data,type){  //type: 0=CS,  1=Web,  2=Doc
       for(i in myArray){
          streamOrd.write(myArray[i]+"\n");
       }
-      streamOrd.write("\n\n");
+      stream1.end();
 
       if(type==1){
          for(i in myArray){
