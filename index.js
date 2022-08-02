@@ -229,6 +229,9 @@ function lastVersionCS(data){
             if ( myArray[i].endsWith(".zip") || !(myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") )) {
                toCanc.push(i);
             }
+            if( !(myArray[i].endsWith("0") || myArray[i].endsWith("1") || myArray[i].endsWith("2") || myArray[i].endsWith("3") || myArray[i].endsWith("4") || myArray[i].endsWith("5") || myArray[i].endsWith("6") || myArray[i].endsWith("7") || myArray[i].endsWith("8") || myArray[i].endsWith("9"))){
+               toCanc.push(i);
+            }
       }
       for (var i = toCanc.length - 1; i >= 0; i--){
          myArray.splice(toCanc[i], 1);
