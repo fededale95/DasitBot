@@ -386,24 +386,30 @@ function uploadDMSFolder(){
          const fs = require('fs');
          data = fs.readFileSync('/etc/dasitbot.conf', 'utf8');
          var param = data.split("\n");
+         var updated = false;
          for(i in param){
             temp = param[i].split("'");
             val = temp[1];
             if(param[i].startsWith("DMSWebFolder")){
                   if(DMSWebFolder!=val){
                      DMSWebFolder=val;
+                     updated = true;
                   }
             } else if(param[i].startsWith("DMSDocFolder")){
                   if(DMSDocFolder!=val){
                      DMSDocFolder=val;
+                     updated = true;
                   }
             } else if(param[i].startsWith("DMSCSFolder")){
                   if(DMSCSFolder!=val){
                      DMSCSFolder=val;
+                     updated = true;
                   }
             }
          }
-         data2 = "NEW CONF: \nDMSWebFolder = "+DMSWebFolder+"\nDMSDocFolder = "+DMSDocFolder+"\nDMSCSFolder = "+DMSCSFolder;
+         if(updated){
+            data2 = "NEW CONF: \nDMSWebFolder = "+DMSWebFolder+"\nDMSDocFolder = "+DMSDocFolder+"\nDMSCSFolder = "+DMSCSFolder;
+         }
          myLog(data2);
       } catch (err) {
          myLog("Errore File dasitbot.conf, controllare!");
