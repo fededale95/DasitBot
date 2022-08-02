@@ -141,9 +141,9 @@ function requestUpdate(){
                lastWeb=last;
             }
             data2 = fs2.readFileSync(homeFolder+'versCS.txt', 'utf8');
+            last2=lastVersion(data2,0);
 
             if(lastCS==null){
-               last2=lastVersion(data2,0);
                var fsOrd = require('fs');
                var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'a'});
                streamOrd.write("lastCS: "+lastCS+"\n");
