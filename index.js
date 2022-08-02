@@ -254,7 +254,7 @@ function myBubbleSort(items){
       //ordino per macroversioni N.x.x
       for (var i = 0; i < items.length; i++) {
             for (var j = 0; j < (items.length - i - 1); j++) {
-              if(items[j][0] > items[j+1][0]) {
+              if(parseInt(items[j][0]) > parseInt(items[j+1][0])) {
                  var tmp = items[j];
                  items[j] = items[j+1];
                  items[j+1] = tmp;
@@ -268,13 +268,11 @@ function myBubbleSort(items){
       for(i in items){
          streamOrd.write(items[i]+"\n");
       }
-      if(items[0][0]>items[1][0]){
-         streamOrd.write("FUNZIONA: "+items[][]+"\n");
-      }
       streamOrd.end();
+
       //elimino tutte le macroversioni precedenti all'ultima
       for (var i = items.length - 2; i >= 0; i--){
-         if(items[i][0]<items[items.length-1]){
+         if(parseInt(items[i][0]) < parseInt(items[items.length-1]){
             items.splice(i, 1);
          }
       }
@@ -282,7 +280,7 @@ function myBubbleSort(items){
       //ora ordino per versione x.N.x
       for (var i = 0; i < items.length; i++) {
             for (var j = 0; j < (items.length - i - 1); j++) {
-              if(items[j][1] > items[j+1][1]) {
+              if(parseInt(items[j][1]) > parseInt(items[j+1][1])) {
                  var tmp = items[j];
                  items[j] = items[j+1];
                  items[j+1] = tmp;
@@ -292,7 +290,7 @@ function myBubbleSort(items){
 
       //elimino le versioni precedenti all'ultima
       for (var i = items.length - 2; i >= 0; i--){
-         if(items[i][1]<items[items.length-1]){
+         if(parseInt(items[i][1]) < parseInt(items[items.length-1])) {
             items.splice(i, 1);
          }
       }
@@ -300,7 +298,7 @@ function myBubbleSort(items){
       //ora ordino per release x.x.N
       for (var i = 0; i < items.length; i++) {
             for (var j = 0; j < (items.length - i - 1); j++) {
-              if(items[j][2] > items[j+1][2]) {
+              if(parseInt(items[j][2]) > parseInt(items[j+1][2])) {
                  var tmp = items[j];
                  items[j] = items[j+1];
                  items[j+1] = tmp;
