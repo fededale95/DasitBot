@@ -281,6 +281,13 @@ function myBubbleSort(items){
          }
       }
 
+      //elimino le versioni precedenti all'ultima
+      for (var i = items.length - 2; i >= 0; i--){
+         if(parseInt(items[i][1]) < parseInt(items[items.length-1])) {
+            items.splice(i, 1);
+         }
+      }
+
       var fsOrd = require('fs');
       var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
       streamOrd.write("ITEMS: \n\n");
@@ -288,13 +295,6 @@ function myBubbleSort(items){
         streamOrd.write(items[i]+"\n");
       }
       streamOrd.end();
-
-      //elimino le versioni precedenti all'ultima
-      for (var i = items.length - 2; i >= 0; i--){
-         if(parseInt(items[i][1]) < parseInt(items[items.length-1])) {
-            items.splice(i, 1);
-         }
-      }
 
       //ora ordino per release x.x.N
       for (var i = 0; i < items.length; i++) {
