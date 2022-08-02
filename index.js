@@ -216,13 +216,15 @@ function lastVersion(data,type){  //type: 0=CS,  1=Web,  2=Doc
           myArray.push(tempArray[tempArray.length-1]);
       }
 
-      var fsOrd = require('fs');
-      var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
-      streamOrd.write("myARRAY: \n\n");
-      for(i in myArray){
-         streamOrd.write(myArray[i]+"\n");
+      if(type==0){
+         var fsOrd = require('fs');
+         var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
+         streamOrd.write("myARRAY: \n\n");
+         for(i in myArray){
+            streamOrd.write(myArray[i]+"\n");
+         }
+         stream1.end();
       }
-      stream1.end();
 
       if(type==1){
          for(i in myArray){
