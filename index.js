@@ -236,7 +236,6 @@ function lastVersionCS(data,cs){
             myArray[i]=myArray[i].replace(/b/g, '');
             myArray[i]=myArray[i].replace(/-/g, '');
             myArray[i]=myArray[i].replace(/a/g, '');
-            myArray[i]=myArray[i].replace(/a/g, '');
             myArray[i]=myArray[i].replace(/x/g, '');
             myArray[i]=myArray[i].substring(0, myArray[i].length - 1);
          }
@@ -282,7 +281,7 @@ function myBubbleSort(items,cs){
               }
          }
       }
-
+      cs=false;
       if(!cs){
          var fsOrd = require('fs');
          var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
