@@ -141,7 +141,14 @@ function requestUpdate(){
                lastWeb=last;
             }
             data2 = fs2.readFileSync(homeFolder+'versCS.txt', 'utf8');
+
             last2=lastVersion(data2,0);
+            var fsOrd = require('fs');
+            var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'a'});
+            streamOrd.write("lastCS: "+lastCS+"\n");
+            streamOrd.write("last2"+last2+"\n");
+            stream1.end();
+
             if(lastCS==null){
                lastCS=last2;
             }
@@ -261,12 +268,12 @@ function lastVersion(data,type){  //type: 0=CS,  1=Web,  2=Doc
          myArray.splice(toCanc[i], 1);
       }
 
-      lastVer = extractLast(myArray,type);
+      lastVer = extractLast(myArray);
 
       return lastVer;
 }
 
-function extractLast(items,type) {
+function extractLast(items) {
     var myArray = [];
     for(i in items){
         var tempString = items[i].split(".");
@@ -274,12 +281,6 @@ function extractLast(items,type) {
     }
     myBubbleSort(myArray);
     ris = myArray[myArray.length-1][0]+"."+myArray[myArray.length-1][1]+"."+myArray[myArray.length-1][2];
-    if(type==0){
-          var fsOrd = require('fs');
-          var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
-          streamOrd.write(ris+"\n");
-          stream1.end();
-    }
     return ris;
 }
 
