@@ -283,14 +283,15 @@ function myBubbleSort(items){
          }
       }
 
-      var fsOrd = require('fs');
-      var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
-      streamOrd.write("ORDINO PER MARCOVERSIONE: \n\n");
-      for(i in items){
-        streamOrd.write(items[i]+"\n");
+      if(!cs){
+         var fsOrd = require('fs');
+         var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
+         streamOrd.write("ORDINO PER MARCOVERSIONE: \n\n");
+         for(i in items){
+           streamOrd.write(items[i]+"\n");
+         }
+         streamOrd.write("\n\n");
       }
-      streamOrd.write("\n\n");
-
 
 
       //elimino tutte le macroversioni precedenti all'ultima
@@ -300,12 +301,13 @@ function myBubbleSort(items){
          }
       }
 
-      streamOrd.write("TAGLIO VECCHIE MACROVERSIONI: \n\n");
-      for(i in items){
-        streamOrd.write(items[i]+"\n");
+      if(!cs){
+         streamOrd.write("TAGLIO VECCHIE MACROVERSIONI: \n\n");
+         for(i in items){
+           streamOrd.write(items[i]+"\n");
+         }
+         streamOrd.write("\n\n");
       }
-      streamOrd.write("\n\n");
-
       //ora ordino per versione x.N.x
       for (var i = 0; i < items.length; i++) {
             for (var j = 0; j < (items.length - i - 1); j++) {
@@ -317,11 +319,13 @@ function myBubbleSort(items){
          }
       }
 
-      streamOrd.write("ORDINO PER VERSIONE: \n\n");
-      for(i in items){
-        streamOrd.write(items[i]+"\n");
+      if(!cs){
+         streamOrd.write("ORDINO PER VERSIONE: \n\n");
+         for(i in items){
+           streamOrd.write(items[i]+"\n");
+         }
+         streamOrd.write("\n\n");
       }
-      streamOrd.write("\n\n");
 
       //elimino le versioni precedenti all'ultima
       for (var i = items.length - 2; i >= 0; i--){
@@ -330,11 +334,13 @@ function myBubbleSort(items){
          }
       }
 
-      streamOrd.write("TAGLIO VECCHIE VERSIONI: \n\n");
-      for(i in items){
-        streamOrd.write(items[i]+"\n");
+      if(!cs){
+         streamOrd.write("TAGLIO VECCHIE VERSIONI: \n\n");
+         for(i in items){
+           streamOrd.write(items[i]+"\n");
+         }
+         streamOrd.write("\n\n");
       }
-      streamOrd.write("\n\n");
 
       //ora ordino per release x.x.N
       for (var i = 0; i < items.length; i++) {
@@ -347,12 +353,14 @@ function myBubbleSort(items){
          }
       }
 
-      streamOrd.write("ORDINO PER RELEASE: \n\n");
-      for(i in items){
-        streamOrd.write(items[i]+"\n");
+      if(!cs){
+         streamOrd.write("ORDINO PER RELEASE: \n\n");
+         for(i in items){
+           streamOrd.write(items[i]+"\n");
+         }
+         streamOrd.write("\n\n");
+         streamOrd.end();
       }
-      streamOrd.write("\n\n");
-      streamOrd.end();
 }
 
 function lastVersion(data){
