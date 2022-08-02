@@ -246,10 +246,6 @@ function extractLast(items) {
         var tempString = items[i].split(".");
         myArray.push(tempString);
     }
-    var fsOrd = require('fs');
-    var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
-    streamOrd.write("PROVA: "+myArray[0][1]);
-    streamOrd.end();
     myBubbleSort(myArray);
     return myArray[myArray.length-1];
 }
@@ -265,7 +261,10 @@ function myBubbleSort(items){
               }
          }
       }
-
+      var fsOrd = require('fs');
+      var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
+      streamOrd.write("PROVA: "+items);
+      streamOrd.end();
       //elimino tutte le macroversioni precedenti all'ultima
       for (var i = items.length - 2; i >= 0; i--){
          if(items[i][0]<items[items.length-1]){
