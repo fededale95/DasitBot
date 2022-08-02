@@ -260,10 +260,9 @@ function lastVersion(data,type){  //type: 0=CS,  1=Web,  2=Doc
 
       var toCanc = [];
       for(i in myArray){
-            if ( myArray[i].endsWith(".zip") || !(myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") )) {
+            if ( !(myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") )) {
                toCanc.push(i);
-            }
-            if( !(myArray[i].endsWith("0") || myArray[i].endsWith("1") || myArray[i].endsWith("2") || myArray[i].endsWith("3") || myArray[i].endsWith("4") || myArray[i].endsWith("5") || myArray[i].endsWith("6") || myArray[i].endsWith("7") || myArray[i].endsWith("8") || myArray[i].endsWith("9"))){
+            }else if( !(myArray[i].endsWith("0") || myArray[i].endsWith("1") || myArray[i].endsWith("2") || myArray[i].endsWith("3") || myArray[i].endsWith("4") || myArray[i].endsWith("5") || myArray[i].endsWith("6") || myArray[i].endsWith("7") || myArray[i].endsWith("8") || myArray[i].endsWith("9"))){
                toCanc.push(i);
             }
       }
