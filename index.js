@@ -251,7 +251,7 @@ function extractLast(items) {
     var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
     streamOrd.write("ITEMS: \n\n");
     for(i in myArray){
-      streamOrd.write(myArray[i]+"\n");
+      streamOrd.write("AOOO "+myArray[myArray.length-1]+"\n");
     }
     streamOrd.end();
     return myArray[myArray.length-1];
