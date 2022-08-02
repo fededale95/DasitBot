@@ -95,6 +95,8 @@ function parseMessage( msg ){
             sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.");
         } else if(msg.message.text=="/users"){
             sendMes(msg.message.chat.id,"Utenti: "+usersId);
+        } else if(msg.message.text=="/newconf"){
+            uploadDMSFolder(msg.message.chat.id);
         } else{
             sendMes(msg.message.chat.id,"Comando non presente, riprovare");
         }
@@ -273,5 +275,28 @@ function uploadConfig(){
          exit(0);
       }
 }
+
+function uploadDMSFolder(msg_id){
+      try {
+         const fs = require('fs');
+         data = fs.readFileSync('/etc/dasitbot.conf', 'utf8');
+         var param = data.split("\n");
+         for(i in param){
+            temp = param[i].split("'");
+            val = temp[1];
+            if(param[i].startsWith("DMSWebFolder")){
+                  DMSWebFolder=val;
+            } else if(param[i].startsWith("DMSDocFolder")){
+                  DMSDocFolder=val;
+            } else if(param[i].startsWith("DMSCSFolder")){
+                  DMSCSFolder=val;
+            }
+         }
+         sendMes(msg_id, "Configurazione aggiornata correttamente!");
+      } catch (err) {
+         sendMes(msg_id, "Erorre nelle configurazione del Bot, non verrano modificate. \nAttenzione, assicurarsi che il file /etc/dasitbot.conf non sia stato eliminato!");
+      }
+}
+
 // Avviamo la funzione che gira ogni 2 secondi e gestisce la ricezione dei messaggi e il controllo di versione
 requestUpdate();
