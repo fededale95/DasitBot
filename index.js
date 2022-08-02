@@ -138,8 +138,8 @@ function requestUpdate(){
       const fs = require('fs');
       const fs2 = require('fs');
       try {
-            data = fs.readFileSync(homeFolder+'lastVersWEB.txt', 'utf8');
-            last=lastVersion(data);
+            data = fs.readFileSync(homeFolder+'vers.txt', 'utf8');
+            last=lastVersionCS(data,false);
             if(lastWeb==null){
                lastWeb=last;
             }
@@ -151,7 +151,7 @@ function requestUpdate(){
                lastWeb=last;
             }
             data2 = fs2.readFileSync(homeFolder+'versCS.txt', 'utf8');
-            last2=lastVersionCS(data2);
+            last2=lastVersionCS(data2,true);
             if(lastCS==null){
                lastCS=last2;
             }
@@ -215,13 +215,31 @@ function splitMyFile(source, maxSize, msg_id) {
       });
 }
 
-function lastVersionCS(data){
+function lastVersionCS(data,cs){
       var myData = data.split("\n");
-      myData.shift();
+      if(cs){
+         myData.shift();
+      }
       var myArray = [];
       for(i in myData){
           var tempArray = myData[i].split(" ");
           myArray.push(tempArray[tempArray.length-1]);
+      }
+
+      if(!cs){
+         for(i in myArray){
+            myArray[i]=myArray[i].replace(/d/g, '');
+            myArray[i]=myArray[i].replace(/m/g, '');
+            myArray[i]=myArray[i].replace(/s/g, '');
+            myArray[i]=myArray[i].replace(/w/g, '');
+            myArray[i]=myArray[i].replace(/e/g, '');
+            myArray[i]=myArray[i].replace(/b/g, '');
+            myArray[i]=myArray[i].replace(/-/g, '');
+            myArray[i]=myArray[i].replace(/a/g, '');
+            myArray[i]=myArray[i].replace(/a/g, '');
+            myArray[i]=myArray[i].replace(/x/g, '');
+            myArray[i]=myArray[i].substring(0, myArray[i].length - 1);
+         }
       }
 
       var toCanc = [];
