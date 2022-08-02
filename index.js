@@ -248,7 +248,7 @@ function extractLast(items) {
     }
     var fsOrd = require('fs');
     var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
-    streamOrd.write(myArray);
+    streamOrd.write("PROVA: "+myArray);
     streamOrd.end();
     myBubbleSort(myArray);
     return myArray[myArray.length-1];
