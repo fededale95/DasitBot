@@ -71,8 +71,8 @@ function parseMessage( msg ){
         } else if(msg.message.text=="/dmsdoctor"){
             const fs = require('fs');
             try {
-               data = fs.readFileSync(homeFolder+'lastVersDOC.txt', 'utf8');
-               last=lastVersion(data);
+               data = fs.readFileSync(homeFolder+'versDoc.txt', 'utf8');
+               last=lastVersion(data,2);
                sendMes(msg.message.chat.id,"DMS Doctor vers: "+last+"\nAttendi alcuni secondi, sto preparando il tuo download...");
                file = DMSDocFolder+'dmsweb-doctor-'+last+'.exe';
                client.sendDocument(msg.message.chat.id, file);
@@ -139,7 +139,7 @@ function requestUpdate(){
       const fs2 = require('fs');
       try {
             data = fs.readFileSync(homeFolder+'vers.txt', 'utf8');
-            last=lastVersionCS(data,false);
+            last=lastVersion(data,1);
             if(lastWeb==null){
                lastWeb=last;
             }
@@ -151,7 +151,7 @@ function requestUpdate(){
                lastWeb=last;
             }
             data2 = fs2.readFileSync(homeFolder+'versCS.txt', 'utf8');
-            last2=lastVersionCS(data2,true);
+            last2=lastVersion(data2,0);
             if(lastCS==null){
                lastCS=last2;
             }
@@ -215,9 +215,9 @@ function splitMyFile(source, maxSize, msg_id) {
       });
 }
 
-function lastVersionCS(data,cs){
+function lastVersion(data,type){  //type: 0=CS,  1=Web,  2=Doc
       var myData = data.split("\n");
-      if(cs){
+      if(type==0){
          myData.shift();
       }
       var myArray = [];
@@ -226,7 +226,7 @@ function lastVersionCS(data,cs){
           myArray.push(tempArray[tempArray.length-1]);
       }
 
-      if(!cs){
+      if(type==1){
          for(i in myArray){
             myArray[i]=myArray[i].replace(/d/g, '');
             myArray[i]=myArray[i].replace(/m/g, '');
@@ -236,6 +236,24 @@ function lastVersionCS(data,cs){
             myArray[i]=myArray[i].replace(/b/g, '');
             myArray[i]=myArray[i].replace(/-/g, '');
             myArray[i]=myArray[i].replace(/a/g, '');
+            myArray[i]=myArray[i].replace(/x/g, '');
+            myArray[i]=myArray[i].substring(0, myArray[i].length - 1);
+         }
+      }
+
+      if(type==2){
+         for(i in myArray){
+            myArray[i]=myArray[i].replace(/d/g, '');
+            myArray[i]=myArray[i].replace(/m/g, '');
+            myArray[i]=myArray[i].replace(/s/g, '');
+            myArray[i]=myArray[i].replace(/w/g, '');
+            myArray[i]=myArray[i].replace(/e/g, '');
+            myArray[i]=myArray[i].replace(/b/g, '');
+            myArray[i]=myArray[i].replace(/o/g, '');
+            myArray[i]=myArray[i].replace(/c/g, '');
+            myArray[i]=myArray[i].replace(/t/g, '');
+            myArray[i]=myArray[i].replace(/r/g, '');
+            myArray[i]=myArray[i].replace(/-/g, '');
             myArray[i]=myArray[i].replace(/x/g, '');
             myArray[i]=myArray[i].substring(0, myArray[i].length - 1);
          }
@@ -254,23 +272,23 @@ function lastVersionCS(data,cs){
          myArray.splice(toCanc[i], 1);
       }
 
-      lastVer = extractLast(myArray,cs);
+      lastVer = extractLast(myArray);
 
       return lastVer;
 }
 
-function extractLast(items,cs) {
+function extractLast(items) {
     var myArray = [];
     for(i in items){
         var tempString = items[i].split(".");
         myArray.push(tempString);
     }
-    myBubbleSort(myArray,cs);
+    myBubbleSort(myArray);
     ris = myArray[myArray.length-1][0]+"."+myArray[myArray.length-1][1]+"."+myArray[myArray.length-1][2];
     return ris;
 }
 
-function myBubbleSort(items,cs){
+function myBubbleSort(items){
       //ordino per macroversioni N.x.x
       for (var i = 0; i < items.length; i++) {
             for (var j = 0; j < (items.length - i - 1); j++) {
@@ -318,21 +336,6 @@ function myBubbleSort(items,cs){
          }
       }
 
-}
-
-function lastVersion(data){
-      var myArray = data.split("\n");
-      var toCanc = [];
-      myArray.sort();
-      for(i in myArray){
-            if ( !(myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") )) {
-               toCanc.push(i);
-            }
-      }
-      for (var i = toCanc.length - 1; i >= 0; i--){
-         myArray.splice(toCanc[i], 1);
-      }
-      return myArray[myArray.length-1];
 }
 
 function logNewVersion(newVersion, data, web){
