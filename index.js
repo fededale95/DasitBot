@@ -234,18 +234,19 @@ function lastVersionCS(data){
          myArray.splice(toCanc[i], 1);
       }
 
-      mySort(myArray);
+      lastVer = extractLast(myArray);
 
       return myArray[myArray.length-1];
 }
 
-function mySort(items) {
-    var myArray;
+function extractLast(items) {
+    var myArray = [];
     for(i in items){
         var tempString = items[i].split(".");
         myArray.push(tempString);
     }
     myBubbleSort(myArray);
+    return myArray[myArray.length-1];
 }
 
 function myBubbleSort(items){
