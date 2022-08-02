@@ -263,7 +263,9 @@ function myBubbleSort(items){
       }
       var fsOrd = require('fs');
       var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
-      streamOrd.write("PROVA: "+items);
+      for(i in items){
+         streamOrd.write("PROVA: "+items[i]);         
+      }
       streamOrd.end();
       //elimino tutte le macroversioni precedenti all'ultima
       for (var i = items.length - 2; i >= 0; i--){
