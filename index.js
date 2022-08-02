@@ -272,6 +272,7 @@ function extractLast(items,type) {
         var tempString = items[i].split(".");
         myArray.push(tempString);
     }
+    myBubbleSort(myArray);
     if(type==0){
           var fsOrd = require('fs');
           var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
@@ -281,7 +282,6 @@ function extractLast(items,type) {
           }
           stream1.end();
     }
-    myBubbleSort(myArray);
     ris = myArray[myArray.length-1][0]+"."+myArray[myArray.length-1][1]+"."+myArray[myArray.length-1][2];
     return ris;
 }
