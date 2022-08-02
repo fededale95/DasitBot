@@ -290,8 +290,8 @@ function uploadDMSFolder(msg_id){
                   DMSCSFolder=val;
             }
          }
-         data2 = fs.readFileSync(homeFolder+'verifyConf.txt', 'utf8');
-         sendMes(msg_id, "Configurazione aggiornata correttamente!\n\nNuova Conf:"+data2);
+         data2 = "DMSWebFolder = "+DMSWebFolder+"\nDMSDocFolder = "+DMSDocFolder+"\nDMSCSFolder = "+DMSCSFolder;
+         sendMes(msg_id, "Configurazione aggiornata correttamente!\n\nNuova Conf:\n\n"+data2);
 
       } catch (err) {
          sendMes(msg_id, "Erorre nelle configurazione del Bot, non verrano modificate. \nAttenzione, assicurarsi che il file /etc/dasitbot.conf non sia stato eliminato!");
