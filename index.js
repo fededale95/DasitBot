@@ -150,8 +150,8 @@ function requestUpdate(){
                }
                lastWeb=last;
             }
-            data2 = fs2.readFileSync(homeFolder+'lastVersCS.txt', 'utf8');
-            last2=lastVersion(data2);
+            data2 = fs2.readFileSync(homeFolder+'versCS.txt', 'utf8');
+            last2=lastVersionCS(data2);
             if(lastCS==null){
                lastCS=last2;
             }
@@ -213,6 +213,27 @@ function splitMyFile(source, maxSize, msg_id) {
       .catch((err) => {
           console.log('Error: ', err);
       });
+}
+
+function lastVersionCS(data){
+      var myData = data.split("\n");
+      var myArray = [];
+      for(i in myData){
+          var tempArray = data.split(" ");
+          myArray.push(tempArray[tempArray.length-1]);
+      }
+
+      var toCanc = [];
+      myArray.sort();
+      for(i in myArray){
+            if ( !(myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") )) {
+               toCanc.push(i);
+            }
+      }
+      for (var i = toCanc.length - 1; i >= 0; i--){
+         myArray.splice(toCanc[i], 1);
+      }
+      return myArray[myArray.length-1];
 }
 
 function lastVersion(data){
