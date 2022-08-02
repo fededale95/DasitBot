@@ -236,7 +236,8 @@ function lastVersionCS(data){
 
       lastVer = extractLast(myArray);
 
-      return myArray[myArray.length-1];
+      return lastVer;
+      //return myArray[myArray.length-1];
 }
 
 function extractLast(items) {
