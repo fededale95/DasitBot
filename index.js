@@ -268,7 +268,7 @@ function myBubbleSort(items){
       for(i in items){
          streamOrd.write(items[i]+"\n");
       }
-      if(parseInt(items[0][0]) > parseInt(items[1][0])) {
+      if(parseInt(items[7][0]) > parseInt(items[1][0])) {
          streamOrd.write("Funziaaa:"+items[0][0]+"\n");
       }
       streamOrd.end();
