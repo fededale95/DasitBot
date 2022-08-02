@@ -11,15 +11,13 @@ var DMSCSFolder;
 var EasterEggPath;
 
 var fsConf = require('fs');
-var streamConf = fsConf.createWriteStream(homeFolder+'verifyConf.txt', {flags:'a'});
-streamConf.write("--------Start--------\n");
+var streamConf = fsConf.createWriteStream(homeFolder+'verifyConf.txt', {flags:'w'});
 streamConf.write("botTokenConfFile = "+botTokenConfFile+"\n");
 streamConf.write("homeFolder = "+homeFolder+"\n");
 streamConf.write("DMSWebFolder = "+DMSWebFolder+"\n");
 streamConf.write("DMSDocFolder = "+DMSDocFolder+"\n");
 streamConf.write("DMSCSFolder = "+DMSCSFolder+"\n");
 streamConf.write("EasterEggPath = "+EasterEggPath+"\n");
-streamConf.write("--------End--------\n\n");
 streamConf.end();
 
 //superagent
@@ -292,7 +290,9 @@ function uploadDMSFolder(msg_id){
                   DMSCSFolder=val;
             }
          }
-         sendMes(msg_id, "Configurazione aggiornata correttamente!");
+         data2 = fs.readFileSync(homeFolder+'verifyConf.txt', 'utf8');
+         sendMes(msg_id, "Configurazione aggiornata correttamente!\n\nNuova Conf:"+data2);
+
       } catch (err) {
          sendMes(msg_id, "Erorre nelle configurazione del Bot, non verrano modificate. \nAttenzione, assicurarsi che il file /etc/dasitbot.conf non sia stato eliminato!");
       }
