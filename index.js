@@ -117,7 +117,6 @@ function requestUpdate(){
       //controllo versioni sw e notifico novità
       const fs = require('fs');
       const fs2 = require('fs');
-      const fs3 = require('fs');
       try {
             data = fs.readFileSync('/home/dms/lastVersWEB.txt', 'utf8');
             last=lastVersion(data);
@@ -125,6 +124,7 @@ function requestUpdate(){
                lastWeb=last;
             }
             if(last!=lastWeb){
+               logNewVersion(last, data, true);
                for(i in usersId){
                   sendMes(usersId[i], "E' disponibile una nuova versione di DMSWeb WebApp!\n vers: "+last+"\nClicca /dmsweb per scaricarla!");
                }
@@ -136,15 +136,7 @@ function requestUpdate(){
                lastCS=last2;
             }
             if(last2!=lastCS){
-               if(last2==null){
-                  var stream1 = fs3.createWriteStream('/home/dms/logUndefinedError.txt', {flags:'a'});
-                  stream1.write("\n\n ------------start------------- \n\n");
-                  stream1.write("last (ultimo calcolato): "+last2);
-                  stream1.write("lastCS (var glob): "+lastCS);
-                  stream1.write("\nCartella DMSEMA (output ls -la): "+data2);
-                  stream1.write("\n\n -------------end-------------- \n\n");
-                  stream1.end();
-               }
+               logNewVersion(last2, data2, false);
                for(i in usersId){
                   sendMes(usersId[i], "E' disponibile una nuova versione di DMS CS EMA!\n vers: "+last2+"\nClicca /dmsema per scaricarla!");
                }
@@ -218,5 +210,22 @@ function lastVersion(data){
       return myArray[myArray.length-1];
 }
 
-// Avviamo la prima lettura dei messaggi
+function logNewVersion(newVersion, data, web){
+      const fs3 = require('fs');
+      var stream1 = fs3.createWriteStream('/home/dms/logNewVersion.txt', {flags:'a'});
+      stream1.write("\n\n ------------start------------- \n\n");
+      if(web){
+         stream1.write("Nuova versione Web: "+newVersion);
+         stream1.write("Vecchia Versione Web: "+lastWeb);
+         stream1.write("\nCartella WEB (output ls -la): "+data);
+      }else{
+         stream1.write("Nuova versione CS: "+newVersion);
+         stream1.write("Vecchia Versione CS: "+lastCS);
+         stream1.write("\nCartella DMSEMA (output ls -la): "+data);
+      }
+      stream1.write("\n\n -------------end-------------- \n\n");
+      stream1.end();
+}
+
+// Avviamo la funzione che gira ogni 2 secondi e gestisce la ricezione dei messaggi e il controllo di versione
 requestUpdate();
