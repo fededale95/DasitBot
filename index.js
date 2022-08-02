@@ -151,7 +151,6 @@ function requestUpdate(){
                lastWeb=last;
             }
             data2 = fs2.readFileSync(homeFolder+'versCS.txt', 'utf8');
-            data2.shift();
             last2=lastVersionCS(data2);
             if(lastCS==null){
                lastCS=last2;
@@ -218,6 +217,7 @@ function splitMyFile(source, maxSize, msg_id) {
 
 function lastVersionCS(data){
       var myData = data.split("\n");
+      myData.shift();
       var myArray = [];
       for(i in myData){
           var tempArray = myData[i].split(" ");
