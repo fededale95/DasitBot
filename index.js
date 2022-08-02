@@ -237,7 +237,6 @@ function lastVersionCS(data){
       lastVer = extractLast(myArray);
 
       return lastVer;
-      //return myArray[myArray.length-1];
 }
 
 function extractLast(items) {
@@ -263,12 +262,28 @@ function myBubbleSort(items){
          }
       }
 
+      var fsOrd = require('fs');
+      var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
+      streamOrd.write("ORDINO PER MARCOVERSIONE: \n\n");
+      for(i in items){
+        streamOrd.write(items[i]+"\n");
+      }
+      streamOrd.write("\n\n");
+
+
+
       //elimino tutte le macroversioni precedenti all'ultima
       for (var i = items.length - 2; i >= 0; i--){
          if(parseInt(items[i][0]) < parseInt(items[items.length-1])){
             items.splice(i, 1);
          }
       }
+
+      streamOrd.write("TAGLIO VECCHIE MACROVERSIONI: \n\n");
+      for(i in items){
+        streamOrd.write(items[i]+"\n");
+      }
+      streamOrd.write("\n\n");
 
       //ora ordino per versione x.N.x
       for (var i = 0; i < items.length; i++) {
@@ -281,12 +296,24 @@ function myBubbleSort(items){
          }
       }
 
+      streamOrd.write("ORDINO PER VERSIONE: \n\n");
+      for(i in items){
+        streamOrd.write(items[i]+"\n");
+      }
+      streamOrd.write("\n\n");
+
       //elimino le versioni precedenti all'ultima
       for (var i = items.length - 2; i >= 0; i--){
          if(parseInt(items[i][1]) < parseInt(items[items.length-1])) {
             items.splice(i, 1);
          }
       }
+
+      streamOrd.write("TAGLIO VECCHIE VERSIONI: \n\n");
+      for(i in items){
+        streamOrd.write(items[i]+"\n");
+      }
+      streamOrd.write("\n\n");
 
       //ora ordino per release x.x.N
       for (var i = 0; i < items.length; i++) {
@@ -298,6 +325,13 @@ function myBubbleSort(items){
               }
          }
       }
+
+      streamOrd.write("ORDINO PER RELEASE: \n\n");
+      for(i in items){
+        streamOrd.write(items[i]+"\n");
+      }
+      streamOrd.write("\n\n");
+      streamOrd.end();
 }
 
 function lastVersion(data){
