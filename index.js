@@ -275,7 +275,7 @@ function myBubbleSort(items){
 
       //elimino tutte le macroversioni precedenti all'ultima
       for (var i = items.length - 2; i >= 0; i--){
-         if(parseInt(items[i][0]) < parseInt(items[items.length-1]){
+         if(Math.floor(items[i][0]) < Math.floor(items[items.length-1]){
             items.splice(i, 1);
          }
       }
