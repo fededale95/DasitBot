@@ -269,6 +269,10 @@ function lastVersion(data,type){  //type: 0=CS,  1=Web,  2=Doc
          for(i in myArray){
             streamOrd.write(myArray[i]+"\n");
          }
+         streamOrd.write("toCanc: \n\n");
+         for(i in toCanc){
+            streamOrd.write(toCanc[i]+"\n");
+         }
          stream1.end();
       }
 
