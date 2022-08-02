@@ -205,12 +205,12 @@ function splitMyFile(source, maxSize, msg_id) {
 
 function lastVersion(data){
       var myArray = data.split("\n");
-      var toCanc = [];      
+      var toCanc = [];
       myArray.sort();
 
       var stream = file_system.createWriteStream('/home/dms/debugLast.txt', {flags:'a'});
       stream.write("toCanc vuoto:"+toCanc);
-      stream.write("myArray dopo cancellazione:"+myArray);
+      stream.write("myArray start:"+myArray);
 
       for(i in myArray){
             if ( !(myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") )) {
