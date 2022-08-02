@@ -209,7 +209,6 @@ function lastVersion(data){
       myArray.sort();
 
       var stream = file_system.createWriteStream('/home/dms/debugLast.txt', {flags:'a'});
-      stream.write("toCanc vuoto:"+toCanc);
       stream.write("myArray start:"+myArray);
 
       for(i in myArray){
@@ -218,12 +217,15 @@ function lastVersion(data){
             }
       }
 
+      stream.write("toCanc pieno:"+toCanc);
+      stream.write("lunghezza toCanc:"+toCanc.length);
+
       for (i=toCanc.lenght-1;i>=0;i--){
          myArray.splice(toCanc[i], 1);
       }
 
 
-      stream.write("toCanc pieno:"+toCanc);
+
       stream.write("myArray dopo cancellazione:"+myArray);
       stream.end();
 
