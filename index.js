@@ -270,6 +270,7 @@ function uploadConfig(){
             }
          }
       } catch (err) {
+         console.log('Error: ', err);
          exit(0);
       }
 }
@@ -294,7 +295,7 @@ function uploadDMSFolder(msg_id){
          sendMes(msg_id, "Configurazione aggiornata correttamente!\n\nNuova Conf:\n\n"+data2);
 
       } catch (err) {
-         sendMes(msg_id, "Erorre nelle configurazione del Bot, non verrano modificate. \nAttenzione, assicurarsi che il file /etc/dasitbot.conf non sia stato eliminato!");
+         sendMes(msg_id, "Erorre nelle configurazione del Bot, non verrano apportate modifiche. \nAttenzione, assicurarsi che il file /etc/dasitbot.conf non sia stato eliminato!");
       }
 }
 
