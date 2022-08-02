@@ -243,7 +243,7 @@ function mySort(items) {
     var myArray = [];
     for(i in items){
         var tempString = items[i].split(".");
-        myArray.push(tempString[0]);
+        myArray.push(tempString);
     }
     myBubbleSort(myArray);
 }
