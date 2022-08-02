@@ -268,14 +268,11 @@ function myBubbleSort(items){
       for(i in items){
          streamOrd.write(items[i]+"\n");
       }
-      if(parseInt(items[7][0]) > parseInt(items[1][0])) {
-         streamOrd.write("Funziaaa:"+items[0][0]+"\n");
-      }
       streamOrd.end();
 
       //elimino tutte le macroversioni precedenti all'ultima
       for (var i = items.length - 2; i >= 0; i--){
-         if(Math.floor(items[i][0]) < Math.floor(items[items.length-1])){
+         if(parseInt(items[i][0]) < parseInt(items[items.length-1])){
             items.splice(i, 1);
          }
       }
