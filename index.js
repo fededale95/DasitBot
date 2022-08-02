@@ -212,12 +212,9 @@ function lastVersion(data){
                toCanc.push(i);
             }
       }
-      for(i in toCanc){
+
+      for (i=toCanc.lenght-1;i>=0;i--){
          myArray.splice(toCanc[i], 1);
-         j=i+1;
-         for(j in toCanc){
-            toCanc[j]=toCanc[j-1];
-         }
       }
 
       var stream = file_system.createWriteStream('/home/dms/debugLast.txt', {flags:'a'});
