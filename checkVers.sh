@@ -1,11 +1,10 @@
 #!/bin/bash
-ls -lt /mnt/nasCons/Nexus/DMSWEBSperimentali | grep dmsweb-x64 > vers.txt
-cut vers.txt -c 58-63 > lastVers.txt
-sed -n '1p' lastVers.txt > lastDMSWeb.txt
+ls -la /mnt/nasCons/Nexus/DMSWEBSperimentali | grep dmsweb-wa > vers.txt
+cut vers.txt -c 55-60 > lastVersWEB.txt
 rm vers.txt
-rm lastVers.txt
-ls -lt /mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA > vers.txt
-cut versCS.txt -c 63-66 > lastVersCS.txt
-sed -n '2p' lastVersCS.txt > lastDMSCS.txt
+ls -la /mnt/nasCons/Nexus/DMSCSSperimentali/DMSEMA > versCS.txt
+cut versCS.txt -c 44-50 > lastVersCS.txt
 rm versCS.txt
-rm lastVersCS.txt
+ls -la /mnt/nasCons/Nexus/DMSWEBSperimentali/ | grep dmsweb-doctor > versDoc.txt
+cut versDoc.txt -c 59-64 > lastVersDOC.txt
+rm versDoc.txt
