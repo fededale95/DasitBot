@@ -249,15 +249,6 @@ function lastVersion(data,type){  //type: 0=CS,  1=Web,  2=Doc
          }
       }
 
-      if(type==0){
-            var fsOrd = require('fs');
-            var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
-            streamOrd.write("myARRAY: \n\n");
-            for(i in myArray){
-               streamOrd.write(myArray[i]+"\n");
-            }
-      }
-
       var toCanc = [];
       for(i in myArray){
             if ( !(myArray[i].startsWith("0") || myArray[i].startsWith("1") || myArray[i].startsWith("2") || myArray[i].startsWith("3") || myArray[i].startsWith("4") || myArray[i].startsWith("5") || myArray[i].startsWith("6") || myArray[i].startsWith("7") || myArray[i].startsWith("8") || myArray[i].startsWith("9") )) {
@@ -270,14 +261,6 @@ function lastVersion(data,type){  //type: 0=CS,  1=Web,  2=Doc
          myArray.splice(toCanc[i], 1);
       }
 
-      if(type==0){
-         streamOrd.write("\n\ntoCanc: \n\n");
-         for(i in toCanc){
-            streamOrd.write(toCanc[i]+"\n");
-         }
-         stream1.end();
-      }
-
       lastVer = extractLast(myArray);
 
       return lastVer;
@@ -288,6 +271,15 @@ function extractLast(items) {
     for(i in items){
         var tempString = items[i].split(".");
         myArray.push(tempString);
+    }
+    if(type==0){
+          var fsOrd = require('fs');
+          var streamOrd = fsOrd.createWriteStream(homeFolder+'ord.txt', {flags:'w'});
+          streamOrd.write("myARRAY: \n\n");
+          for(i in myArray){
+             streamOrd.write(myArray[i]+"\n");
+          }
+          stream1.end();
     }
     myBubbleSort(myArray);
     ris = myArray[myArray.length-1][0]+"."+myArray[myArray.length-1][1]+"."+myArray[myArray.length-1][2];
