@@ -220,7 +220,7 @@ function lastVersionCS(data){
       var myData = data.split("\n");
       var myArray = [];
       for(i in myData){
-          var tempArray = data.split(" ");
+          var tempArray = myData[i].split(" ");
           myArray.push(tempArray[tempArray.length-1]);
       }
 
