@@ -261,12 +261,12 @@ function lastVersion(data,type){  //type: 0=CS,  1=Web,  2=Doc
          myArray.splice(toCanc[i], 1);
       }
 
-      lastVer = extractLast(myArray);
+      lastVer = extractLast(myArray,type);
 
       return lastVer;
 }
 
-function extractLast(items) {
+function extractLast(items,type) {
     var myArray = [];
     for(i in items){
         var tempString = items[i].split(".");
