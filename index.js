@@ -1,8 +1,29 @@
 /**
  * Librerie e variabili
  */
+//upload config from /etc/dasitbot.conf
+var useConf = true; //true = utilizza i config file, flase altrimenti
+uploadConfig();
+var botTokenConfFile;
+var homeFolder;
+var DMSWebFolder;
+var DMSDocFolder;
+var DMSCSFolder;
+var EasterEggPath;
 
- //superagent
+var fsConf = require('fs');
+var streamConf = fsConf.createWriteStream('/home/dms/verifyConf.txt', {flags:'a'});
+streamConf.write("--------Start--------\n");
+streamConf.write("botTokenConfFile = "+botTokenConfFile+"\n");
+streamConf.write("homeFolder = "+homeFolder+"\n");
+streamConf.write("DMSWebFolder = "+DMSWebFolder+"\n");
+streamConf.write("DMSDocFolder = "+DMSDocFolder+"\n");
+streamConf.write("DMSCSFolder = "+DMSCSFolder+"\n");
+streamConf.write("EasterEggPath = "+EasterEggPath+"\n");
+streamConf.write("--------End--------\n\n");
+streamConf.end();
+
+//superagent
 const   superagent      = require( 'superagent' );
 const   botToken        = '5403849384:AAGWMSWWzu-vPpMoXTohKl0xE_yCBoQXE2E';
 let     lastOffset      = 0;
@@ -227,5 +248,31 @@ function logNewVersion(newVersion, data, web){
       stream1.end();
 }
 
+function uploadConfig(){
+      try {
+         const fs = require('fs');
+         data = fs.readFileSync('/etc/dasitbot.conf', 'utf8');
+         var param = data.split("\n");
+         for(i in param){
+            temp = param[i].split("'");
+            val = temp[1];
+            if(param[i].startsWith("botToken")){
+                  botTokenConfFile=val;
+            } else if(param[i].startsWith("homeFolder")){
+                  homeFolder=val;
+            } else if(param[i].startsWith("DMSWebFolder")){
+                  DMSWebFolder=val;
+            } else if(param[i].startsWith("DMSDocFolder")){
+                  DMSDocFolder=val;
+            } else if(param[i].startsWith("DMSCSFolder")){
+                  DMSCSFolder=val;
+            } else if(param[i].startsWith("EasterEggPath")){
+                  EasterEggPath=val;
+            }
+         }
+      } catch (err) {
+         useConf=false;
+      }
+}
 // Avviamo la funzione che gira ogni 2 secondi e gestisce la ricezione dei messaggi e il controllo di versione
 requestUpdate();
