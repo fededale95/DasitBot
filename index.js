@@ -255,18 +255,18 @@ function lastVersionCS(data,cs){
          myArray.splice(toCanc[i], 1);
       }
 
-      lastVer = extractLast(myArray);
+      lastVer = extractLast(myArray,cs);
 
       return lastVer;
 }
 
-function extractLast(items) {
+function extractLast(items,cs) {
     var myArray = [];
     for(i in items){
         var tempString = items[i].split(".");
         myArray.push(tempString);
     }
-    myBubbleSort(myArray);
+    myBubbleSort(myArray,cs);
     ris = myArray[myArray.length-1][0]+"."+myArray[myArray.length-1][1]+"."+myArray[myArray.length-1][2];
     return ris;
 }
