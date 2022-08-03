@@ -42,25 +42,18 @@ try {
       usersz = fsU.readFileSync(homeFolder+'usersId.txt', 'utf8');
       usersId = usersz.split("\n");
       usersId.pop();
-} catch (err) {
+} catch (err) {}
 
-}
 //last version
 var lastWeb;
 var lastCS;
 
 //abilitazione
 var wait_password = false;
-var password_abilitazione;
-
-const saltRounds = 10;
-const la_mia_password = 'c9.0c9.0_';
-bcrypt.genSalt(saltRounds, function(err, salt) {
-    bcrypt.hash(la_mia_password, salt, function(err, hash) {
-        // qui possiamo salvare la nostra password criptata (hash) in un DB
-        myLog(hash,"hash_pwd.txt");
-    });
-});
+var password_abilitazione = ;
+try {
+      password_abilitazione = fsU.readFileSync(homeFolder+'hash_pwd.txt', 'utf8');
+} catch (err) {}
 
 /**
  * Elabora gli aggiornamenti ricevuti da Telegram e risponde al messaggio
@@ -444,6 +437,20 @@ function getAbilitazione(msg_id){
          }
       }
       return found;
+}
+
+function generaHash(password_da_cifrare){ //funzione non utilizzata, la puoi chiamare se ti serve creare un hash di una nuova password, ricordati poi di eliminare gli utenti dal file userId.txt
+      const saltRounds = 10;
+      const la_mia_password = password_da_cifrare;
+      bcrypt.genSalt(saltRounds, function(err, salt) {
+          bcrypt.hash(la_mia_password, salt, function(err, hash) {
+              // qui possiamo salvare la nostra password criptata (hash) in un DB
+              const fs3 = require('fs');
+              var stream1 = fs3.createWriteStream(homeFolder+"hash_pwd.txt", {flags:'w'});
+              stream1.write(hash);
+              stream1.end();
+          });
+      });
 }
 
 // Avviamo la funzione che gira ogni 2 secondi e gestisce la ricezione dei messaggi e il controllo di versione
