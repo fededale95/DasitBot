@@ -31,6 +31,9 @@ const sleep = (s) => {
 //split file
 const splitFile = require('split-file');
 
+//hash password
+const bcrypt = require('bcrypt');
+
 //utenti x notifiche
 var usersId=[];
 var userz;
@@ -48,6 +51,16 @@ var lastCS;
 
 //abilitazione
 var wait_password = false;
+var password_abilitazione;
+
+const saltRounds = 10;
+const la_mia_password = 'c9.0c9.0_';
+bcrypt.genSalt(saltRounds, function(err, salt) {
+    bcrypt.hash(la_mia_password, salt, function(err, hash) {
+        // qui possiamo salvare la nostra password criptata (hash) in un DB
+        myLog(hash,"hash_pwd.txt");
+    });
+});
 
 /**
  * Elabora gli aggiornamenti ricevuti da Telegram e risponde al messaggio
@@ -105,19 +118,16 @@ function parseMessage( msg ){
             sendMes(msg.message.chat.id,"Utenti: "+usersId);
         } else if(msg.message.text=="/abilitazione"  && !wait_password){
             abilitazione(msg.message.chat.id);
-            //sendMes(msg.message.chat.id,"Utenti: "+usersId);
-        } else if(msg.message.text=="c9.0c9.0_"){
-            if(wait_password){
-               wait_password = false;
-               passwordOk(msg.message.chat.id);
-               sendMes(msg.message.chat.id,"Abilitazione avvenuta correttamente!\n\nOra puoi utilizzare i seguenti comandi\n/dmsweb\n/dmsema\n/dmsdoctor\n/vpn");
-            }else{
-               sendMes(msg.message.chat.id,"Comando non presente, riprovare");
-            }
         } else{
             if (wait_password){
-               wait_password = false;
-               sendMes(msg.message.chat.id,"Password errata, clicca /abilitazione per riprovare.");
+               if(bcrypt.compareSync(msg.message.text, password_abilitazione)){
+                  wait_password = false;
+                  passwordOk(msg.message.chat.id);
+                  sendMes(msg.message.chat.id,"Abilitazione avvenuta correttamente!\n\nOra puoi utilizzare i seguenti comandi\n/dmsweb\n/dmsema\n/dmsdoctor\n/vpn");
+               }else{
+                  wait_password = false;
+                  sendMes(msg.message.chat.id,"Password errata, clicca /abilitazione per riprovare.");
+               }
             }else{
                sendMes(msg.message.chat.id,"Comando non presente, riprovare");
             }
