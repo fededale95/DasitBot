@@ -55,6 +55,7 @@ try {
       password_abilitazione = fsU.readFileSync(homeFolder+'hash_pwd.txt', 'utf8');
 } catch (err) {}
 
+myLog(password_abilitazione, "tempFede.txt")
 /**
  * Elabora gli aggiornamenti ricevuti da Telegram e risponde al messaggio
  * ricevuto
