@@ -34,7 +34,7 @@ const splitFile = require('split-file');
 //hash password
 const bcrypt = require('bcrypt');
 
-myLog(getData(),"data.txt");
+myLog("BOT START:\n"+getData(),"data.txt");
 
 //utenti x notifiche
 var usersId=[];
