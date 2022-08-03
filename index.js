@@ -99,6 +99,7 @@ function parseMessage( msg ){
             //sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.\nClicca /abilitazione per richiedere i permessi per tutti i comandi.");
             client
             .sendMessage(msg.message.chat.id, "Prova: ")
+            .getUpdates()
             .promise()
             .then(function(response){
                myLog("OK","logPwd.txt");
