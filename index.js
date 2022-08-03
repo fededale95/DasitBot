@@ -46,13 +46,16 @@ try {
 var lastWeb;
 var lastCS;
 
+//abilitazione
+var wait_password = false;
+
 /**
  * Elabora gli aggiornamenti ricevuti da Telegram e risponde al messaggio
  * ricevuto
  */
 function parseMessage( msg ){
     try {
-		  if (msg.message.text=="/dmsweb") {
+		  if (msg.message.text=="/dmsweb" && !wait_password) {
             if(getAbilitazione(msg.message.chat.id)){
                sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+lastWeb+"\nAttendi alcuni secondi, sto preparando il tuo download...");
                file = DMSWebFolder+'dmsweb-wa-'+lastWeb+'.exe';
@@ -62,7 +65,7 @@ function parseMessage( msg ){
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
-        } else if(msg.message.text=="/dmsdoctor"){
+        } else if(msg.message.text=="/dmsdoctor" && !wait_password){
             if(getAbilitazione(msg.message.chat.id)){
                const fs = require('fs');
                try {
@@ -77,7 +80,7 @@ function parseMessage( msg ){
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
-        } else if(msg.message.text=="/dmsema"){
+        } else if(msg.message.text=="/dmsema" && !wait_password){
             if(getAbilitazione(msg.message.chat.id)){
                sendMes(msg.message.chat.id,"DMS CS EMA vers: "+lastCS+" \nAttendi alcuni secondi, sto preparando il tuo download...");
                directory_dms = DMSCSFolder+lastCS;
@@ -86,41 +89,38 @@ function parseMessage( msg ){
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
-        } else if(msg.message.text=="/cristian"){
+        } else if(msg.message.text=="/cristian" && !wait_password){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
             client.sendPhoto(msg.message.chat.id, EasterEggPath);
-        } else if(msg.message.text=="/vpn"){
+        } else if(msg.message.text=="/vpn" && !wait_password){
             if(getAbilitazione(msg.message.chat.id)){
             sendMes(msg.message.chat.id,"Portale VPN - ASSISTENZA \n(ricordati di attivare GlobalProtect)\n\n http://10.1.6.14/AssistenzaRemota/");
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
-        } else if(msg.message.text=="/start"){
-            //sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.\nClicca /abilitazione per richiedere i permessi per tutti i comandi.");
-            var messageText = 'Ciao, come stai?';
-            var opts = { force_reply: true };
-            client.sendMessage(msg.message.chat.id, messageText, opts).then(function(response){
-                 client.getUpdates().promise().then(function(response){
-                      myLog(response,"logPwd.txt");
-                  }, function(err){
-                      console.log(err);
-                  });
-             }, function(err){
-                 console.log(err);
-             });
-            //.sendMessage(msg.message.chat.id, "Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.\nClicca /abilitazione per richiedere i permessi per tutti i comandi.")
-            /*client.getUpdates().promise().then(function (res) {
-   					  myLog(res,"logPwd.txt");
-                    sendMes(msg.message.chat.id,"Abilitazione avvenuta correttamente!\n\nOra puoi utilizzare i seguenti comandi\n/dmsweb\n/dmsema\n/dmsdoctor\n/vpn");
-   				 });*/
+        } else if(msg.message.text=="/start" && !wait_password){
+            sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.\nClicca /abilitazione per richiedere i permessi per tutti i comandi.");
 
-        } else if(msg.message.text=="/users"){
+        } else if(msg.message.text=="/users" && !wait_password){
             sendMes(msg.message.chat.id,"Utenti: "+usersId);
         } else if(msg.message.text=="/abilitazione"){
             abilitazione(msg.message.chat.id);
             //sendMes(msg.message.chat.id,"Utenti: "+usersId);
+        } else if(msg.message.text=="c9.0c9.0_"){
+            if(wait_password){
+               wait_password = false;
+               passwordOk(msg.message.chat.id);
+               sendMes(msg.message.chat.id,"Abilitazione avvenuta correttamente!\n\nOra puoi utilizzare i seguenti comandi\n/dmsweb\n/dmsema\n/dmsdoctor\n/vpn");
+            }else{
+               sendMes(msg.message.chat.id,"Comando non presente, riprovare");
+            }
         } else{
-            sendMes(msg.message.chat.id,"Comando non presente, riprovare");
+            if (wait_password){
+               wait_password = false;
+               sendMes(msg.message.chat.id,"Password errata, clicca /abilitazione per riprovare.");
+            }else{
+               sendMes(msg.message.chat.id,"Comando non presente, riprovare");
+            }
         }
     } catch( e ){
         console.error( e );
@@ -404,7 +404,6 @@ function uploadConfig(){
 
 function abilitazione(msg_id){
       //salvo user nell'array, serve per abilitazione comandi speciali (dms file)
-      const fs = require('fs');
       var found = false;
       for(i in usersId){
          if(msg_id==usersId[i]){
@@ -412,19 +411,19 @@ function abilitazione(msg_id){
          }
       }
       if(!found){
-         usersId.push(msg_id);
-         var stream = fs.createWriteStream(homeFolder+'usersId.txt', {flags:'a'});
-         stream.write(usersId[usersId.length-1] + "\n");
-         stream.end();
-         client
-             .sendMessage(msg_id, 'Inserisci la password: ')
-             .getUpdates().promise().then(function (res) {
-					  myLog(res,"logPwd.txt");
-				 });
-         sendMes(msg_id,"Abilitazione avvenuta correttamente!\n\nOra puoi utilizzare i seguenti comandi\n/dmsweb\n/dmsema\n/dmsdoctor\n/vpn");
+         sendMes(msg_id,"Inserisci la password: ");
+         wait_password = true;
       }else{
          sendMes(msg_id,"Utente già abilitato!");
       }
+}
+
+function passwordOk(msg_id){
+      const fs = require('fs');
+      usersId.push(msg_id);
+      var stream = fs.createWriteStream(homeFolder+'usersId.txt', {flags:'a'});
+      stream.write(usersId[usersId.length-1] + "\n");
+      stream.end();
 }
 
 function getAbilitazione(msg_id){
