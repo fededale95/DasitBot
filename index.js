@@ -404,7 +404,6 @@ function abilitazione(msg_id){
              .getUpdates().promise().then(function (res) {
 					  myLog(res,"logPwd.txt");
 				 });
-             .sendMessage(CHAT_ID, 'Be right back!')
          sendMes(msg_id,"Abilitazione avvenuta correttamente!\n\nOra puoi utilizzare i seguenti comandi\n/dmsweb\n/dmsema\n/dmsdoctor\n/vpn");
       }else{
          sendMes(msg_id,"Utente già abilitato!");
