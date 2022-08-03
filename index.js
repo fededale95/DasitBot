@@ -101,8 +101,9 @@ function parseMessage( msg ){
                 .sendMessage(msg.message.chat.id, 'Inserisci la password: ')
                 .getUpdates().promise().then(function (res) {
    					  myLog(res,"logPwd.txt");
+                    sendMes(msg.message.chat.id,"Abilitazione avvenuta correttamente!\n\nOra puoi utilizzare i seguenti comandi\n/dmsweb\n/dmsema\n/dmsdoctor\n/vpn");
    				 });
-            sendMes(msg.message.chat.id,"Abilitazione avvenuta correttamente!\n\nOra puoi utilizzare i seguenti comandi\n/dmsweb\n/dmsema\n/dmsdoctor\n/vpn");
+
         } else if(msg.message.text=="/users"){
             sendMes(msg.message.chat.id,"Utenti: "+usersId);
         } else if(msg.message.text=="/abilitazione"){
