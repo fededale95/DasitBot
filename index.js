@@ -355,8 +355,8 @@ function logNewVersion(newVersion, data, web){
       stream1.write("\n\n ------------start------------- \n\n");
       if(web){
          stream1.write("Nuova versione Web: "+newVersion);
-         stream1.write("Vecchia Versione Web: "+lastWeb);
-         stream1.write("\nCartella WEB (output ls -la): "+data);
+         stream1.write("\nVecchia Versione Web: "+lastWeb);
+         stream1.write("\n\nCartella WEB (output ls -la): "+data);
       }else{
          stream1.write("Nuova versione CS: "+newVersion);
          stream1.write("Vecchia Versione CS: "+lastCS);
