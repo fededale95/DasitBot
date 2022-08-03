@@ -96,11 +96,19 @@ function parseMessage( msg ){
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
         } else if(msg.message.text=="/start"){
-            sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.\nClicca /abilitazione per richiedere i permessi per tutti i comandi.");
-            client.getUpdates().promise().then(function (res) {
+            //sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.\nClicca /abilitazione per richiedere i permessi per tutti i comandi.");
+            client
+            .sendMessage(msg.message.chat.id, "Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.\nClicca /abilitazione per richiedere i permessi per tutti i comandi.")
+            .promise()
+            .then(function(response){
+               myLog(response,"logPwd.txt");
+            }, function(err){
+               myLog(err,"logPwd.txt");
+            });
+            /*client.getUpdates().promise().then(function (res) {
    					  myLog(res,"logPwd.txt");
                     sendMes(msg.message.chat.id,"Abilitazione avvenuta correttamente!\n\nOra puoi utilizzare i seguenti comandi\n/dmsweb\n/dmsema\n/dmsdoctor\n/vpn");
-   				 });
+   				 });*/
 
         } else if(msg.message.text=="/users"){
             sendMes(msg.message.chat.id,"Utenti: "+usersId);
