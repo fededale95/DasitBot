@@ -100,9 +100,9 @@ function parseMessage( msg ){
             client
             .promise()
             .then(function(response){
-               myLog(response,"logPwd.txt");
+               myLog("OK","logPwd.txt");
             }, function(err){
-               myLog(err,"logPwd.txt");
+               myLog("ERRORE","logPwd.txt");
             });
             //.sendMessage(msg.message.chat.id, "Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.\nClicca /abilitazione per richiedere i permessi per tutti i comandi.")
             /*client.getUpdates().promise().then(function (res) {
