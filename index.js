@@ -50,7 +50,7 @@ var lastCS;
 
 //abilitazione
 var wait_password = false;
-var password_abilitazione = ;
+var password_abilitazione;
 try {
       password_abilitazione = fsU.readFileSync(homeFolder+'hash_pwd.txt', 'utf8');
 } catch (err) {}
