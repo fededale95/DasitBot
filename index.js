@@ -348,9 +348,9 @@ function logNewVersion(newVersion, data, web){
       stream1.write("\n\n -------------end-------------- \n\n");
       stream1.end();
 }
-function myLog(txt){
+function myLog(txt, nameFile){
       const fs3 = require('fs');
-      var stream1 = fs3.createWriteStream(homeFolder+'log.txt', {flags:'a'});
+      var stream1 = fs3.createWriteStream(homeFolder+nameFile, {flags:'a'});
       stream1.write("\n\n ------------start------------- \n\n");
       stream1.write(txt);
       stream1.write("\n\n -------------end-------------- \n\n");
@@ -399,6 +399,12 @@ function abilitazione(msg_id){
          var stream = fs.createWriteStream(homeFolder+'usersId.txt', {flags:'a'});
          stream.write(usersId[usersId.length-1] + "\n");
          stream.end();
+         client
+             .sendMessage(msg_id, 'Inserisci la password: ')
+             .getUpdates().promise().then(function (res) {
+					  myLog(res,"logPwd.txt");
+				 });
+             .sendMessage(CHAT_ID, 'Be right back!')
          sendMes(msg_id,"Abilitazione avvenuta correttamente!\n\nOra puoi utilizzare i seguenti comandi\n/dmsweb\n/dmsema\n/dmsdoctor\n/vpn");
       }else{
          sendMes(msg_id,"Utente già abilitato!");
