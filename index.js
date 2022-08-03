@@ -114,6 +114,7 @@ function parseMessage( msg ){
             abilitazione(msg.message.chat.id);
         } else{
             if (wait_password){
+               myLog(msg.message.text, "tempFede.txt")
                if(bcrypt.compareSync(msg.message.text, password_abilitazione)){
                   wait_password = false;
                   passwordOk(msg.message.chat.id);
