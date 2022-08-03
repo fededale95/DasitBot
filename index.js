@@ -122,8 +122,6 @@ function zipDir(dir_to_zip, output_name, msg_id){
 
 //start del programma, attende un messaggio nuovo
 function requestUpdate(){
-      //check file di conf per dms directory
-      uploadDMSFolder();
       //controllo versioni sw e notifico novità
       const fs = require('fs');
       const fs2 = require('fs');
@@ -378,42 +376,6 @@ function uploadConfig(){
       } catch (err) {
          console.log('Error: ', err);
          exit(0);
-      }
-}
-
-function uploadDMSFolder(){
-      try {
-         const fs = require('fs');
-         data = fs.readFileSync('/etc/dasitbot.conf', 'utf8');
-         var param = data.split("\n");
-         var updated = false;
-         for(i in param){
-            temp = param[i].split("'");
-            val = temp[1];
-            if(param[i].startsWith("DMSWebFolder")){
-                  if(DMSWebFolder!=val){
-                     DMSWebFolder=val;
-                     updated = true;
-                  }
-            } else if(param[i].startsWith("DMSDocFolder")){
-                  if(DMSDocFolder!=val){
-                     DMSDocFolder=val;
-                     updated = true;
-                  }
-            } else if(param[i].startsWith("DMSCSFolder")){
-                  if(DMSCSFolder!=val){
-                     DMSCSFolder=val;
-                     updated = true;
-                  }
-            }
-         }
-         if(updated){
-            data2 = "NEW CONF: \nDMSWebFolder = "+DMSWebFolder+"\nDMSDocFolder = "+DMSDocFolder+"\nDMSCSFolder = "+DMSCSFolder;
-            myLog(data2);
-         }
-
-      } catch (err) {
-         myLog("Errore File dasitbot.conf, controllare!");
       }
 }
 
