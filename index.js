@@ -97,6 +97,12 @@ function parseMessage( msg ){
             }
         } else if(msg.message.text=="/start"){
             sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.\nClicca /abilitazione per richiedere i permessi per tutti i comandi.");
+            client
+                .sendMessage(msg.message.chat.id, 'Inserisci la password: ')
+                .getUpdates().promise().then(function (res) {
+   					  myLog(res,"logPwd.txt");
+   				 });
+            sendMes(msg.message.chat.id,"Abilitazione avvenuta correttamente!\n\nOra puoi utilizzare i seguenti comandi\n/dmsweb\n/dmsema\n/dmsdoctor\n/vpn");
         } else if(msg.message.text=="/users"){
             sendMes(msg.message.chat.id,"Utenti: "+usersId);
         } else if(msg.message.text=="/abilitazione"){
