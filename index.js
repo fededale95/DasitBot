@@ -458,7 +458,7 @@ function generaHash(password_da_cifrare){ //funzione non utilizzata, la puoi chi
 
 function getData(){
       const d = new Date();
-      return "Data: "+d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear()+"\nOra: "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+      return "Data: "+d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()+"\nOra: "+(d.getHours()+2)+":"+d.getMinutes()+":"+d.getSeconds();
 }
 
 // Avviamo la funzione che gira ogni 2 secondi e gestisce la ricezione dei messaggi e il controllo di versione
