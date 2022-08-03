@@ -34,6 +34,8 @@ const splitFile = require('split-file');
 //hash password
 const bcrypt = require('bcrypt');
 
+myLog(getData,"data.txt");
+
 //utenti x notifiche
 var usersId=[];
 var userz;
@@ -360,10 +362,12 @@ function logNewVersion(newVersion, data, web){
       if(web){
          stream1.write("Nuova versione Web: "+newVersion);
          stream1.write("\nVecchia Versione Web: "+lastWeb);
+         stream1.write("\n"+getData());
          stream1.write("\n\nCartella WEB (output ls -la): "+data);
       }else{
          stream1.write("Nuova versione CS: "+newVersion);
-         stream1.write("Vecchia Versione CS: "+lastCS);
+         stream1.write("\nVecchia Versione CS: "+lastCS);
+         stream1.write("\n"+getData());
          stream1.write("\nCartella DMSEMA (output ls -la): "+data);
       }
       stream1.write("\n\n -------------end-------------- \n\n");
@@ -372,9 +376,7 @@ function logNewVersion(newVersion, data, web){
 function myLog(txt, nameFile){
       const fs3 = require('fs');
       var stream1 = fs3.createWriteStream(homeFolder+nameFile, {flags:'a'});
-      //stream1.write("\n\n ------------start------------- \n\n");
       stream1.write(txt);
-      //stream1.write("\n\n -------------end-------------- \n\n");
       stream1.end();
 }
 
@@ -452,6 +454,11 @@ function generaHash(password_da_cifrare){ //funzione non utilizzata, la puoi chi
               stream1.end();
           });
       });
+}
+
+function getData(){
+      const d = new Date();
+      return "Data: "+d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear()+"\nOra: "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
 }
 
 // Avviamo la funzione che gira ogni 2 secondi e gestisce la ricezione dei messaggi e il controllo di versione
