@@ -56,7 +56,6 @@ try {
       password_abilitazione = password_abilitazione.substring(0, password_abilitazione.length - 1);
 } catch (err) {}
 
-myLog(password_abilitazione, "tempFede.txt")
 /**
  * Elabora gli aggiornamenti ricevuti da Telegram e risponde al messaggio
  * ricevuto
@@ -115,7 +114,6 @@ function parseMessage( msg ){
             abilitazione(msg.message.chat.id);
         } else{
             if (wait_password){
-               myLog(msg.message.text, "tempFede.txt")
                if(bcrypt.compareSync(msg.message.text, password_abilitazione)){
                   wait_password = false;
                   passwordOk(msg.message.chat.id);
