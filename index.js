@@ -373,9 +373,9 @@ function logNewVersion(newVersion, data, web){
 function myLog(txt, nameFile){
       const fs3 = require('fs');
       var stream1 = fs3.createWriteStream(homeFolder+nameFile, {flags:'a'});
-      stream1.write("\n\n ------------start------------- \n\n");
+      //stream1.write("\n\n ------------start------------- \n\n");
       stream1.write(txt);
-      stream1.write("\n\n -------------end-------------- \n\n");
+      //stream1.write("\n\n -------------end-------------- \n\n");
       stream1.end();
 }
 
