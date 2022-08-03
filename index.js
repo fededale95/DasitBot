@@ -53,36 +53,55 @@ var lastCS;
 function parseMessage( msg ){
     try {
 		  if (msg.message.text=="/dmsweb") {
-            sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+lastWeb+"\nAttendi alcuni secondi, sto preparando il tuo download...");
-            file = DMSWebFolder+'dmsweb-wa-'+lastWeb+'.exe';
-            fileName = 'dmsweb-wa-'+lastWeb+'.exe';
-            output_zip = homeFolder+'DMSWeb'+lastWeb+'.zip';
-            zipFile(file, fileName, output_zip, msg.message.chat.id);
+            if(getAbilitazione(msg.message.chat.id)){
+               sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+lastWeb+"\nAttendi alcuni secondi, sto preparando il tuo download...");
+               file = DMSWebFolder+'dmsweb-wa-'+lastWeb+'.exe';
+               fileName = 'dmsweb-wa-'+lastWeb+'.exe';
+               output_zip = homeFolder+'DMSWeb'+lastWeb+'.zip';
+               zipFile(file, fileName, output_zip, msg.message.chat.id);
+            } else{
+               sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
+            }
         } else if(msg.message.text=="/dmsdoctor"){
-            const fs = require('fs');
-            try {
-               data = fs.readFileSync(homeFolder+'versDoc.txt', 'utf8');
-               last=lastVersion(data,2);
-               sendMes(msg.message.chat.id,"DMS Doctor vers: "+last+"\nAttendi alcuni secondi, sto preparando il tuo download...");
-               file = DMSDocFolder+'dmsweb-doctor-'+last+'.exe';
-               client.sendDocument(msg.message.chat.id, file);
-            } catch (err) {
-              console.error(err);
+            if(getAbilitazione(msg.message.chat.id)){
+               const fs = require('fs');
+               try {
+                  data = fs.readFileSync(homeFolder+'versDoc.txt', 'utf8');
+                  last=lastVersion(data,2);
+                  sendMes(msg.message.chat.id,"DMS Doctor vers: "+last+"\nAttendi alcuni secondi, sto preparando il tuo download...");
+                  file = DMSDocFolder+'dmsweb-doctor-'+last+'.exe';
+                  client.sendDocument(msg.message.chat.id, file);
+               } catch (err) {
+                 console.error(err);
+               }
+            } else{
+               sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
         } else if(msg.message.text=="/dmsema"){
-            sendMes(msg.message.chat.id,"DMS CS EMA vers: "+lastCS+" \nAttendi alcuni secondi, sto preparando il tuo download...");
-            directory_dms = DMSCSFolder+lastCS;
-            output_zip = homeFolder+'DMSEMA.zip';
-            zipDir(directory_dms, output_zip, msg.message.chat.id);
+            if(getAbilitazione(msg.message.chat.id)){
+               sendMes(msg.message.chat.id,"DMS CS EMA vers: "+lastCS+" \nAttendi alcuni secondi, sto preparando il tuo download...");
+               directory_dms = DMSCSFolder+lastCS;
+               output_zip = homeFolder+'DMSEMA.zip';
+               zipDir(directory_dms, output_zip, msg.message.chat.id);
+            } else{
+               sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
+            }
         } else if(msg.message.text=="/cristian"){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
             client.sendPhoto(msg.message.chat.id, EasterEggPath);
         } else if(msg.message.text=="/vpn"){
+            if(getAbilitazione(msg.message.chat.id)){
             sendMes(msg.message.chat.id,"Portale VPN - ASSISTENZA \n(ricordati di attivare GlobalProtect)\n\n http://10.1.6.14/AssistenzaRemota/");
+            } else{
+               sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
+            }
         } else if(msg.message.text=="/start"){
-            sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.");
+            sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.\nClicca /abilitazione per richiedere i permessi per tutti i comandi.");
         } else if(msg.message.text=="/users"){
             sendMes(msg.message.chat.id,"Utenti: "+usersId);
+        } else if(msg.message.text=="/abilitazione"){
+            abilitazione(msg.message.chat.id);
+            //sendMes(msg.message.chat.id,"Utenti: "+usersId);
         } else{
             sendMes(msg.message.chat.id,"Comando non presente, riprovare");
         }
@@ -161,19 +180,6 @@ function requestUpdate(){
                 msg.body.result.map( inputMessage => {
                     // Aggiorniamo l'offset con l'ultimo messaggio ricevuto
                     lastOffset = inputMessage.update_id +1;
-                    //salvo chi ha parlato con me
-                    var found = false;
-                    for(i in usersId){
-                       if(inputMessage.message.chat.id==usersId[i]){
-                          found = true;
-                       }
-                    }
-                    if(!found){
-                       usersId.push(inputMessage.message.chat.id);
-                       var stream = fs.createWriteStream(homeFolder+'usersId.txt', {flags:'a'});
-                       stream.write(usersId[usersId.length-1] + "\n");
-                       stream.end();
-                    }
                     // Elaboriamo il testo ricevuto
                     parseMessage( inputMessage );
                 });
@@ -377,6 +383,36 @@ function uploadConfig(){
          console.log('Error: ', err);
          exit(0);
       }
+}
+
+function abilitazione(msg_id){
+      //salvo user nell'array, serve per abilitazione comandi speciali (dms file)
+      const fs = require('fs');
+      var found = false;
+      for(i in usersId){
+         if(msg_id==usersId[i]){
+           found = true;
+         }
+      }
+      if(!found){
+         usersId.push(msg_id);
+         var stream = fs.createWriteStream(homeFolder+'usersId.txt', {flags:'a'});
+         stream.write(usersId[usersId.length-1] + "\n");
+         stream.end();
+         sendMes(msg_id,"Abilitazione avvenuta correttamente!\n\nOra puoi utilizzare i seguenti comandi\n/dmsweb\n/dmsema\n/dmsdoctor\n/vpn");
+      }else{
+         sendMes(msg_id,"Utente già abilitato!");
+      }
+}
+
+function getAbilitazione(msg_id){
+      var found = false;
+      for(i in usersId){
+         if(msg_id==usersId[i]){
+           found = true;
+         }
+      }
+      return found;
 }
 
 // Avviamo la funzione che gira ogni 2 secondi e gestisce la ricezione dei messaggi e il controllo di versione
