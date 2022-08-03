@@ -97,15 +97,9 @@ function parseMessage( msg ){
             }
         } else if(msg.message.text=="/start"){
             //sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.\nClicca /abilitazione per richiedere i permessi per tutti i comandi.");
-            client
-            .sendMessage(msg.message.chat.id, "Prova: ")
-            .getUpdates()
-            .promise()
-            .then(function(response){
-               myLog("OK","logPwd.txt");
-            }, function(err){
-               myLog("ERRORE","logPwd.txt");
-            });
+            var messageText = 'Ciao, come stai?';
+            var opts = { force_reply: true };
+            client.sendMessage(msg.message.chat.id, messageText, opts).then(reply => myLog(reply,"logPwd.txt"));
             //.sendMessage(msg.message.chat.id, "Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.\nClicca /abilitazione per richiedere i permessi per tutti i comandi.")
             /*client.getUpdates().promise().then(function (res) {
    					  myLog(res,"logPwd.txt");
