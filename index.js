@@ -53,6 +53,7 @@ var wait_password = false;
 var password_abilitazione;
 try {
       password_abilitazione = fsU.readFileSync(homeFolder+'hash_pwd.txt', 'utf8');
+      password_abilitazione = password_abilitazione.substring(0, password_abilitazione.length - 1);
 } catch (err) {}
 
 myLog(password_abilitazione, "tempFede.txt")
