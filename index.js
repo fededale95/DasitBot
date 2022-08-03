@@ -103,7 +103,7 @@ function parseMessage( msg ){
 
         } else if(msg.message.text=="/users" && !wait_password){
             sendMes(msg.message.chat.id,"Utenti: "+usersId);
-        } else if(msg.message.text=="/abilitazione"){
+        } else if(msg.message.text=="/abilitazione"  && !wait_password){
             abilitazione(msg.message.chat.id);
             //sendMes(msg.message.chat.id,"Utenti: "+usersId);
         } else if(msg.message.text=="c9.0c9.0_"){
