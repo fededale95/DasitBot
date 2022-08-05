@@ -112,10 +112,10 @@ function parseMessage( msg ){
 
         } else if(msg.message.text=="/users" && !wait_password){
             var chatUsers = "";
-            for(i in usersId){
+            /*for(i in usersId){
                chatUsers+=client.getChat(usersId[i]);
-            }
-            sendMes(msg.message.chat.id,"Utenti: "+chatUsers);
+            }*/
+            sendMes(msg.message.chat.id,"Utenti: "+client.getChat(usersId[0]);
         } else if(msg.message.text=="/abilitazione"  && !wait_password){
             abilitazione(msg.message.chat.id);
         } else{
