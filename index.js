@@ -112,8 +112,8 @@ function parseMessage( msg ){
 
         } else if(msg.message.text=="/users" && !wait_password){
             var chatUsers = "";
-            for(i in userId){
-               chatUsers+=client.getChat(userId[i]);
+            for(i in usersId){
+               chatUsers+=client.getChat(usersId[i]);
             }
             sendMes(msg.message.chat.id,"Utenti: "+chatUsers);
         } else if(msg.message.text=="/abilitazione"  && !wait_password){
