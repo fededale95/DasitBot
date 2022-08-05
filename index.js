@@ -111,11 +111,7 @@ function parseMessage( msg ){
             sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.\nClicca /abilitazione per richiedere i permessi per tutti i comandi.");
 
         } else if(msg.message.text=="/users" && !wait_password){
-            var chatUsers = client.getChatMembersCount(usersId[0]);
-            /*for(i in usersId){
-               chatUsers+=client.getChat(usersId[i]);
-            }*/
-            sendMes(msg.message.chat.id,"Utente: "+chatUsers);
+            sendMes(msg.message.chat.id,"Utenti: "+usersId);
         } else if(msg.message.text=="/abilitazione"  && !wait_password){
             abilitazione(msg.message.chat.id);
         } else{
