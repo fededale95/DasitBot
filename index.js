@@ -115,7 +115,7 @@ function parseMessage( msg ){
             /*for(i in usersId){
                chatUsers+=client.getChat(usersId[i]);
             }*/
-            sendMes(msg.message.chat.id,"Utenti: "+client.getChat(usersId[0]));
+            sendMes(msg.message.chat.id,"Utente: "+client.getChat(usersId[0].username+" Nome: "+client.getChat(usersId[0].first_name+" Cognome: "+client.getChat(usersId[0].last_name));
         } else if(msg.message.text=="/abilitazione"  && !wait_password){
             abilitazione(msg.message.chat.id);
         } else{
