@@ -125,7 +125,7 @@ function parseMessage( msg ){
             msglenovo+= "    e. Core C6 = Disabilitato\n";
             msglenovo+= "    f. Prestazioni della CPU e distorsione energetica = disabilitato\n";
             msglenovo+= "    g. Profilo termico = Prestazioni massime\n";
-            msglenovo+= "    h. Risparmio energetico della memoria = Disabilitato\n";
+            msglenovo+= "    h. Risparmio energetico della memoria = Disabilitato\n\n";
             msglenovo+= "Premere F10 per salvare e ripristinare. Selezionare Sì quando viene richiesto di confermare.\n";
             msglenovo+= "Il server ora si riavvierà.\n";
             sendMes(msg.message.chat.id,msglenovo);
