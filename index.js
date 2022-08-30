@@ -110,6 +110,26 @@ function parseMessage( msg ){
         } else if(msg.message.text=="/start" && !wait_password){
             sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.\nClicca /abilitazione per richiedere i permessi per tutti i comandi.");
 
+        } else if(msg.message.text=="/lenovo" && !wait_password){
+            msglenovo = "Ottimizzazione settings LENOVO TD350 per ESXi:\n";
+            msglenovo+= "Accendi il server.\n";
+            msglenovo+= "Premere F1 e accedere alla configurazione del BIOS\n";
+            msglenovo+= "Dalla schermata di configurazione principale, premere il tasto freccia destra per accedere alla scheda Impostazioni avanzate\n";
+            msglenovo+= "Seleziona Impostazioni di alimentazione avanzate\n";
+            msglenovo+= "Seleziona Profilo prestazioni e seleziona Custom\n";
+            msglenovo+= "Modificare le seguenti opzioni come segue:\n";"
+            msglenovo+= "a. Tecnologia avanzata Intel SpeedStep = Abilitato\n";
+            msglenovo+= "b. Modalità Turbo = Abilitato\n";
+            msglenovo+= "c. Supporto C1E = Disabilitato\n";
+            msglenovo+= "d. Core C3 = Disabilitato\n";
+            msglenovo+= "e. Core C6 = Disabilitato\n";
+            msglenovo+= "f. Prestazioni della CPU e distorsione energetica = disabilitato\n";
+            msglenovo+= "g. Profilo termico = Prestazioni massime\n";
+            msglenovo+= "h. Risparmio energetico della memoria = Disabilitato\n";
+            msglenovo+= "Premere F10 per salvare e ripristinare. Selezionare Sì quando viene richiesto di confermare.\n";
+            msglenovo+= "Il server ora si riavvierà.\n";
+            sendMes(msg.message.chat.id,msglenovo);
+
         } else if(msg.message.text=="/users" && !wait_password){
             sendMes(msg.message.chat.id,"Utenti: "+usersId);
         } else if(msg.message.text=="/abilitazione"  && !wait_password){
