@@ -117,7 +117,7 @@ function parseMessage( msg ){
             msglenovo+= "Dalla schermata di configurazione principale, premere il tasto freccia destra per accedere alla scheda Impostazioni avanzate\n";
             msglenovo+= "Seleziona Impostazioni di alimentazione avanzate\n";
             msglenovo+= "Seleziona Profilo prestazioni e seleziona Custom\n";
-            msglenovo+= "Modificare le seguenti opzioni come segue:\n";"
+            msglenovo+= "Modificare le seguenti opzioni come segue:\n";
             msglenovo+= "a. Tecnologia avanzata Intel SpeedStep = Abilitato\n";
             msglenovo+= "b. Modalità Turbo = Abilitato\n";
             msglenovo+= "c. Supporto C1E = Disabilitato\n";
