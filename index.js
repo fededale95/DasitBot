@@ -132,7 +132,7 @@ function parseMessage( msg ){
 
         } else if(msg.message.text=="/users" && !wait_password){
             sendMes(msg.message.chat.id,"Utenti: "+usersId);
-        } else if(msg.message.text=="/start" && !wait_password){
+        } else if(msg.message.text=="/testnotify" && !wait_password){
             testNotify();
         } else if(msg.message.text=="/abilitazione"  && !wait_password){
             abilitazione(msg.message.chat.id);
