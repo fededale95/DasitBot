@@ -492,7 +492,7 @@ function testNotify(){
             var stream2 = fs4.createWriteStream(homeFolder+"usersIdError.txt", {flags:'w'});
             stream2.write("ERRORE"+usersId[i]);
             stream2.end();
-            toCanc.push(i);
+            toCanc.push(userId[i]);
          });
       }
       for (var i = toCanc.length - 1; i >= 0; i--){
