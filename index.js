@@ -130,8 +130,8 @@ function parseMessage( msg ){
             msglenovo+= "Il server ora si riavvierà.\n";
             sendMes(msg.message.chat.id,msglenovo);
 
-        } else if(msg.message.text=="/users" && !wait_password){
-            sendMes(msg.message.chat.id,"Utenti: "+usersId);
+        } else if(msg.message.text=="/whoami" && !wait_password){
+            sendMes(msg.message.chat.id,"Utenti: "+msg.message.chat.id);
         } else if(msg.message.text=="/testnotify" && !wait_password){
             testNotify();
         } else if(msg.message.text=="/abilitazione"  && !wait_password){
