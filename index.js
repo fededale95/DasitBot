@@ -486,7 +486,7 @@ function getData(){
 function testNotify(){
       for(i in usersId){
          client.sendMessage(usersId[i], "Test eliminazione utente, ignorate questo messaggio").catch(function(err){
-            myLog(err, homeFolder+"erroriUsers.txt");
+            myLog(err, "erroriUsers.txt");
          });
       }
 }
