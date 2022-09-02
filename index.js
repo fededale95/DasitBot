@@ -488,7 +488,7 @@ function getData(){
 function testNotify(){
       var toCanc = [];
       for(i in usersId){
-         sendMes(usersId[i], "Test eliminazione utente, ignorate questo messaggio");
+         sendMes(usersId[i], "Test eliminazione utente, faccio solo 2 prove promesso, vi arriveranno giusto 2 messaggi così. Fede");
       }
 }
 
