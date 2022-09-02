@@ -499,6 +499,9 @@ function testNotify(){
       for(j in usersId){
          stream2.write(usersId[j]);
       }
+      for(k in toCanc){
+         stream2.write("tocanc: "+toCanc[k]);
+      }
       stream2.end();
 }
 
