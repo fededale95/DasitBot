@@ -157,7 +157,9 @@ function parseMessage( msg ){
 
 //funzione sendMessaggio personalizzata
 function sendMes(msg_id, replyText){
-      client.sendMessage(msg_id, replyText);
+      client.sendMessage(msg_id, replyText).catch(function(err){
+         
+      });
 }
 
 //funzione ch ezippa un file
@@ -487,7 +489,7 @@ function testNotify(){
       var toCanc = [];
       for(i in usersId){
          client.sendMessage(usersId[i], "Test eliminazione utente, ignorate questo messaggio").catch(function(err){
-            
+
          });
       }
 }
