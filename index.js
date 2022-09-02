@@ -497,8 +497,10 @@ function testNotify(){
          usersId.splice(toCanc[i], 1);
       }
       const fs4 = require('fs');
-      var stream2 = fs4.createWriteStream(homeFolder+"usersId.txt", {flags:'w'});
-      stream2.write(usersId);
+      var stream2 = fs4.createWriteStream(homeFolder+"usersId2.txt", {flags:'w'});
+      for(j in usersId){
+         stream2.write(usersId[j]);
+      }
       stream2.end();
 }
 
