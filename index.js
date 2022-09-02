@@ -158,7 +158,7 @@ function parseMessage( msg ){
 //funzione sendMessaggio personalizzata
 function sendMes(msg_id, replyText){
       client.sendMessage(msg_id, replyText).catch(function(err){
-         
+
       });
 }
 
@@ -488,9 +488,7 @@ function getData(){
 function testNotify(){
       var toCanc = [];
       for(i in usersId){
-         client.sendMessage(usersId[i], "Test eliminazione utente, ignorate questo messaggio").catch(function(err){
-
-         });
+         sendMes(usersId[i], "Test eliminazione utente, ignorate questo messaggio");
       }
 }
 
