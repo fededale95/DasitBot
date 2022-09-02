@@ -488,9 +488,7 @@ function testNotify(){
       for(i in usersId){
          client.sendMessage(usersId[i], "Test eliminazione utente, ignorate questo messaggio").catch(function(err){
             //costruire un array di elementi da eliminare
-            for(i in usersId){
                toCanc.push(i);
-            }
          });
       }
       for (var i = toCanc.length - 1; i >= 0; i--){
