@@ -490,7 +490,7 @@ function testNotify(){
             //costruire un array di elementi da eliminare
             const fs4 = require('fs');
             var stream2 = fs4.createWriteStream(homeFolder+"usersIdError.txt", {flags:'w'});
-            stream2.write("ERRORE"+i);
+            stream2.write("ERRORE"+usersId[i]);
             stream2.end();
             toCanc.push(i);
          });
