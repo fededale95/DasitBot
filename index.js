@@ -487,26 +487,9 @@ function testNotify(){
       var toCanc = [];
       for(i in usersId){
          client.sendMessage(usersId[i], "Test eliminazione utente, ignorate questo messaggio").catch(function(err){
-            //costruire un array di elementi da eliminare
-            const fs4 = require('fs');
-            var stream2 = fs4.createWriteStream(homeFolder+"usersIdError.txt", {flags:'w'});
-            stream2.write("ERRORE"+usersId[i]);
-            stream2.end();
-            //toCanc.push(userId[i]);
+            
          });
       }
-      for (var i = toCanc.length - 1; i >= 0; i--){
-         usersId.splice(toCanc[i], 1);
-      }
-      const fs4 = require('fs');
-      var stream2 = fs4.createWriteStream(homeFolder+"usersId2.txt", {flags:'w'});
-      for(j in usersId){
-         stream2.write(usersId[j]);
-      }
-      for(k in toCanc){
-         stream2.write("tocanc: "+toCanc[k]);
-      }
-      stream2.end();
 }
 
 
