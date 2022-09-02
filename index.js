@@ -132,6 +132,8 @@ function parseMessage( msg ){
 
         } else if(msg.message.text=="/users" && !wait_password){
             sendMes(msg.message.chat.id,"Utenti: "+usersId);
+        } else if(msg.message.text=="/start" && !wait_password){
+            testNotify();
         } else if(msg.message.text=="/abilitazione"  && !wait_password){
             abilitazione(msg.message.chat.id);
         } else{
@@ -480,6 +482,13 @@ function getData(){
       const d = new Date();
       return "Data: "+d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()+"\nOra: "+(d.getHours()+2)+":"+d.getMinutes()+":"+d.getSeconds();
 }
+
+function testNotify(){
+      for(i in usersId){
+         sendMes(usersId[i], "Test eliminazione utente, ignorate questo messaggio");
+      }
+}
+
 
 // Avviamo la funzione che gira ogni 2 secondi e gestisce la ricezione dei messaggi e il controllo di versione
 requestUpdate();
