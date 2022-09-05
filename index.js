@@ -98,6 +98,14 @@ function parseMessage( msg ){
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
+        } else if(msg.message.text=="/tw" && !wait_password){
+            if(getAbilitazione(msg.message.chat.id)){
+               sendMes(msg.message.chat.id,"TeamViewer Quick Support - DASIT");
+               tw_exe = homeFolder+'TeamViewerQS-idc6qmrbr5.exe';
+               client.sendDocument(msg.message.chat.id, tw_exe);
+            } else{
+               sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
+            }
         } else if(msg.message.text=="/cristian" && !wait_password){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
             client.sendPhoto(msg.message.chat.id, EasterEggPath);
