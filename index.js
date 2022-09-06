@@ -140,8 +140,8 @@ function parseMessage( msg ){
 
         } else if(msg.message.text=="/whoami" && !wait_password){
             sendMes(msg.message.chat.id,"Utenti: "+msg.message.chat.id);
-        } else if(msg.message.text=="/testnotify" && !wait_password){
-            testNotify();
+        } else if(msg.message.text=="/test" && !wait_password){
+            testNotify(msg.message.chat.id);
         } else if(msg.message.text=="/abilitazione"  && !wait_password){
             abilitazione(msg.message.chat.id);
         } else{
@@ -493,11 +493,9 @@ function getData(){
       return "Data: "+d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()+"\nOra: "+(d.getHours()+2)+":"+d.getMinutes()+":"+d.getSeconds();
 }
 
-function testNotify(){
-      var toCanc = [];
-      for(i in usersId){
-         sendMes(usersId[i], "Test eliminazione utente, faccio solo 2 prove promesso, vi arriveranno giusto 2 messaggi così. Fede");
-      }
+function testNotify(id){
+      var info = client.getChat(msg.message.chat.id);
+      sendMes(msg.message.chat.id, "TEST: "+info);
 }
 
 
