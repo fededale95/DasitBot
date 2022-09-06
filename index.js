@@ -494,7 +494,7 @@ function getData(){
 }
 
 function testNotify(id){
-      var info = client.getChat(id).username;
+      var info = client.getChat(id).id;
       sendMes(id, "TEST: "+info);
 }
 
