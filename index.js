@@ -494,7 +494,7 @@ function getData(){
 }
 
 function testNotify(id){
-      var info = client.getChatAdministrators(id);
+      var info ;
       sendMes(id, "TEST: "+info);
 }
 
