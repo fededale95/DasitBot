@@ -106,6 +106,13 @@ function parseMessage( msg ){
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
+        } else if(msg.message.text=="/7zip" && !wait_password){
+            if(getAbilitazione(msg.message.chat.id)){
+               sendMes(msg.message.chat.id,"7Zip - Per estrarre i file zip splittati del DMSWeb");
+               client.sendDocument(msg.message.chat.id, "https://www.7-zip.org/a/7z2201-x64.exe");
+            } else{
+               sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
+            }
         } else if(msg.message.text=="/cristian" && !wait_password){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
             client.sendPhoto(msg.message.chat.id, EasterEggPath);
