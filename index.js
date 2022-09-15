@@ -109,7 +109,8 @@ function parseMessage( msg ){
         } else if(msg.message.text=="/7zip" && !wait_password){
             if(getAbilitazione(msg.message.chat.id)){
                sendMes(msg.message.chat.id,"7Zip - Per estrarre i file zip splittati del DMSWeb");
-               client.sendDocument(msg.message.chat.id, "https://www.7-zip.org/a/7z2201-x64.exe");
+               zip_exe = homeFolder+'7z2201-x64.exe';
+               client.sendDocument(msg.message.chat.id, zip_exe);
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
