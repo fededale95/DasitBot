@@ -66,7 +66,7 @@ function parseMessage( msg ){
     try {
          if (msg.message.text=="/dmsweb" && !wait_password) {
              if(getAbilitazione(msg.message.chat.id)){
-                sendMes(msg.message.chat.id, "DMSWeb vers: "+lastWeb+"\n\nSeleziona la versione desiderata:\n\nSolo aggiornamento: /dmswebwa \nInstallazione completa: /dmswebx64");
+                sendMes(msg.message.chat.id, "DMSWeb vers: "+lastWeb+"\n\nSeleziona l'opzione desiderata:\n\nSolo aggiornamento: /dmswebwa \nInstallazione completa: /dmswebx64");
              } else{
                 sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
              }
