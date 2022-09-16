@@ -64,17 +64,34 @@ try {
  */
 function parseMessage( msg ){
     try {
-		  if (msg.message.text=="/dmsweb" && !wait_password) {
+         if (msg.message.text=="/dmsweb" && !wait_password) {
+             if(getAbilitazione(msg.message.chat.id)){
+                sendMes(msg.message.chat.id, "DMSWeb vers: "+lastWeb+"\n\nSeleziona la versione desiderata:\n Solo aggiornamento: /dmswebwa \n Installazione completa: /dmswebx64");
+             } else{
+                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
+             }
+         }
+		  else if(msg.message.text=="/dmswebwa" && !wait_password) {
             if(getAbilitazione(msg.message.chat.id)){
                sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+lastWeb+"\nAttendi alcuni secondi, sto preparando il tuo download...");
                file = DMSWebFolder+'dmsweb-wa-'+lastWeb+'.exe';
                fileName = 'dmsweb-wa-'+lastWeb+'.exe';
-               output_zip = homeFolder+'DMSWeb'+lastWeb+'.zip';
+               output_zip = homeFolder+'DMSWeb-wa-'+lastWeb+'.zip';
                zipFile(file, fileName, output_zip, msg.message.chat.id);
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
-        } else if(msg.message.text=="/dmsdoctor" && !wait_password){
+        } else if(msg.message.text=="/dmswebx64" && !wait_password) {
+            if(getAbilitazione(msg.message.chat.id)){
+               sendMes(msg.message.chat.id, "DMSWeb x64 vers: "+lastWeb+"\nAttendi alcuni secondi, sto preparando il tuo download...");
+               file = DMSWebFolder+'dmsweb-x64-'+lastWeb+'.exe';
+               fileName = 'dmsweb-x64-'+lastWeb+'.exe';
+               output_zip = homeFolder+'DMSWeb-x64-'+lastWeb+'.zip';
+               zipFile(file, fileName, output_zip, msg.message.chat.id);
+            } else{
+               sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
+            }
+        }else if(msg.message.text=="/dmsdoctor" && !wait_password){
             if(getAbilitazione(msg.message.chat.id)){
                const fs = require('fs');
                try {
