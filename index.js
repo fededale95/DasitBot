@@ -136,7 +136,7 @@ function parseMessage( msg ){
                //sendMes(msg.message.chat.id,"Invio file .html per test");
                //page = homeFolder+'prova.html';
                //client.sendDocument(msg.message.chat.id, page);
-               vpn=msg.message.text.substring(5);
+               vpn=msg.message.text.substring(7);
                sendMes(msg.message.chat.id, vpn);
                const fsvpn = require("fs");
 
