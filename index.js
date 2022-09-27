@@ -139,22 +139,13 @@ function parseMessage( msg ){
 
                const fsvpn = require("fs");
 
-               var vpn_list=[];
                var stringa;
                fsvpn.readdir("/var/www/html/AssistenzaRemota", (errore, files) => {
                  if (errore) {
                    throw errore;
                  }
 
-                 for(i in files){
-                    vpn_list.push(files[i]);
-                 }
-
-
-                 for(i in vpn_list){
-                    temp=""+vpn_list[i];
-                    stringa.concat(temp);
-                 }
+                 stringa=files[0]+files[1]+files[2];
 
 
                  sendMes(msg.message.chat.id,stringa);
