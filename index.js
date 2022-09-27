@@ -158,7 +158,7 @@ function parseMessage( msg ){
                     sendMes(msg.message.chat.id, "Nessuna occorrnza trovata, specifica meglio la parola chiave");
                  } else if(found==1){
                     var filehtm;
-                    fsvpn.readdir("/var/www/html/AssistenzaRemota"+name, (errore, files) => {
+                    fsvpn.readdir("/var/www/html/AssistenzaRemota/"+name, (errore, files) => {
                        if (errore) {
                          throw errore;
                        }
