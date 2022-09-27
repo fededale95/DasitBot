@@ -150,7 +150,7 @@ function parseMessage( msg ){
                     vpn_list = vpn_list+tmpo;
                  }*/
 
-                 vpn_list=files[0]+"prova";
+                 vpn_list=files[0]+"prova"+files[1];
 
                  sendMes(msg.message.chat.id,""+vpn_list);
                });
