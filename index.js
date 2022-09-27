@@ -151,7 +151,7 @@ function parseMessage( msg ){
                  }
                  for(m in folder){
                     if(folder[m].includes(vpn)){
-                       name=folder[m];
+                       name=folder[m].toUpperCase();
                        found++;
                     }
                  }
