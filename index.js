@@ -131,27 +131,34 @@ function parseMessage( msg ){
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
-        } else if(msg.message.text=="/index" && !wait_password){
+        } else if(msg.message.text.startsWith("/index") && !wait_password){
             if(getAbilitazione(msg.message.chat.id)){
                //sendMes(msg.message.chat.id,"Invio file .html per test");
                //page = homeFolder+'prova.html';
                //client.sendDocument(msg.message.chat.id, page);
-
+               vpn=msg.message.text.substring(5);
                const fsvpn = require("fs");
 
                var stringa;
+               var found=0;
+               var name;
                fsvpn.readdir("/var/www/html/AssistenzaRemota", (errore, files) => {
                  if (errore) {
                    throw errore;
                  }
-
                  for(m in files){
-                    sendMes(msg.message.chat.id,files[m]);
+                    if(files[m].includes(vpn)){
+                       name=files[m];
+                       found++;
+                    }
                  }
-
-
-
-                 sendMes(msg.message.chat.id,stringa);
+                 if(found==0){
+                    sendMes(msg.message.chat.id, "Nessuna occorrnza trovata, specifica meglio la parola chiave");
+                 } else if(found==1){
+                    client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name+"/"+name+".html");
+                 }else{
+                    sendMes(msg.message.chat.id, "Trovate troppe occorrenze, specifica meglio la parola chiave");
+                 }
                });
 
             } else{
