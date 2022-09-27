@@ -143,7 +143,13 @@ function parseMessage( msg ){
                  if (errore) {
                    throw errore;
                  }
-                 sendMes(msg.message.chat.id,files[0]);
+                 var vpn_list;
+
+                 for(int i=0; i<files.length; i++){
+                    vpn_list+=files[i]+"/n";
+                 }
+                 
+                 sendMes(msg.message.chat.id,vpn_list);
                });
 
             } else{
