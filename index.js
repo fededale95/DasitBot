@@ -138,7 +138,7 @@ function parseMessage( msg ){
                //client.sendDocument(msg.message.chat.id, page);
                temp=msg.message.text.substring(9);
                vpn=temp.toUpperCase();
-               sendMes(msg.message.chat.id,vpn);
+               //sendMes(msg.message.chat.id,vpn);
                const fsvpn = require("fs");
 
                var stringa;
