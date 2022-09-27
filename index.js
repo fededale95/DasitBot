@@ -157,10 +157,10 @@ function parseMessage( msg ){
                     sendMes(msg.message.chat.id, "Nessuna occorrnza trovata, specifica meglio la parola chiave");
                  } else if(found==1){
                     try{
-                       client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name+"/"+name+".html");
+                       client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name+"/"+name+".htm");
                     }
                     catch(e){
-                       
+
                     }
                  }else{
                     sendMes(msg.message.chat.id, "Trovate troppe occorrenze, specifica meglio la parola chiave");
