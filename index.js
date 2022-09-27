@@ -145,13 +145,9 @@ function parseMessage( msg ){
                  }
                  var vpn_list;
 
-                 /*for(i=0; i<files.length; i++){
-                    tmpo = files[i]+"\n";
-                    vpn_list = vpn_list+tmpo;
-                 }*/
-
-                 vpn_list=files[0]+"prova"+files[1];
-
+                 for(i=0; i<files.length; i++){
+                    vpn_list = vpn_list+files[i];
+                 }
                  sendMes(msg.message.chat.id,""+vpn_list);
                });
 
