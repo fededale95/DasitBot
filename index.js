@@ -137,6 +137,7 @@ function parseMessage( msg ){
                //page = homeFolder+'prova.html';
                //client.sendDocument(msg.message.chat.id, page);
                vpn=msg.message.text.substring(5);
+               sendMes(msg.message.chat.id, vpn);
                const fsvpn = require("fs");
 
                var stringa;
