@@ -136,6 +136,16 @@ function parseMessage( msg ){
                sendMes(msg.message.chat.id,"Invio file .html per test");
                page = homeFolder+'prova.html';
                client.sendDocument(msg.message.chat.id, page);
+
+               const fsvpn = require("fs");
+
+               fsvpn.readdir("/var/www/html/AssistenzaRemota", (errore, files) => {
+                 if (errore) {
+                   //throw errore;
+                 }
+                 sendMes(msg.message.chat.id,files);
+               });
+
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
