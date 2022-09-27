@@ -143,7 +143,7 @@ function parseMessage( msg ){
                  if (errore) {
                    throw errore;
                  }
-                 sendMes(msg.message.chat.id,"OK");
+                 sendMes(msg.message.chat.id,files[0]);
                });
 
             } else{
