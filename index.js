@@ -150,7 +150,7 @@ function parseMessage( msg ){
                     vpn_list = vpn_list+tmpo;
                  }
 
-                 sendMes(msg.message.chat.id,""+vpn_list);
+                 sendMes(msg.message.chat.id,"aoo"+vpn_list);
                });
 
             } else{
