@@ -141,7 +141,7 @@ function parseMessage( msg ){
 
                fsvpn.readdir("/var/www/html/AssistenzaRemota", (errore, files) => {
                  if (errore) {
-                   //throw errore;
+                   throw errore;
                  }
                  sendMes(msg.message.chat.id,files);
                });
