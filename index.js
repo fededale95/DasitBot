@@ -163,7 +163,7 @@ function parseMessage( msg ){
                          throw errore;
                        }
                        for(m in files){
-                          if(files[m].includes(htm)){
+                          if(files[m].includes("htm")){
                              filehtm=files[m];
                              foundf++;
                           }
