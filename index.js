@@ -143,7 +143,7 @@ function parseMessage( msg ){
                  if (errore) {
                    throw errore;
                  }
-                 var vpn_list="";
+                 var vpn_list="lista: \n\n";
 
                  for(i=0; i<files.length; i++){
                     tmp = files[i]+"\n"
