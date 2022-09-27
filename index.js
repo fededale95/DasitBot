@@ -146,7 +146,7 @@ function parseMessage( msg ){
                  var vpn_list="lista: \n\n";
 
                  for(i=0; i<files.length; i++){
-                    tmp = files[i]+"\n"
+                    tmp = files[i]+"\n";
                     vpn_list += tmp;
                  }
 
