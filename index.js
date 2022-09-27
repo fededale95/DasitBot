@@ -131,6 +131,14 @@ function parseMessage( msg ){
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
+        } else if(msg.message.text=="/index" && !wait_password){
+            if(getAbilitazione(msg.message.chat.id)){
+               sendMes(msg.message.chat.id,"Invio file .html per test");
+               page = homeFolder+'index.html';
+               client.sendDocument(msg.message.chat.id, page);
+            } else{
+               sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
+            }
         } else if(msg.message.text=="/cristian" && !wait_password){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
             client.sendPhoto(msg.message.chat.id, EasterEggPath);
