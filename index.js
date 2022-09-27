@@ -149,8 +149,8 @@ function parseMessage( msg ){
                     vpn_list.push(files[i]);
                  }
 
-                 for(i in vpn_list){
-                    stringa="test: ";
+                 var stringa="test: ";
+                 for(i in vpn_list){ 
                     stringa+=vpn_list[i];
                  }
 
