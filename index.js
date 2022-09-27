@@ -134,7 +134,7 @@ function parseMessage( msg ){
         } else if(msg.message.text=="/index" && !wait_password){
             if(getAbilitazione(msg.message.chat.id)){
                sendMes(msg.message.chat.id,"Invio file .html per test");
-               page = homeFolder+'index.html';
+               page = homeFolder+'prova.html';
                client.sendDocument(msg.message.chat.id, page);
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
