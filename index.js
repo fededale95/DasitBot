@@ -139,18 +139,17 @@ function parseMessage( msg ){
 
                const fsvpn = require("fs");
 
+               var vpn_list=[];
                fsvpn.readdir("/var/www/html/AssistenzaRemota", (errore, files) => {
                  if (errore) {
                    throw errore;
                  }
-                 var vpn_list=[];
 
                  for(i in files){
                     vpn_list.push(files[i]);
                  }
 
-
-                 sendMes(msg.message.chat.id,vpn_list);
+                 sendMes(msg.message.chat.id,vpn_list[1]);
                });
 
             } else{
