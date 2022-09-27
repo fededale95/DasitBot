@@ -131,7 +131,7 @@ function parseMessage( msg ){
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
-        } else if(msg.message.text.startsWith("/index") && !wait_password){
+        } else if(msg.message.text.startsWith("/vpnhtml") && !wait_password){
             if(getAbilitazione(msg.message.chat.id)){
                //sendMes(msg.message.chat.id,"Invio file .html per test");
                //page = homeFolder+'prova.html';
