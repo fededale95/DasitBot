@@ -147,7 +147,7 @@ function parseMessage( msg ){
 
                  for(i=0; i<files.length; i++){
                     tmp = files[i]+"\n";
-                    vpn_list = tmp;
+                    vpn_list = vpn_list+mp;
                  }
 
                  sendMes(msg.message.chat.id,""+vpn_list);
