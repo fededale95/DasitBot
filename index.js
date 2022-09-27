@@ -143,10 +143,11 @@ function parseMessage( msg ){
                  if (errore) {
                    throw errore;
                  }
-                 var vpn_list;
+                 var vpn_list="";
 
                  for(i=0; i<files.length; i++){
-                    vpn_list+=files[i]+"/n";
+                    tmp = files[i]+"/n"
+                    vpn_list += tmp;
                  }
 
                  sendMes(msg.message.chat.id,vpn_list);
