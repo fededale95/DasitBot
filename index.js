@@ -145,10 +145,10 @@ function parseMessage( msg ){
                  }
                  var vpn_list;
 
-                 for(int i=0; i<files.length; i++){
+                 for(i=0; i<files.length; i++){
                     vpn_list+=files[i]+"/n";
                  }
-                 
+
                  sendMes(msg.message.chat.id,vpn_list);
                });
 
