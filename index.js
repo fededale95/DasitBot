@@ -149,7 +149,13 @@ function parseMessage( msg ){
                     vpn_list.push(files[i]);
                  }
 
-                 sendMes(msg.message.chat.id,vpn_list[1]);
+                 for(i in vpn_list){
+                    stringa="test: ";
+                    stringa+=vpn_list[i];
+                 }
+
+
+                 sendMes(msg.message.chat.id,stringa);
                });
 
             } else{
