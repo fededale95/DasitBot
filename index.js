@@ -143,14 +143,16 @@ function parseMessage( msg ){
                  if (errore) {
                    throw errore;
                  }
-                 var vpn_list="lista: \n\n";
+                 var vpn_list;
 
-                 for(i=0; i<files.length; i++){
+                 /*for(i=0; i<files.length; i++){
                     tmpo = files[i]+"\n";
                     vpn_list = vpn_list+tmpo;
-                 }
+                 }*/
 
-                 sendMes(msg.message.chat.id,"aoo"+vpn_list);
+                 vpn_list=files[0]+"\"+files[1];
+
+                 sendMes(msg.message.chat.id,""+vpn_list);
                });
 
             } else{
