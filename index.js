@@ -133,9 +133,9 @@ function parseMessage( msg ){
             }
         } else if(msg.message.text=="/index" && !wait_password){
             if(getAbilitazione(msg.message.chat.id)){
-               sendMes(msg.message.chat.id,"Invio file .html per test");
-               page = homeFolder+'prova.html';
-               client.sendDocument(msg.message.chat.id, page);
+               //sendMes(msg.message.chat.id,"Invio file .html per test");
+               //page = homeFolder+'prova.html';
+               //client.sendDocument(msg.message.chat.id, page);
 
                const fsvpn = require("fs");
 
