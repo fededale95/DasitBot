@@ -142,26 +142,40 @@ function parseMessage( msg ){
 
                var stringa;
                var found=0;
+               var foundf=0;
                var name;
-               fsvpn.readdir("/var/www/html/AssistenzaRemota", (errore, files) => {
+               fsvpn.readdir("/var/www/html/AssistenzaRemota", (errore, folder) => {
                  if (errore) {
                    throw errore;
                  }
-                 for(m in files){
-                    if(files[m].includes(vpn)){
-                       name=files[m];
+                 for(m in folder){
+                    if(folder[m].includes(vpn)){
+                       name=folder[m];
                        found++;
                     }
                  }
                  if(found==0){
                     sendMes(msg.message.chat.id, "Nessuna occorrnza trovata, specifica meglio la parola chiave");
                  } else if(found==1){
-                    try{
-                       client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name+"/"+name+".htm");
-                    }
-                    catch(e){
-
-                    }
+                    var filehtm;
+                    fsvpn.readdir("/var/www/html/AssistenzaRemota"+name, (errore, files) => {
+                       if (errore) {
+                         throw errore;
+                       }
+                       for(m in files){
+                          if(files[m].includes(htm)){
+                             filehtm=files[m];
+                             foundf++;
+                          }
+                       }
+                       if(foundf==0){
+                          sendMes(msg.message.chat.id, "Nella cartella della vpn non è presente un file html o htm");
+                       }else if(foundf==1){
+                          client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name+"/"+filehtm);
+                       }else{
+                          sendMes(msg.message.chat.id, "Trovate più file html o htm, il programma ancora non gestisce l'invio multiplo");
+                       }
+                    });
                  }else{
                     sendMes(msg.message.chat.id, "Trovate troppe occorrenze, specifica meglio la parola chiave");
                  }
