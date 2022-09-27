@@ -146,7 +146,7 @@ function parseMessage( msg ){
                  }
 
                  for(m in files){
-                    stringa += files[m];
+                    sendMes(msg.message.chat.id,files[m]);
                  }
 
 
