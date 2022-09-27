@@ -153,7 +153,7 @@ function parseMessage( msg ){
 
                  for(i in vpn_list){
                     temp=""+vpn_list[i];
-                    stringa=temp;
+                    stringa+=temp;
                  }
 
 
