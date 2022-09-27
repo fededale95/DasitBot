@@ -140,6 +140,7 @@ function parseMessage( msg ){
                const fsvpn = require("fs");
 
                var vpn_list=[];
+               var stringa="test: ";
                fsvpn.readdir("/var/www/html/AssistenzaRemota", (errore, files) => {
                  if (errore) {
                    throw errore;
@@ -149,8 +150,8 @@ function parseMessage( msg ){
                     vpn_list.push(files[i]);
                  }
 
-                 var stringa="test: ";
-                 for(i in vpn_list){ 
+
+                 for(i in vpn_list){
                     stringa+=vpn_list[i];
                  }
 
