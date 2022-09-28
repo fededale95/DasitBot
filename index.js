@@ -176,7 +176,7 @@ function parseMessage( msg ){
                           }
                        });
                     }else{
-                       for(i in name){  
+                       for(i in name){
                           fsvpn.readdir("/var/www/html/AssistenzaRemota/"+name[i], (errore, files) => {
                             var foundfs=0;
                             var filehtm;
@@ -196,7 +196,7 @@ function parseMessage( msg ){
                             }else{
                                //sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+filehtm);
                                //client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+filehtm);
-                               //sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+i);
+                               sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]);
                             }
                          });
 
