@@ -193,7 +193,7 @@ function parseMessage( msg ){
                             }
                             if(foundfs==0){
                                fileshtm.push("none");
-                               sendMes(msg.message.chat.id, "Nella cartella della vpn non è presente un file html o htm");
+                               sendMes(msg.message.chat.id, "Nella cartella della vpn: "+name[i]+" non è presente un file html o htm");
                             }else{
                                foundfs=0;
                                sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+fileshtm[fileshtm.length-1]);
