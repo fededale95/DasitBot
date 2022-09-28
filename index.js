@@ -206,7 +206,7 @@ function parseMessage( msg ){
                           }
                        }
                        if(found==0){
-                          sendMes(msg.message.chat.id, "Nessuna risultato!");
+                          sendMes(msg.message.chat.id, "Nessun risultato!");
                        } else if(found==1){
                           var filehtm;
                           fsvpn.readdir("/var/www/html/AssistenzaRemota/"+name[0], (errore, files) => {
