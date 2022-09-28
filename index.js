@@ -168,7 +168,7 @@ function parseMessage( msg ){
                              }
                           }
                           if(foundf==0){
-                             sendMes(msg.message.chat.id, "Nella cartella della vpn:"+name[0]+" non è presente un file html o htm");
+                             sendMes(msg.message.chat.id, "Nella cartella della vpn: "+name[0]+" non è presente un file html o htm");
                           }else if(foundf==1){
                              client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[0]+"/"+filehtm);
                           }else{
