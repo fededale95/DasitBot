@@ -194,7 +194,7 @@ function parseMessage( msg ){
                             if(foundfs==0){
                                fileshtm.push("none");
                             }
-                               sendMes(msg.message.chat.id, filehtm);
+                               sendMes(msg.message.chat.id, fileshtm[i]);
                                //client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+filehtm);
                          });
                        }
