@@ -134,7 +134,7 @@ function parseMessage( msg ){
         } else if(msg.message.text.startsWith("/vpnhtml") && !wait_password){
             if(getAbilitazione(msg.message.chat.id)){
                temp=msg.message.text.substring(9);
-               if(temp.length>4){
+               if(temp.length>3){
                   vpn=temp.toUpperCase();
                   const fsvpn = require("fs");
                   var stringa;
@@ -206,7 +206,7 @@ function parseMessage( msg ){
                     }
                   });
                } else{
-                  sendMes(msg.message.chat.id, "Parola chiave troppo corta, prova con piu' di 4 caratteri!");
+                  sendMes(msg.message.chat.id, "Parola chiave troppo corta, prova con 4 o piu' caratteri!");
                }
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
