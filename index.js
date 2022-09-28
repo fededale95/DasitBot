@@ -136,8 +136,6 @@ function parseMessage( msg ){
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
-        } else if(msg.message.text.startsWith("/vpnhtml") && !wait_password){
-
         } else if(msg.message.text=="/cristian" && !inserimento){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
             client.sendPhoto(msg.message.chat.id, EasterEggPath);
