@@ -188,10 +188,11 @@ function parseMessage( msg ){
                                   if(!files[m].includes("$")){
                                      fileshtm.push(files[m]);
                                      //sendMes(msg.message.chat.id, fileshtm[fileshtm.length-1]);
-                                     founds++;
+                                     foundfs++;
                                   }
                                }
                             }
+                            sendMes(msg.message.chat.id, "AO"+fileshtm.length);
                             if(foundfs==0){
                                fileshtm.push("none");
                             }
