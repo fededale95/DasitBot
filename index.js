@@ -201,7 +201,7 @@ function parseMessage( msg ){
                          });
                        }
 
-                          sendMes(msg.message.chat.id, "AO"+fileshtm.length);
+                          //sendMes(msg.message.chat.id, "AO"+fileshtm.length);
 
 
 
