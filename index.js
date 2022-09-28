@@ -179,8 +179,8 @@ function parseMessage( msg ){
                        var fileshtm = [];
                        for(j in name){
                           var foundfs=0;
-                          sendMes(msg.message.chat.id, "j: "+j);
                           fsvpn.readdir("/var/www/html/AssistenzaRemota/"+name[j], (errore, files) => {
+                           sendMes(msg.message.chat.id, "j: "+j);
                            if(errore){
                               throw errore;
                            }else{
