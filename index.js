@@ -180,6 +180,7 @@ function parseMessage( msg ){
                        for(j in name){
                           var foundfs=0;
                           fsvpn.readdir("/var/www/html/AssistenzaRemota/"+name[j], (errore, files) => {
+                            k=j;
                             if (errore) {
                               throw errore;
                             }
@@ -193,10 +194,10 @@ function parseMessage( msg ){
                             }
                             if(foundfs==0){
                                fileshtm.push("none");
-                               sendMes(msg.message.chat.id, "Nella cartella della vpn: "+name[j]+" non è presente un file html o htm");
+                               sendMes(msg.message.chat.id, "Nella cartella della vpn: "+name[k]+" non è presente un file html o htm");
                             }else{
                                foundfs=0;
-                               sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[j]+"/"+fileshtm[fileshtm.length-1]);
+                               sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[k]+"/"+fileshtm[fileshtm.length-1]);
                             }
                            //client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+filehtm);
                          });
