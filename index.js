@@ -200,9 +200,8 @@ function parseMessage( msg ){
                          });
                        }
 
-                       for(j in fileshtm){
-                          sendMes(msg.message.chat.id, "AO"+fileshtm[j]);
-                       }
+                          sendMes(msg.message.chat.id, "AO"+fileshtm.length);
+
 
 
                        for(i in name){
