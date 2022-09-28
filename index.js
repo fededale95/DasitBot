@@ -195,10 +195,15 @@ function parseMessage( msg ){
                             if(foundfs==0){
                                fileshtm.push("none");
                             }
-                               sendMes(msg.message.chat.id, fileshtm[i]);
+                               //sendMes(msg.message.chat.id, fileshtm[i]);
                                //client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+filehtm);
                          });
                        }
+
+                       for(j in fileshtm){
+                          sendMes(msg.message.chat.id, fileshtm[j]);
+                       }
+
 
                        for(i in name){
                           if(fileshtm[i]=="none"){
