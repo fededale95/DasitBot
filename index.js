@@ -133,56 +133,57 @@ function parseMessage( msg ){
             }
         } else if(msg.message.text.startsWith("/vpnhtml") && !wait_password){
             if(getAbilitazione(msg.message.chat.id)){
-               //sendMes(msg.message.chat.id,"Invio file .html per test");
-               //page = homeFolder+'prova.html';
-               //client.sendDocument(msg.message.chat.id, page);
                temp=msg.message.text.substring(9);
-               vpn=temp.toUpperCase();
-               //sendMes(msg.message.chat.id,vpn);
-               const fsvpn = require("fs");
-
-               var stringa;
-               var found=0;
-               var foundf=0;
-               var name;
-               fsvpn.readdir("/var/www/html/AssistenzaRemota", (errore, folder) => {
-                 if (errore) {
-                   throw errore;
-                 }
-                 for(m in folder){
-                    if(folder[m].includes(vpn)){
-                       name=folder[m].toUpperCase();
-                       found++;
+               if(temp.length>4){
+                  vpn=temp.toUpperCase();
+                  const fsvpn = require("fs");
+                  var stringa;
+                  var found=0;
+                  var foundf=0;
+                  var name;
+                  fsvpn.readdir("/var/www/html/AssistenzaRemota", (errore, folder) => {
+                    if (errore) {
+                      throw errore;
                     }
-                 }
-                 if(found==0){
-                    sendMes(msg.message.chat.id, "Nessuna occorrnza trovata, specifica meglio la parola chiave");
-                 } else if(found==1){
-                    var filehtm;
-                    fsvpn.readdir("/var/www/html/AssistenzaRemota/"+name, (errore, files) => {
-                       if (errore) {
-                         throw errore;
+                    for(m in folder){
+                       if(folder[m].includes(vpn)){
+                          name=folder[m].toUpperCase();
+                          found++;
                        }
-                       for(m in files){
-                          if(files[m].includes("htm")){
-                             filehtm=files[m];
-                             foundf++;
+                    }
+                    if(found==0){
+                       sendMes(msg.message.chat.id, "Nessuna occorrenza trovata, specifica meglio la parola chiave");
+                    } else if(found==1){
+                       var filehtm;
+                       fsvpn.readdir("/var/www/html/AssistenzaRemota/"+name, (errore, files) => {
+                          if (errore) {
+                            throw errore;
                           }
+                          for(m in files){
+                             if(files[m].includes("htm")){
+                                if(!files[m].includes("$")){
+                                   filehtm=files[m];
+                                   foundf++;
+                                }
+                             }
+                          }
+                          if(foundf==0){
+                             sendMes(msg.message.chat.id, "Nella cartella della vpn non è presente un file html o htm");
+                          }else if(foundf==1){
+                             client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name+"/"+filehtm);
+                          }else{
+                             sendMes(msg.message.chat.id, "Trovati più file html o htm, il programma ancora non gestisce l'invio multiplo");
+                          }
+                       });
+                    }else{
+                       for(i in files){
+                          sendMes(msg.message.chat.id, files[i]);
                        }
-
-                       if(foundf==0){
-                          sendMes(msg.message.chat.id, "Nella cartella della vpn non è presente un file html o htm");
-                       }else if(foundf==1){
-                          client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name+"/"+filehtm);
-                       }else{
-                          sendMes(msg.message.chat.id, "Trovate più file html o htm, il programma ancora non gestisce l'invio multiplo");
-                       }
-                    });
-                 }else{
-                    sendMes(msg.message.chat.id, "Trovate troppe occorrenze, specifica meglio la parola chiave");
-                 }
-               });
-
+                    }
+                  });
+               } else{
+                  sendMes(msg.message.chat.id, "Parola chiave troppo corta, prova con piu' di 4 caratteri!");
+               }
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
@@ -197,7 +198,6 @@ function parseMessage( msg ){
             }
         } else if(msg.message.text=="/start" && !wait_password){
             sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.\nClicca /abilitazione per richiedere i permessi per tutti i comandi.");
-
         } else if(msg.message.text=="/lenovo" && !wait_password){
             msglenovo = "Ottimizzazione settings LENOVO TD350 per ESXi:\n\n";
             msglenovo+= " - Accendi il server.\n";
@@ -217,7 +217,6 @@ function parseMessage( msg ){
             msglenovo+= "Premere F10 per salvare e ripristinare. Selezionare Sì quando viene richiesto di confermare.\n";
             msglenovo+= "Il server ora si riavvierà.\n";
             sendMes(msg.message.chat.id,msglenovo);
-
         } else if(msg.message.text=="/whoami" && !wait_password){
             sendMes(msg.message.chat.id,"Utenti: "+msg.message.chat.id);
         } else if(msg.message.text=="/test" && !wait_password){
