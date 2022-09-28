@@ -569,7 +569,8 @@ function abilitazione(msg_id){
       }
 }
 
-function insert_name_vpn(){
+function insert_name_vpn(msg_id){
+      sendMes(msg_id,"Digita il nome della VPN: ");
       wait_name_vpn = true;
 }
 
