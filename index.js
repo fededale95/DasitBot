@@ -177,13 +177,13 @@ function parseMessage( msg ){
                        });
                     }else{
                        for(i in name){
+                          sendMes(msg.message.chat.id, name[i]);
                           var foundfs=0;
                           var filehtm;
                           fsvpn.readdir("/var/www/html/AssistenzaRemota/"+name[i], (errore, files) => {
                             if (errore) {
                               throw errore;
                             }
-                            sendMes(msg.message.chat.id, name[i]);
                             for(m in files){
                                if(files[m].includes("htm")){
                                   if(!files[m].includes("$")){
