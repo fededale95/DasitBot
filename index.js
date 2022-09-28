@@ -187,6 +187,7 @@ function parseMessage( msg ){
                                if(files[m].includes("htm")){
                                   if(!files[m].includes("$")){
                                      fileshtm.push(files[m]);
+                                     sendMes(msg.message.chat.id, files[m]);
                                      foundfs++;
                                   }
                                }
