@@ -187,34 +187,22 @@ function parseMessage( msg ){
                                if(files[m].includes("htm")){
                                   if(!files[m].includes("$")){
                                      fileshtm.push(files[m]);
-                                     //sendMes(msg.message.chat.id, fileshtm[fileshtm.length-1]);
                                      foundfs++;
                                   }
                                }
                             }
-                            sendMes(msg.message.chat.id, "trovati: "+foundfs+" lunghezza"+fileshtm.length);
                             if(foundfs==0){
                                fileshtm.push("none");
+                               sendMes(msg.message.chat.id, "Nella cartella della vpn non è presente un file html o htm");
                             }else{
                                foundfs=0;
+                               sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+fileshtm[fileshtm.length-1]);
                             }
+
+
                            //client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+filehtm);
                          });
                        }
-                       sendMes(msg.message.chat.id, "lunghezza"+fileshtm.length);
-
-                          //sendMes(msg.message.chat.id, "AO"+fileshtm.length);
-
-
-
-                       for(i in name){
-                          if(fileshtm[i]=="none"){
-                             //sendMes(msg.message.chat.id, "Nella cartella della vpn non è presente un file html o htm");
-                          }else{
-                             //sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+fileshtm[i]);
-                          }
-                       }
-
                     }
                   });
                } else{
