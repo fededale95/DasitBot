@@ -140,14 +140,14 @@ function parseMessage( msg ){
                   var stringa;
                   var found=0;
                   var foundf=0;
-                  var name;
+                  var name = [];
                   fsvpn.readdir("/var/www/html/AssistenzaRemota", (errore, folder) => {
                     if (errore) {
                       throw errore;
                     }
                     for(m in folder){
                        if(folder[m].includes(vpn)){
-                          name=folder[m].toUpperCase();
+                          name.push(folder[m].toUpperCase());
                           found++;
                        }
                     }
@@ -155,7 +155,7 @@ function parseMessage( msg ){
                        sendMes(msg.message.chat.id, "Nessuna occorrenza trovata, specifica meglio la parola chiave");
                     } else if(found==1){
                        var filehtm;
-                       fsvpn.readdir("/var/www/html/AssistenzaRemota/"+name, (errore, files) => {
+                       fsvpn.readdir("/var/www/html/AssistenzaRemota/"+name[0], (errore, files) => {
                           if (errore) {
                             throw errore;
                           }
@@ -170,14 +170,32 @@ function parseMessage( msg ){
                           if(foundf==0){
                              sendMes(msg.message.chat.id, "Nella cartella della vpn non è presente un file html o htm");
                           }else if(foundf==1){
-                             client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name+"/"+filehtm);
+                             client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[0]+"/"+filehtm);
                           }else{
                              sendMes(msg.message.chat.id, "Trovati più file html o htm, il programma ancora non gestisce l'invio multiplo");
                           }
                        });
                     }else{
-                       for(i in files){
-                          sendMes(msg.message.chat.id, files[i]);
+                       var filehtm;
+                       for(i in folder){
+                          fsvpn.readdir("/var/www/html/AssistenzaRemota/"+name[i], (errore, files) => {
+                            if (errore) {
+                              throw errore;
+                            }
+                            for(m in files){
+                               if(files[m].includes("htm")){
+                                  if(!files[m].includes("$")){
+                                     filehtm=files[m];
+                                     foundf++;
+                                  }
+                               }
+                            }
+                            if(foundf==0){
+                               sendMes(msg.message.chat.id, "Nella cartella della vpn non è presente un file html o htm");
+                            }else
+                               client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+filehtm);
+                            }
+                         });
                        }
                     }
                   });
