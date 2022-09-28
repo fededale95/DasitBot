@@ -201,7 +201,7 @@ function parseMessage( msg ){
                        }
 
                        for(j in fileshtm){
-                          sendMes(msg.message.chat.id, fileshtm[j]);
+                          sendMes(msg.message.chat.id, "AO"+fileshtm[j]);
                        }
 
 
