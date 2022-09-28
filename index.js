@@ -198,10 +198,12 @@ function parseMessage( msg ){
                             }else{
                                foundfs=0;
                             }
-
-                               //sendMes(msg.message.chat.id, fileshtm[i]);
-                               //client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+filehtm);
+                           //client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+filehtm);
                          });
+                       }
+
+                       for(i in fileshtm){
+                          sendMes(msg.message.chat.id, fileshtm[i]);
                        }
 
                           //sendMes(msg.message.chat.id, "AO"+fileshtm.length);
