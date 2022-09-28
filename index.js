@@ -195,6 +195,8 @@ function parseMessage( msg ){
 
                             if(foundfs==0){
                                fileshtm.push("none");
+                            }else{
+                               foundfs=0;
                             }
                             sendMes(msg.message.chat.id, "trovati: "+foundfs+" lunghezza"+fileshtm.length);
                                //sendMes(msg.message.chat.id, fileshtm[i]);
