@@ -177,7 +177,7 @@ function parseMessage( msg ){
                        });
                     }else{
                        var filehtm;
-                       for(i in folder){
+                       for(i in name){
                           fsvpn.readdir("/var/www/html/AssistenzaRemota/"+name[i], (errore, files) => {
                             if (errore) {
                               throw errore;
