@@ -51,6 +51,7 @@ var lastWeb;
 var lastCS;
 
 //abilitazione
+var inserimento;
 var wait_password = false;
 var password_abilitazione;
 try {
@@ -58,20 +59,24 @@ try {
       password_abilitazione = password_abilitazione.substring(0, password_abilitazione.length - 1);
 } catch (err) {}
 
+//vpn search
+var wait_name_vpn = false;
+
 /**
  * Elabora gli aggiornamenti ricevuti da Telegram e risponde al messaggio
  * ricevuto
  */
 function parseMessage( msg ){
     try {
-         if (msg.message.text=="/dmsweb" && !wait_password) {
+         inserimento = wait_password || wait_name_vpn;
+         if (msg.message.text=="/dmsweb" && !inserimento) {
              if(getAbilitazione(msg.message.chat.id)){
                 sendMes(msg.message.chat.id, "DMSWeb vers: "+lastWeb+"\n\nSeleziona l'opzione desiderata:\n\nSolo aggiornamento: /dmswebwa \nInstallazione completa: /dmswebx64");
              } else{
                 sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
              }
          }
-		  else if(msg.message.text=="/dmswebwa" && !wait_password) {
+		  else if(msg.message.text=="/dmswebwa" && !inserimento) {
             if(getAbilitazione(msg.message.chat.id)){
                sendMes(msg.message.chat.id, "DMSWeb WebApp vers: "+lastWeb+"\nAttendi alcuni secondi, sto preparando il tuo download...");
                file = DMSWebFolder+'dmsweb-wa-'+lastWeb+'.exe';
@@ -81,7 +86,7 @@ function parseMessage( msg ){
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
-        } else if(msg.message.text=="/dmswebx64" && !wait_password) {
+        } else if(msg.message.text=="/dmswebx64" && !inserimento) {
             if(getAbilitazione(msg.message.chat.id)){
                sendMes(msg.message.chat.id, "DMSWeb x64 vers: "+lastWeb+"\nAttendi alcuni secondi, sto preparando il tuo download...");
                file = DMSWebFolder+'dmsweb-x64-'+lastWeb+'.exe';
@@ -91,7 +96,7 @@ function parseMessage( msg ){
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
-        }else if(msg.message.text=="/dmsdoctor" && !wait_password){
+        }else if(msg.message.text=="/dmsdoctor" && !inserimento){
             if(getAbilitazione(msg.message.chat.id)){
                const fs = require('fs');
                try {
@@ -106,7 +111,7 @@ function parseMessage( msg ){
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
-        } else if(msg.message.text=="/dmsema" && !wait_password){
+        } else if(msg.message.text=="/dmsema" && !inserimento){
             if(getAbilitazione(msg.message.chat.id)){
                sendMes(msg.message.chat.id,"DMS CS EMA vers: "+lastCS+" \nAttendi alcuni secondi, sto preparando il tuo download...");
                directory_dms = DMSCSFolder+lastCS;
@@ -115,7 +120,7 @@ function parseMessage( msg ){
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
-        } else if(msg.message.text=="/tw" && !wait_password){
+        } else if(msg.message.text=="/tw" && !inserimento){
             if(getAbilitazione(msg.message.chat.id)){
                sendMes(msg.message.chat.id,"TeamViewer Quick Support - DASIT");
                tw_exe = homeFolder+'TeamViewerQS-idc6qmrbr5.exe';
@@ -123,7 +128,7 @@ function parseMessage( msg ){
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
-        } else if(msg.message.text=="/7zip" && !wait_password){
+        } else if(msg.message.text=="/7zip" && !inserimento){
             if(getAbilitazione(msg.message.chat.id)){
                sendMes(msg.message.chat.id,"7Zip - Per estrarre i file zip splittati del DMSWeb");
                zip_exe = homeFolder+'7z2201-x64.exe';
@@ -132,97 +137,19 @@ function parseMessage( msg ){
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
         } else if(msg.message.text.startsWith("/vpnhtml") && !wait_password){
-            if(getAbilitazione(msg.message.chat.id)){
-               temp=msg.message.text.substring(9);
-               if(temp.length>3){
-                  vpn=temp.toUpperCase();
-                  const fsvpn = require("fs");
-                  var stringa;
-                  var found=0;
-                  var foundf=0;
-                  var name = [];
-                  fsvpn.readdir("/var/www/html/AssistenzaRemota", (errore, folder) => {
-                    if (errore) {
-                      throw errore;
-                    }
-                    for(m in folder){
-                       if(folder[m].toUpperCase().includes(vpn)){
-                          name.push(folder[m]);
-                          found++;
-                       }
-                    }
-                    if(found==0){
-                       sendMes(msg.message.chat.id, "Nessuna risultato!");
-                    } else if(found==1){
-                       var filehtm;
-                       fsvpn.readdir("/var/www/html/AssistenzaRemota/"+name[0], (errore, files) => {
-                          if (errore) {
-                            throw errore;
-                          }
-                          for(m in files){
-                             if(files[m].includes("htm")){
-                                if(!files[m].includes("$")){
-                                   filehtm=files[m];
-                                   foundf++;
-                                }
-                             }
-                          }
-                          if(foundf==0){
-                             sendMes(msg.message.chat.id, "Nella cartella della vpn: "+name[0]+" non è presente un file html o htm");
-                          }else if(foundf==1){
-                             client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[0]+"/"+filehtm);
-                          }else{
-                             sendMes(msg.message.chat.id, "Trovati più file html o htm, il programma ancora non gestisce l'invio multiplo");
-                          }
-                       });
-                    }else{
-                       var fileshtm = [];
-                       name.forEach(cart => {
-                          var foundfs=0;
-                          fsvpn.readdir("/var/www/html/AssistenzaRemota/"+cart, (errore, files) => {
-                           if(errore){
-                              throw errore;
-                           }else{
-                                for(m in files){
-                                   if(files[m].includes("htm")){
-                                      if(!files[m].includes("$")){
-                                         fileshtm.push(files[m]);
-                                         foundfs++;
-                                      }
-                                   }
-                                }
-                                if(foundfs==0){
-                                   fileshtm.push("none");
-                                   sendMes(msg.message.chat.id, "Nella cartella della vpn: "+cart+" non è presente un file html o htm");
-                                }else{
-                                   foundfs=0;
-                                   //sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+cart+"/"+fileshtm[fileshtm.length-1]);
-                                   client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+cart+"/"+fileshtm[fileshtm.length-1]);
-                                }
-                           }
-                         });
-                     })
 
-                    }
-                  });
-               } else{
-                  sendMes(msg.message.chat.id, "Parola chiave troppo corta, prova con 4 o piu' caratteri!");
-               }
-            } else{
-               sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
-            }
-        } else if(msg.message.text=="/cristian" && !wait_password){
+        } else if(msg.message.text=="/cristian" && !inserimento){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
             client.sendPhoto(msg.message.chat.id, EasterEggPath);
-        } else if(msg.message.text=="/vpn" && !wait_password){
+        } else if(msg.message.text=="/vpn" && !inserimento){
             if(getAbilitazione(msg.message.chat.id)){
             sendMes(msg.message.chat.id,"Portale VPN - ASSISTENZA \n(ricordati di attivare GlobalProtect)\n\n http://10.1.6.14/AssistenzaRemota/");
             } else{
                sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
             }
-        } else if(msg.message.text=="/start" && !wait_password){
+        } else if(msg.message.text=="/start" && !inserimento){
             sendMes(msg.message.chat.id,"Benvenuto nel Bot Dasit, clicca sul menu per scegliere un comando.\nClicca /abilitazione per richiedere i permessi per tutti i comandi.");
-        } else if(msg.message.text=="/lenovo" && !wait_password){
+        } else if(msg.message.text=="/lenovo" && !inserimento){
             msglenovo = "Ottimizzazione settings LENOVO TD350 per ESXi:\n\n";
             msglenovo+= " - Accendi il server.\n";
             msglenovo+= " - Premere F1 e accedere alla configurazione del BIOS\n";
@@ -241,13 +168,15 @@ function parseMessage( msg ){
             msglenovo+= "Premere F10 per salvare e ripristinare. Selezionare Sì quando viene richiesto di confermare.\n";
             msglenovo+= "Il server ora si riavvierà.\n";
             sendMes(msg.message.chat.id,msglenovo);
-        } else if(msg.message.text=="/whoami" && !wait_password){
+        } else if(msg.message.text=="/whoami" && !inserimento){
             sendMes(msg.message.chat.id,"Utenti: "+msg.message.chat.id);
-        } else if(msg.message.text=="/test" && !wait_password){
+        } else if(msg.message.text=="/test" && !inserimento){
             testNotify(msg.message.chat.id);
-        } else if(msg.message.text=="/abilitazione"  && !wait_password){
+        } else if(msg.message.text=="/abilitazione"  && !inserimento){
             abilitazione(msg.message.chat.id);
-        } else{
+        } else if(msg.message.text=="/vh"  && !inserimento){
+            insert_name_vpn(msg.message.chat.id);
+        }else{
             if (wait_password){
                if(bcrypt.compareSync(msg.message.text, password_abilitazione)){
                   wait_password = false;
@@ -256,6 +185,87 @@ function parseMessage( msg ){
                }else{
                   wait_password = false;
                   sendMes(msg.message.chat.id,"Password errata, clicca /abilitazione per riprovare.");
+               }
+            }else if(wait_name_vpn){
+               wait_name_vpn = false;
+               if(getAbilitazione(msg.message.chat.id)){
+                  temp=msg.message.text;
+                  if(temp.length>3){
+                     vpn=temp.toUpperCase();
+                     const fsvpn = require("fs");
+                     var stringa;
+                     var found=0;
+                     var foundf=0;
+                     var name = [];
+                     fsvpn.readdir("/var/www/html/AssistenzaRemota", (errore, folder) => {
+                       if (errore) {
+                         throw errore;
+                       }
+                       for(m in folder){
+                          if(folder[m].toUpperCase().includes(vpn)){
+                             name.push(folder[m]);
+                             found++;
+                          }
+                       }
+                       if(found==0){
+                          sendMes(msg.message.chat.id, "Nessuna risultato!");
+                       } else if(found==1){
+                          var filehtm;
+                          fsvpn.readdir("/var/www/html/AssistenzaRemota/"+name[0], (errore, files) => {
+                             if (errore) {
+                               throw errore;
+                             }
+                             for(m in files){
+                                if(files[m].includes("htm")){
+                                   if(!files[m].includes("$")){
+                                      filehtm=files[m];
+                                      foundf++;
+                                   }
+                                }
+                             }
+                             if(foundf==0){
+                                sendMes(msg.message.chat.id, "Nella cartella della vpn: "+name[0]+" non è presente un file html o htm");
+                             }else if(foundf==1){
+                                client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[0]+"/"+filehtm);
+                             }else{
+                                sendMes(msg.message.chat.id, "Trovati più file html o htm, il programma ancora non gestisce l'invio multiplo");
+                             }
+                          });
+                       }else{
+                          var fileshtm = [];
+                          name.forEach(cart => {
+                             var foundfs=0;
+                             fsvpn.readdir("/var/www/html/AssistenzaRemota/"+cart, (errore, files) => {
+                              if(errore){
+                                 throw errore;
+                              }else{
+                                   for(m in files){
+                                      if(files[m].includes("htm")){
+                                         if(!files[m].includes("$")){
+                                            fileshtm.push(files[m]);
+                                            foundfs++;
+                                         }
+                                      }
+                                   }
+                                   if(foundfs==0){
+                                      fileshtm.push("none");
+                                      sendMes(msg.message.chat.id, "Nella cartella della vpn: "+cart+" non è presente un file html o htm");
+                                   }else{
+                                      foundfs=0;
+                                      //sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+cart+"/"+fileshtm[fileshtm.length-1]);
+                                      client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+cart+"/"+fileshtm[fileshtm.length-1]);
+                                   }
+                              }
+                            });
+                        })
+
+                       }
+                     });
+                  } else{
+                     sendMes(msg.message.chat.id, "Parola chiave troppo corta, prova con 4 o piu' caratteri!");
+                  }
+               } else{
+                  sendMes(msg.message.chat.id, "Utente non abilitato, clicca /abilitazione per richiedere i permessi!");
                }
             }else{
                sendMes(msg.message.chat.id,"Comando non presente, riprovare");
@@ -557,6 +567,10 @@ function abilitazione(msg_id){
       }else{
          sendMes(msg_id,"Utente già abilitato!");
       }
+}
+
+function insert_name_vpn(){
+      wait_name_vpn = true;
 }
 
 function passwordOk(msg_id){
