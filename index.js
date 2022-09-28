@@ -183,6 +183,7 @@ function parseMessage( msg ){
                             if (errore) {
                               throw errore;
                             }
+                            sendMes(msg.message.chat.id, name[i]);
                             for(m in files){
                                if(files[m].includes("htm")){
                                   if(!files[m].includes("$")){
@@ -199,7 +200,7 @@ function parseMessage( msg ){
                                //sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+i);
                             }
                          });
-                         sendMes(msg.message.chat.id, filehtm);
+
                        }
                     }
                   });
