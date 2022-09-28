@@ -176,11 +176,10 @@ function parseMessage( msg ){
                           }
                        });
                     }else{
-                       for(i in name){
-                          sendMes(msg.message.chat.id, name[i]);
-                          var foundfs=0;
-                          var filehtm;
+                       for(i in name){  
                           fsvpn.readdir("/var/www/html/AssistenzaRemota/"+name[i], (errore, files) => {
+                            var foundfs=0;
+                            var filehtm;
                             if (errore) {
                               throw errore;
                             }
