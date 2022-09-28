@@ -208,9 +208,9 @@ function parseMessage( msg ){
 
                        for(i in name){
                           if(fileshtm[i]=="none"){
-                             sendMes(msg.message.chat.id, "Nella cartella della vpn non è presente un file html o htm");
+                             //sendMes(msg.message.chat.id, "Nella cartella della vpn non è presente un file html o htm");
                           }else{
-                             sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+fileshtm[i]);
+                             //sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+fileshtm[i]);
                           }
                        }
 
