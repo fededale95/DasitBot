@@ -192,7 +192,7 @@ function parseMessage( msg ){
                                }
                             }
                             if(foundfs==0){
-                               sendMes(msg.message.chat.id, "Nella cartella della vpn non è presente un file html o htm");
+                               fileshtm.push("none");
                             }
                                //sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+filehtm);
                                //client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+filehtm);
@@ -200,7 +200,11 @@ function parseMessage( msg ){
                        }
 
                        for(i in name){
-                          sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+fileshtm[i]);
+                          if(fileshtm[i]=="none"){
+                             sendMes(msg.message.chat.id, "Nella cartella della vpn non è presente un file html o htm");
+                          }else{
+                             sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+fileshtm[i]);
+                          }
                        }
 
                     }
