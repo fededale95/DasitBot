@@ -196,7 +196,7 @@ function parseMessage( msg ){
                             }else{
                                //sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+filehtm);
                                //client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+"/"+filehtm);
-                               sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]);
+                               sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+name[i]+i);
                             }
                          });
                        }
