@@ -179,11 +179,12 @@ function parseMessage( msg ){
                        var fileshtm = [];
                        for(j in name){
                           var foundfs=0;
+                          sendMes(msg.message.chat.id, "j: "+j);
                           fsvpn.readdir("/var/www/html/AssistenzaRemota/"+name[j], (errore, files) => {
-                            if (errore) {
+                           if(errore){
                               throw errore;
                            }else{
-                                 for(m in files){
+                                for(m in files){
                                    if(files[m].includes("htm")){
                                       if(!files[m].includes("$")){
                                          fileshtm.push(files[m]);
