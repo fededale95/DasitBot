@@ -139,8 +139,6 @@ function parseMessage( msg ){
         } else if(msg.message.text=="/cristian" && !inserimento){
             sendMes(msg.message.chat.id,"NEXUS, Sono Cristian!");
             client.sendPhoto(msg.message.chat.id, EasterEggPath);
-        } else if(msg.message.text=="/users" && !inserimento){
-            sendMes(msg.message.chat.id,"ECCOLO: "+msg.message.chat.type);
         } else if(msg.message.text=="/gianca" && !inserimento){
             sendMes(msg.message.chat.id,"Beautiful, Beautiful is not!");
             client.sendVideo(msg.message.chat.id, homeFolder+'gianca.mp4');
