@@ -253,7 +253,6 @@ function parseMessage( msg ){
                                       sendMes(msg.message.chat.id, "Nella cartella della vpn: "+cart+" non è presente un file html o htm");
                                    }else{
                                       foundfs=0;
-                                      //sendMes(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+cart+"/"+fileshtm[fileshtm.length-1]);
                                       client.sendDocument(msg.message.chat.id, "/var/www/html/AssistenzaRemota/"+cart+"/"+fileshtm[fileshtm.length-1]);
                                    }
                               }
@@ -365,7 +364,7 @@ function requestUpdate(){
 function splitMyFile(source, maxSize, msg_id) {
       splitFile.splitFileBySize( source , maxSize)
       .then((names) => {
-         for(i=0;i<names.length;i++){ //capire grandezza file e salvare num in var al posto che mettere 3
+         for(i=0;i<names.length;i++){
              file_system.rename(source+'.sf-part'+(i+1) , source+'.00'+(i+1), function(err) {
                  if ( err ) console.log('ERROR: ' + err);
              });
@@ -598,7 +597,7 @@ function generaHash(password_da_cifrare){ //funzione non utilizzata, la puoi chi
       const la_mia_password = password_da_cifrare;
       bcrypt.genSalt(saltRounds, function(err, salt) {
           bcrypt.hash(la_mia_password, salt, function(err, hash) {
-              // qui possiamo salvare la nostra password criptata (hash) in un DB
+              // qui possiamo salvare la nostra password criptata (hash) in un txt
               const fs3 = require('fs');
               var stream1 = fs3.createWriteStream(homeFolder+"hash_pwd.txt", {flags:'w'});
               stream1.write(hash);
